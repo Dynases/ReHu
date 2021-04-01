@@ -347,18 +347,6 @@ Public Class P_Principal
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     Private Sub btPersonal_Click(sender As Object, e As EventArgs) Handles btPersonal.Click
         Dim frm As New F3_Personal
         frm._nameButton = btPersonal.Name

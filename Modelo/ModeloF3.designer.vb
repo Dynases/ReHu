@@ -25,6 +25,9 @@ Partial Class ModeloF3
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ModeloF3))
         Me.panel1 = New System.Windows.Forms.Panel()
+        Me.superTabControl1 = New DevComponents.DotNetBar.SuperTabControl()
+        Me.superTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.MpanelSuperior = New System.Windows.Forms.Panel()
         Me.PanelUsuario = New System.Windows.Forms.Panel()
         Me.lbHora = New System.Windows.Forms.Label()
         Me.lbFecha = New System.Windows.Forms.Label()
@@ -32,12 +35,6 @@ Partial Class ModeloF3
         Me.lblHora = New System.Windows.Forms.Label()
         Me.lblFecha = New System.Windows.Forms.Label()
         Me.lblUsuario = New System.Windows.Forms.Label()
-        Me.superTabControl1 = New DevComponents.DotNetBar.SuperTabControl()
-        Me.superTabControlPanel2 = New DevComponents.DotNetBar.SuperTabControlPanel()
-        Me.MpanelBuscador = New System.Windows.Forms.Panel()
-        Me.superTabItem2 = New DevComponents.DotNetBar.SuperTabItem()
-        Me.superTabControlPanel1 = New DevComponents.DotNetBar.SuperTabControlPanel()
-        Me.MpanelSuperior = New System.Windows.Forms.Panel()
         Me.PanelSuperior = New DevComponents.DotNetBar.PanelEx()
         Me.PanelToolBar1 = New System.Windows.Forms.Panel()
         Me.btnSalir = New DevComponents.DotNetBar.ButtonX()
@@ -58,6 +55,9 @@ Partial Class ModeloF3
         Me.btnAnterior = New DevComponents.DotNetBar.ButtonX()
         Me.btnPrimero = New DevComponents.DotNetBar.ButtonX()
         Me.superTabItem1 = New DevComponents.DotNetBar.SuperTabItem()
+        Me.superTabControlPanel2 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.MpanelBuscador = New System.Windows.Forms.Panel()
+        Me.superTabItem2 = New DevComponents.DotNetBar.SuperTabItem()
         Me.MEP = New System.Windows.Forms.ErrorProvider(Me.components)
         Me.MHighlighterFocus = New DevComponents.DotNetBar.Validator.Highlighter()
         Me.BBtnUsuario = New DevComponents.DotNetBar.BubbleButton()
@@ -65,18 +65,18 @@ Partial Class ModeloF3
         Me.BubbleButton2 = New DevComponents.DotNetBar.BubbleButton()
         Me.MFlyoutUsuario = New DevComponents.DotNetBar.Controls.Flyout(Me.components)
         Me.panel1.SuspendLayout()
-        Me.PanelUsuario.SuspendLayout()
         CType(Me.superTabControl1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.superTabControl1.SuspendLayout()
-        Me.superTabControlPanel2.SuspendLayout()
         Me.superTabControlPanel1.SuspendLayout()
         Me.MpanelSuperior.SuspendLayout()
+        Me.PanelUsuario.SuspendLayout()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelToolBar1.SuspendLayout()
         Me.PanelInferior.SuspendLayout()
         Me.MPanelUserAct.SuspendLayout()
         CType(Me.BubbleBarUsuario, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelNavegacion.SuspendLayout()
+        Me.superTabControlPanel2.SuspendLayout()
         CType(Me.MEP, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
@@ -86,8 +86,61 @@ Partial Class ModeloF3
         Me.panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.panel1.Location = New System.Drawing.Point(0, 0)
         Me.panel1.Name = "panel1"
-        Me.panel1.Size = New System.Drawing.Size(1350, 729)
+        Me.panel1.Size = New System.Drawing.Size(1350, 719)
         Me.panel1.TabIndex = 1
+        '
+        'superTabControl1
+        '
+        Me.superTabControl1.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        '
+        '
+        '
+        Me.superTabControl1.ControlBox.CloseBox.Name = ""
+        '
+        '
+        '
+        Me.superTabControl1.ControlBox.MenuBox.Name = ""
+        Me.superTabControl1.ControlBox.Name = ""
+        Me.superTabControl1.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.superTabControl1.ControlBox.MenuBox, Me.superTabControl1.ControlBox.CloseBox})
+        Me.superTabControl1.Controls.Add(Me.superTabControlPanel1)
+        Me.superTabControl1.Controls.Add(Me.superTabControlPanel2)
+        Me.superTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.superTabControl1.ForeColor = System.Drawing.Color.Black
+        Me.superTabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.superTabControl1.Name = "superTabControl1"
+        Me.superTabControl1.ReorderTabsEnabled = True
+        Me.superTabControl1.SelectedTabFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.superTabControl1.SelectedTabIndex = 0
+        Me.superTabControl1.Size = New System.Drawing.Size(1350, 719)
+        Me.superTabControl1.TabFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.superTabControl1.TabIndex = 88
+        Me.superTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.superTabItem1, Me.superTabItem2})
+        Me.superTabControl1.Text = "superTabControl1"
+        '
+        'superTabControlPanel1
+        '
+        Me.superTabControlPanel1.Controls.Add(Me.MpanelSuperior)
+        Me.superTabControlPanel1.Controls.Add(Me.PanelSuperior)
+        Me.superTabControlPanel1.Controls.Add(Me.PanelInferior)
+        Me.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.superTabControlPanel1.Location = New System.Drawing.Point(0, 25)
+        Me.superTabControlPanel1.Name = "superTabControlPanel1"
+        Me.superTabControlPanel1.Size = New System.Drawing.Size(1350, 694)
+        Me.superTabControlPanel1.TabIndex = 1
+        Me.superTabControlPanel1.TabItem = Me.superTabItem1
+        '
+        'MpanelSuperior
+        '
+        Me.MpanelSuperior.BackColor = System.Drawing.Color.White
+        Me.MpanelSuperior.Controls.Add(Me.PanelUsuario)
+        Me.MpanelSuperior.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MpanelSuperior.Location = New System.Drawing.Point(0, 72)
+        Me.MpanelSuperior.Name = "MpanelSuperior"
+        Me.MpanelSuperior.Size = New System.Drawing.Size(1350, 583)
+        Me.MpanelSuperior.TabIndex = 103
         '
         'PanelUsuario
         '
@@ -163,86 +216,6 @@ Partial Class ModeloF3
         Me.lblUsuario.Size = New System.Drawing.Size(87, 18)
         Me.lblUsuario.TabIndex = 0
         Me.lblUsuario.Text = "USUARIO:"
-        '
-        'superTabControl1
-        '
-        Me.superTabControl1.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        '
-        '
-        '
-        Me.superTabControl1.ControlBox.CloseBox.Name = ""
-        '
-        '
-        '
-        Me.superTabControl1.ControlBox.MenuBox.Name = ""
-        Me.superTabControl1.ControlBox.Name = ""
-        Me.superTabControl1.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.superTabControl1.ControlBox.MenuBox, Me.superTabControl1.ControlBox.CloseBox})
-        Me.superTabControl1.Controls.Add(Me.superTabControlPanel1)
-        Me.superTabControl1.Controls.Add(Me.superTabControlPanel2)
-        Me.superTabControl1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.superTabControl1.ForeColor = System.Drawing.Color.Black
-        Me.superTabControl1.Location = New System.Drawing.Point(0, 0)
-        Me.superTabControl1.Name = "superTabControl1"
-        Me.superTabControl1.ReorderTabsEnabled = True
-        Me.superTabControl1.SelectedTabFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.superTabControl1.SelectedTabIndex = 0
-        Me.superTabControl1.Size = New System.Drawing.Size(1350, 729)
-        Me.superTabControl1.TabFont = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.superTabControl1.TabIndex = 88
-        Me.superTabControl1.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.superTabItem1, Me.superTabItem2})
-        Me.superTabControl1.Text = "superTabControl1"
-        '
-        'superTabControlPanel2
-        '
-        Me.superTabControlPanel2.Controls.Add(Me.MpanelBuscador)
-        Me.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.superTabControlPanel2.Location = New System.Drawing.Point(0, 25)
-        Me.superTabControlPanel2.Name = "superTabControlPanel2"
-        Me.superTabControlPanel2.Size = New System.Drawing.Size(1350, 704)
-        Me.superTabControlPanel2.TabIndex = 2
-        Me.superTabControlPanel2.TabItem = Me.superTabItem2
-        '
-        'MpanelBuscador
-        '
-        Me.MpanelBuscador.BackColor = System.Drawing.Color.White
-        Me.MpanelBuscador.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MpanelBuscador.Location = New System.Drawing.Point(0, 0)
-        Me.MpanelBuscador.Name = "MpanelBuscador"
-        Me.MpanelBuscador.Size = New System.Drawing.Size(1350, 704)
-        Me.MpanelBuscador.TabIndex = 104
-        '
-        'superTabItem2
-        '
-        Me.superTabItem2.AttachedControl = Me.superTabControlPanel2
-        Me.superTabItem2.GlobalItem = False
-        Me.superTabItem2.Name = "superTabItem2"
-        Me.superTabItem2.PredefinedColor = DevComponents.DotNetBar.eTabItemColor.OfficeMobile2014Blue
-        Me.superTabItem2.Text = "BUSCADOR"
-        '
-        'superTabControlPanel1
-        '
-        Me.superTabControlPanel1.Controls.Add(Me.MpanelSuperior)
-        Me.superTabControlPanel1.Controls.Add(Me.PanelSuperior)
-        Me.superTabControlPanel1.Controls.Add(Me.PanelInferior)
-        Me.superTabControlPanel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.superTabControlPanel1.Location = New System.Drawing.Point(0, 25)
-        Me.superTabControlPanel1.Name = "superTabControlPanel1"
-        Me.superTabControlPanel1.Size = New System.Drawing.Size(1350, 704)
-        Me.superTabControlPanel1.TabIndex = 1
-        Me.superTabControlPanel1.TabItem = Me.superTabItem1
-        '
-        'MpanelSuperior
-        '
-        Me.MpanelSuperior.BackColor = System.Drawing.Color.White
-        Me.MpanelSuperior.Controls.Add(Me.PanelUsuario)
-        Me.MpanelSuperior.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.MpanelSuperior.Location = New System.Drawing.Point(0, 72)
-        Me.MpanelSuperior.Name = "MpanelSuperior"
-        Me.MpanelSuperior.Size = New System.Drawing.Size(1350, 593)
-        Me.MpanelSuperior.TabIndex = 103
         '
         'PanelSuperior
         '
@@ -376,7 +349,7 @@ Partial Class ModeloF3
         Me.PanelInferior.Controls.Add(Me.PanelNavegacion)
         Me.PanelInferior.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelInferior.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.PanelInferior.Location = New System.Drawing.Point(0, 665)
+        Me.PanelInferior.Location = New System.Drawing.Point(0, 655)
         Me.PanelInferior.Name = "PanelInferior"
         Me.PanelInferior.Size = New System.Drawing.Size(1350, 39)
         Me.PanelInferior.Style.Alignment = System.Drawing.StringAlignment.Center
@@ -555,6 +528,33 @@ Partial Class ModeloF3
         Me.superTabItem1.PredefinedColor = DevComponents.DotNetBar.eTabItemColor.OfficeMobile2014Blue
         Me.superTabItem1.Text = "REGISTRO"
         '
+        'superTabControlPanel2
+        '
+        Me.superTabControlPanel2.Controls.Add(Me.MpanelBuscador)
+        Me.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.superTabControlPanel2.Location = New System.Drawing.Point(0, 25)
+        Me.superTabControlPanel2.Name = "superTabControlPanel2"
+        Me.superTabControlPanel2.Size = New System.Drawing.Size(1350, 704)
+        Me.superTabControlPanel2.TabIndex = 2
+        Me.superTabControlPanel2.TabItem = Me.superTabItem2
+        '
+        'MpanelBuscador
+        '
+        Me.MpanelBuscador.BackColor = System.Drawing.Color.White
+        Me.MpanelBuscador.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MpanelBuscador.Location = New System.Drawing.Point(0, 0)
+        Me.MpanelBuscador.Name = "MpanelBuscador"
+        Me.MpanelBuscador.Size = New System.Drawing.Size(1350, 704)
+        Me.MpanelBuscador.TabIndex = 104
+        '
+        'superTabItem2
+        '
+        Me.superTabItem2.AttachedControl = Me.superTabControlPanel2
+        Me.superTabItem2.GlobalItem = False
+        Me.superTabItem2.Name = "superTabItem2"
+        Me.superTabItem2.PredefinedColor = DevComponents.DotNetBar.eTabItemColor.OfficeMobile2014Blue
+        Me.superTabItem2.Text = "BUSCADOR"
+        '
         'MEP
         '
         Me.MEP.ContainerControl = Me
@@ -590,7 +590,7 @@ Partial Class ModeloF3
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1350, 729)
+        Me.ClientSize = New System.Drawing.Size(1350, 719)
         Me.Controls.Add(Me.panel1)
         Me.KeyPreview = True
         Me.Name = "ModeloF3"
@@ -598,13 +598,12 @@ Partial Class ModeloF3
         Me.Text = "ModeloF3"
         Me.WindowState = System.Windows.Forms.FormWindowState.Minimized
         Me.panel1.ResumeLayout(False)
-        Me.PanelUsuario.ResumeLayout(False)
-        Me.PanelUsuario.PerformLayout()
         CType(Me.superTabControl1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.superTabControl1.ResumeLayout(False)
-        Me.superTabControlPanel2.ResumeLayout(False)
         Me.superTabControlPanel1.ResumeLayout(False)
         Me.MpanelSuperior.ResumeLayout(False)
+        Me.PanelUsuario.ResumeLayout(False)
+        Me.PanelUsuario.PerformLayout()
         Me.PanelSuperior.ResumeLayout(False)
         Me.PanelToolBar1.ResumeLayout(False)
         Me.PanelInferior.ResumeLayout(False)
@@ -612,6 +611,7 @@ Partial Class ModeloF3
         Me.MPanelUserAct.PerformLayout()
         CType(Me.BubbleBarUsuario, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelNavegacion.ResumeLayout(False)
+        Me.superTabControlPanel2.ResumeLayout(False)
         CType(Me.MEP, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 

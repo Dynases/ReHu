@@ -5971,6 +5971,33 @@ Public Class AccesoLogica
 #End Region
 
 #Region "PERSONAL"
+
+    Public Shared Function L_prEliminarPersonal(_numi As String, ByRef _mensaje As String) As Boolean
+
+        Dim _resultado As Boolean
+
+        If L_fnbValidarEliminacion(_numi, "Personal1", "panumi", _mensaje) = True Then
+            Dim _Tabla As DataTable
+
+            Dim _listParam As New List(Of Datos.DParametro)
+
+            _listParam.Add(New Datos.DParametro("@tipo", -1))
+            _listParam.Add(New Datos.DParametro("@panumi", _numi))
+            _listParam.Add(New Datos.DParametro("@pauact", L_Usuario))
+
+            _Tabla = D_ProcedimientoConParam("sp_Personal", _listParam)
+
+            If _Tabla.Rows.Count > 0 Then
+                _resultado = True
+            Else
+                _resultado = False
+            End If
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
     Public Shared Function L_prGrabarPersonal(ByRef _numi As String, _estado As String, _tipoDoc As String, _nroDoc As String,
                                               _fnac As String, _fing As String, _nombres As String, _direc As String,
                                               _telf1 As String, _telf2 As String, _estcivil As String, _genero As String,
@@ -5990,7 +6017,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@panombre", _nombres))
         _listParam.Add(New Datos.DParametro("@padirec", _direc))
         _listParam.Add(New Datos.DParametro("@patelf1", _telf1))
-        _listParam.Add(New Datos.DParametro("@patlef2", _telf2))
+        _listParam.Add(New Datos.DParametro("@patelf2", _telf2))
         _listParam.Add(New Datos.DParametro("@paestcivil", _estcivil))
         _listParam.Add(New Datos.DParametro("@pagenero", _genero))
         _listParam.Add(New Datos.DParametro("@paemail", _email))
@@ -6037,7 +6064,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@panombre", _nombres))
         _listParam.Add(New Datos.DParametro("@padirec", _direc))
         _listParam.Add(New Datos.DParametro("@patelf1", _telf1))
-        _listParam.Add(New Datos.DParametro("@patlef2", _telf2))
+        _listParam.Add(New Datos.DParametro("@patelf2", _telf2))
         _listParam.Add(New Datos.DParametro("@paestcivil", _estcivil))
         _listParam.Add(New Datos.DParametro("@pagenero", _genero))
         _listParam.Add(New Datos.DParametro("@paemail", _email))

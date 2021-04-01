@@ -270,6 +270,9 @@ Public Class F3_Personal
         _PHabilitarFamilia()
         _PHabilitarCargo()
 
+        grDetalleSueldos.Enabled = True
+        grDetalleSueldos.AllowUserToAddRows = True
+
         btnNuevo.Enabled = False
         btnModificar.Enabled = False
         btnEliminar.Enabled = False
@@ -328,6 +331,9 @@ Public Class F3_Personal
         _PInHabilitarContrato()
         _PInHabilitarFamilia()
         _PInHabilitarCargo()
+
+        grDetalleSueldos.Enabled = False
+
 
         btnNuevo.Enabled = True
         btnModificar.Enabled = True
@@ -422,13 +428,13 @@ Public Class F3_Personal
 
         'VACIO LOS DETALLES 
         _prCargarGridDetalleContrato(-1)
-        grContrato.AllowAddNew = True
+        'grContrato.AllowAddNew = True
 
         _prCargarGridDetalleFamilia(-1)
-        grFamilia.AllowAddNew = True
+        'grFamilia.AllowAddNew = True
 
         _prCargarGridDetalleCargo(-1)
-        grCargo.AllowAddNew = True
+        'grCargo.AllowAddNew = True
 
         _prCargarGridDetalleSueldos(-1)
         grDetalleSueldos.AllowUserToAddRows = True
@@ -490,15 +496,16 @@ Public Class F3_Personal
             .Visible = False
         End With
         With grContrato
-            .DefaultFilterRowComparison = FilterConditionOperator.BeginsWith
+            .DefaultFilterRowComparison = FilterConditionOperator.Contains
             .FilterMode = FilterMode.Automatic
             .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .GroupByBoxVisible = False
             .VisualStyle = VisualStyle.Office2007
+
         End With
 
-        grContrato.AllowAddNew = False
-        grContrato.ContextMenuStrip = cmEliminarSueldo
+        'grContrato.AllowAddNew = False
+        grContrato.ContextMenuStrip = cmEliminarContrato
     End Sub
     Private Sub _prCargarGridDetalleFamilia(idCabecera As String)
         Dim dt As New DataTable
@@ -565,7 +572,7 @@ Public Class F3_Personal
         End With
 
         grFamilia.AllowAddNew = False
-        grFamilia.ContextMenuStrip = cmEliminarSueldo
+        grFamilia.ContextMenuStrip = cmEliminarFamilia
     End Sub
     Private Sub _prCargarGridDetalleCargo(idCabecera As String)
         Dim dt As New DataTable
@@ -617,7 +624,7 @@ Public Class F3_Personal
         End With
 
         grCargo.AllowAddNew = False
-        grCargo.ContextMenuStrip = cmEliminarSueldo
+        grCargo.ContextMenuStrip = cmEliminarCargo
     End Sub
 
 
@@ -749,8 +756,7 @@ Public Class F3_Personal
                                           )
 
                 _prCargarPersonal()
-
-                '_Limpiar()
+                _PLimpiar()
 
             Else
                 Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
@@ -805,6 +811,8 @@ Public Class F3_Personal
                     End If
                 End If
                 ToastNotification.Show(Me, "Código de Personal ".ToUpper + tbNumi.Text + " modificado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                _prCargarPersonal()
+                _prSalir()
             End If
 
 
@@ -863,6 +871,10 @@ Public Class F3_Personal
 
             grContrato.DataSource = TablaContrato
 
+            btnNuevoCont.Enabled = True
+            btnModificarCont.Enabled = False
+            btnAgregarCont.Enabled = False
+
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
         End Try
@@ -891,6 +903,10 @@ Public Class F3_Personal
 
             grFamilia.DataSource = TablaFamilia
 
+            btnNuevoF.Enabled = True
+            btnModificarF.Enabled = False
+            btnAgregarF.Enabled = False
+
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
         End Try
@@ -908,6 +924,11 @@ Public Class F3_Personal
             TablaGargo.Rows.Add(0, 0, dtFechaCargo.Value.ToString("yyyy/MM/dd"), cbCargo.Value, swEstadoCont.Value, 0)
 
             grCargo.DataSource = TablaGargo
+
+            btnNuevoC.Enabled = True
+            btnModificarC.Enabled = False
+            btnAgregarC.Enabled = False
+
 
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
@@ -1017,6 +1038,49 @@ Public Class F3_Personal
             pbImg.Load(vlImagen.getImagen())
         End If
     End Sub
+    Public Sub _prEliminarRegistro()
+        Dim info As New TaskDialogInfo("eliminacion".ToUpper, eTaskDialogIcon.Delete, "¿esta seguro de eliminar el registro?".ToUpper, "".ToUpper, eTaskDialogButton.Yes Or eTaskDialogButton.Cancel, eTaskDialogBackgroundColor.Blue)
+        Dim result As eTaskDialogResult = TaskDialog.Show(info)
+        If result = eTaskDialogResult.Yes Then
+            Dim mensajeError As String = ""
+            Dim res As Boolean = L_prEliminarPersonal(tbNumi.Text, mensajeError)
+            If res Then
+                ToastNotification.Show(Me, "Codigo de Personal ".ToUpper + tbNumi.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                _prCargarPersonal()
+                _prInhabilitar()
+            Else
+                ToastNotification.Show(Me, mensajeError, My.Resources.WARNING, 8000, eToastGlowColor.Red, eToastPosition.TopCenter)
+            End If
+        End If
+    End Sub
+    Public Sub _PrimerRegistro()
+        Dim _MPos As Integer
+        If grPersonal.RowCount > 0 Then
+            _MPos = 0
+            grPersonal.Row = _MPos
+        End If
+    End Sub
+    Public Sub _AnteriorRegistro()
+        Dim _MPos As Integer = grPersonal.Row
+        If _MPos > 0 And grPersonal.RowCount > 0 Then
+            _MPos = _MPos - 1
+            grPersonal.Row = _MPos
+        End If
+    End Sub
+    Public Sub _SiguienteRegistro()
+        Dim _pos As Integer = grPersonal.Row
+        If _pos < grPersonal.RowCount - 1 And _pos >= 0 Then
+            _pos = grPersonal.Row + 1
+            grPersonal.Row = _pos
+        End If
+    End Sub
+    Public Sub _UltimoRegistro()
+        Dim _pos As Integer = grPersonal.Row
+        If grPersonal.RowCount > 0 Then
+            _pos = grPersonal.RowCount - 1
+            grPersonal.Row = _pos
+        End If
+    End Sub
 
     Private Sub _prSalir()
         If btnGrabar.Enabled = True Then
@@ -1070,6 +1134,9 @@ Public Class F3_Personal
 
     Private Sub btnNuevoC_Click(sender As Object, e As EventArgs) Handles btnNuevoC.Click
         _prLimpiarCargo()
+        btnNuevoC.Enabled = False
+        btnModificarC.Enabled = False
+        btnAgregarC.Enabled = True
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         _Inter = _Inter + 1
@@ -1159,7 +1226,7 @@ Public Class F3_Personal
     End Sub
 
     Private Sub grDetalleSueldos_CellEndEdit(sender As Object, e As DataGridViewCellEventArgs) Handles grDetalleSueldos.CellEndEdit
-        Dim estado As Integer
+        Dim estado As String
         estado = grDetalleSueldos.Rows(e.RowIndex).Cells("estado").Value
         If estado = 1 Then
             grDetalleSueldos.Rows(e.RowIndex).Cells("estado").Value = 2
@@ -1187,6 +1254,134 @@ Public Class F3_Personal
             superTabControl1.SelectedTabIndex = 0
         End If
     End Sub
+
+    Private Sub grDetalleSueldos_DefaultValuesNeeded(sender As Object, e As DataGridViewRowEventArgs) Handles grDetalleSueldos.DefaultValuesNeeded
+        With e.Row
+            .Cells("estado").Value = 0
+        End With
+    End Sub
+
+    Private Sub EliminarContrato_Click(sender As Object, e As EventArgs) Handles EliminarContrato.Click
+        Dim pos As Integer = grContrato.CurrentRow.RowIndex
+        If pos >= 0 Then
+            Dim estado As Integer
+            estado = grContrato.GetValue("estado")
+            If estado = 1 Or estado = 2 Then ' si estoy eliminando una fila ya guardada le cambio el estado y lo oculto de la grilla
+                CType(grContrato.DataSource, DataTable).Rows(pos).Item("estado") = -1
+
+                grContrato.Row = grContrato.RowCount - 1
+                grContrato.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grContrato.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
+
+            Else 'si estoy eliminando una fila nueva, simplemente la elimino del grid
+                grContrato.CurrentRow.Delete()
+
+            End If
+        End If
+    End Sub
+
+    Private Sub EliminarFamilia_Click(sender As Object, e As EventArgs) Handles EliminarFamilia.Click
+        Dim pos As Integer = grFamilia.CurrentRow.RowIndex
+        If pos >= 0 Then
+            Dim estado As Integer
+            estado = grFamilia.GetValue("estado")
+            If estado = 1 Or estado = 2 Then ' si estoy eliminando una fila ya guardada le cambio el estado y lo oculto de la grilla
+                CType(grFamilia.DataSource, DataTable).Rows(pos).Item("estado") = -1
+
+                grFamilia.Row = grFamilia.RowCount - 1
+                grFamilia.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grFamilia.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
+
+            Else 'si estoy eliminando una fila nueva, simplemente la elimino del grid
+                grFamilia.CurrentRow.Delete()
+
+            End If
+        End If
+    End Sub
+
+    Private Sub EliminarCargo_Click(sender As Object, e As EventArgs) Handles EliminarCargo.Click
+        Dim pos As Integer = grCargo.CurrentRow.RowIndex
+        If pos >= 0 Then
+            Dim estado As Integer
+            estado = grCargo.GetValue("estado")
+            If estado = 1 Or estado = 2 Then ' si estoy eliminando una fila ya guardada le cambio el estado y lo oculto de la grilla
+                CType(grCargo.DataSource, DataTable).Rows(pos).Item("estado") = -1
+
+                grCargo.Row = grCargo.RowCount - 1
+                grCargo.RootTable.ApplyFilter(New Janus.Windows.GridEX.GridEXFilterCondition(grCargo.RootTable.Columns("estado"), Janus.Windows.GridEX.ConditionOperator.GreaterThanOrEqualTo, 0))
+
+            Else 'si estoy eliminando una fila nueva, simplemente la elimino del grid
+                grCargo.CurrentRow.Delete()
+
+            End If
+        End If
+    End Sub
+
+    Private Sub btnEliminar_Click(sender As Object, e As EventArgs) Handles btnEliminar.Click
+        _prEliminarRegistro()
+    End Sub
+
+    Private Sub btnPrimero_Click(sender As Object, e As EventArgs) Handles btnPrimero.Click
+        _PrimerRegistro()
+    End Sub
+
+    Private Sub btnAnterior_Click(sender As Object, e As EventArgs) Handles btnAnterior.Click
+        _AnteriorRegistro()
+    End Sub
+
+    Private Sub btnSiguiente_Click(sender As Object, e As EventArgs) Handles btnSiguiente.Click
+        _SiguienteRegistro()
+    End Sub
+
+    Private Sub btnUltimo_Click(sender As Object, e As EventArgs) Handles btnUltimo.Click
+        _UltimoRegistro()
+    End Sub
+
+    Private Sub cbEstado_ValueChanged(sender As Object, e As EventArgs) Handles cbEstado.ValueChanged
+        If cbEstado.SelectedIndex < 0 And cbEstado.Text <> String.Empty Then
+            btEstado.Visible = True
+        Else
+            btEstado.Visible = False
+        End If
+    End Sub
+
+    Private Sub btEstado_Click(sender As Object, e As EventArgs) Handles btEstado.Click
+        Dim numi As String = ""
+        If L_prLibreriaGrabar(numi, 1, 1, cbEstado.Text, "") Then
+            _prCargarComboLibreria(cbEstado, 1, 1)
+            cbEstado.SelectedIndex = CType(cbEstado.DataSource, DataTable).Rows.Count - 1
+        End If
+    End Sub
+
+    Private Sub cbTipoDoc_ValueChanged(sender As Object, e As EventArgs) Handles cbTipoDoc.ValueChanged
+        If cbTipoDoc.SelectedIndex < 0 And cbTipoDoc.Text <> String.Empty Then
+            btTipoDoc.Visible = True
+        Else
+            btTipoDoc.Visible = False
+        End If
+    End Sub
+
+    Private Sub btTipoDoc_Click(sender As Object, e As EventArgs) Handles btTipoDoc.Click
+        'Dim numi As String = ""
+        'If L_prLibreriaGrabar(numi, 1, 2, cbTipoDoc.Text, "") Then
+        '    _prCargarComboLibreria(cbTipoDoc, 1, 2)
+        '    cbTipoDoc.SelectedIndex = CType(cbTipoDoc.DataSource, DataTable).Rows.Count - 1
+        'End If
+        _prAgregarCombo(cbTipoDoc, 1, 2)
+    End Sub
+
+
+    Private Sub _prAgregarCombo(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo, cod1 As String, cod2 As String)
+        Dim numi As String = ""
+        If L_prLibreriaGrabar(numi, cod1, cod2, mCombo.Text, "") Then
+            _prCargarComboLibreria(mCombo, cod1, cod2)
+            mCombo.SelectedIndex = CType(mCombo.DataSource, DataTable).Rows.Count - 1
+        End If
+    End Sub
+
+    Private Sub EliminarItem_Click(sender As Object, e As EventArgs) Handles EliminarItem.Click
+        btnEliminar.PerformClick()
+    End Sub
+
+
 
 #End Region
 End Class
