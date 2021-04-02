@@ -288,7 +288,6 @@ Public Class F3_Personal
         swEstadoCont.Enabled = True
 
         btnNuevoCont.Enabled = True
-        btnModificarCont.Enabled = True
         'btnAgregarCont.Enabled = True
     End Sub
     Private Sub _PHabilitarFamilia()
@@ -301,7 +300,6 @@ Public Class F3_Personal
         swEstadoFlia.Enabled = True
 
         btnNuevoF.Enabled = True
-        btnModificarF.Enabled = True
         'btnAgregarF.Enabled = True
     End Sub
     Private Sub _PHabilitarCargo()
@@ -310,7 +308,6 @@ Public Class F3_Personal
         swEstadoCargo.Enabled = True
 
         btnNuevoC.Enabled = True
-        btnModificarC.Enabled = True
         'btnAgregarC.Enabled = True
     End Sub
     Private Sub _prInhabilitar()
@@ -350,7 +347,6 @@ Public Class F3_Personal
         swEstadoCont.Enabled = False
 
         btnNuevoCont.Enabled = False
-        btnModificarCont.Enabled = False
         btnAgregarCont.Enabled = False
     End Sub
     Private Sub _PInHabilitarFamilia()
@@ -363,7 +359,6 @@ Public Class F3_Personal
         swEstadoFlia.Enabled = False
 
         btnNuevoF.Enabled = False
-        btnModificarF.Enabled = False
         btnAgregarF.Enabled = False
     End Sub
     Private Sub _PInHabilitarCargo()
@@ -372,7 +367,6 @@ Public Class F3_Personal
         swEstadoCargo.Enabled = False
 
         btnNuevoC.Enabled = False
-        btnModificarC.Enabled = False
         btnAgregarC.Enabled = False
     End Sub
     Private Sub _PLimpiar()
@@ -401,7 +395,6 @@ Public Class F3_Personal
         'swEstadoCont.Value = True
         _prLimpiarContrato()
         btnNuevoCont.Enabled = False
-        btnModificarCont.Enabled = False
         btnAgregarCont.Enabled = True
 
         'Info Familia
@@ -414,7 +407,6 @@ Public Class F3_Personal
         'swEstadoFlia.Value = True
         _prLimpiarFamilia()
         btnNuevoF.Enabled = False
-        btnModificarF.Enabled = False
         btnAgregarF.Enabled = True
 
         'Info Cargo
@@ -423,7 +415,6 @@ Public Class F3_Personal
         'swEstadoCargo.Value = True
         _prLimpiarCargo()
         btnNuevoC.Enabled = False
-        btnModificarC.Enabled = False
         btnAgregarC.Enabled = True
 
         'VACIO LOS DETALLES 
@@ -463,22 +454,21 @@ Public Class F3_Personal
         With grContrato.RootTable.Columns("pbpanumi")
             .Width = 60
             .Visible = False
-
         End With
 
         With grContrato.RootTable.Columns("pbfinicio")
             .Caption = "Fecha Inicio"
-            .Width = 90
+            .Width = 120
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
         End With
         With grContrato.RootTable.Columns("pbffin")
             .Caption = "Fecha Fin"
-            .Width = 90
+            .Width = 120
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
         End With
         With grContrato.RootTable.Columns("pbrutacont")
             .Caption = "Ruta Contrato"
-            .Width = 150
+            .Width = 200
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
         End With
 
@@ -496,9 +486,9 @@ Public Class F3_Personal
             .Visible = False
         End With
         With grContrato
-            .DefaultFilterRowComparison = FilterConditionOperator.Contains
-            .FilterMode = FilterMode.Automatic
-            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            '.DefaultFilterRowComparison = FilterConditionOperator.Contains
+            '.FilterMode = FilterMode.Automatic
+            '.FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .GroupByBoxVisible = False
             .VisualStyle = VisualStyle.Office2007
 
@@ -518,24 +508,22 @@ Public Class F3_Personal
         With grFamilia.RootTable.Columns("pcnumi")
             .Caption = "Código"
             .Width = 50
-            .Visible = True
+            .Visible = False
         End With
 
         With grFamilia.RootTable.Columns("pcpanumi")
             .Width = 60
             .Visible = False
-
         End With
-
         With grFamilia.RootTable.Columns("pcnombres")
             .Caption = "Nombres"
-            .Width = 70
+            .Width = 150
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
         End With
 
         With grFamilia.RootTable.Columns("pcfnac")
             .Caption = "Fecha Nac."
-            .Width = 90
+            .Width = 110
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
         End With
 
@@ -553,6 +541,7 @@ Public Class F3_Personal
         With grFamilia.RootTable.Columns("pcnrodoc")
             .Caption = "Nro. Doc."
             .Visible = True
+            .Width = 110
         End With
         With grFamilia.RootTable.Columns("pcdependencia")
             .Visible = False
@@ -564,9 +553,9 @@ Public Class F3_Personal
             .Visible = False
         End With
         With grFamilia
-            .DefaultFilterRowComparison = FilterConditionOperator.BeginsWith
-            .FilterMode = FilterMode.Automatic
-            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            '.DefaultFilterRowComparison = FilterConditionOperator.BeginsWith
+            '.FilterMode = FilterMode.Automatic
+            '.FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .GroupByBoxVisible = False
             .VisualStyle = VisualStyle.Office2007
         End With
@@ -585,26 +574,30 @@ Public Class F3_Personal
         With grCargo.RootTable.Columns("pdnumi")
             .Caption = "Código"
             .Width = 50
-            .Visible = True
+            .Visible = False
         End With
 
         With grCargo.RootTable.Columns("pdpanumi")
             .Width = 60
             .Visible = False
-
         End With
 
         With grCargo.RootTable.Columns("pdfecha")
             .Caption = "Fecha"
-            .Width = 70
+            .Width = 110
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
         End With
 
         With grCargo.RootTable.Columns("pdcargo")
-            .Caption = "Cargo"
+            .Caption = "IdCargo"
             .Width = 90
             .Visible = False
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+        End With
+        With grCargo.RootTable.Columns("ycdes3")
+            .Caption = "Cargo"
+            .Width = 150
+            .Visible = True
         End With
 
         With grCargo.RootTable.Columns("pdestado")
@@ -616,9 +609,9 @@ Public Class F3_Personal
             .Visible = False
         End With
         With grCargo
-            .DefaultFilterRowComparison = FilterConditionOperator.BeginsWith
-            .FilterMode = FilterMode.Automatic
-            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            '.DefaultFilterRowComparison = FilterConditionOperator.BeginsWith
+            '.FilterMode = FilterMode.Automatic
+            '.FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .GroupByBoxVisible = False
             .VisualStyle = VisualStyle.Office2007
         End With
@@ -695,6 +688,12 @@ Public Class F3_Personal
     End Sub
     Public Function _ValidarCampos() As Boolean
         Try
+            If (cbEstado.SelectedIndex < 0) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor Seleccione o Agregue Estado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                cbEstado.Focus()
+                Return False
+            End If
             If (cbTipoDoc.SelectedIndex < 0) Then
                 Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
                 ToastNotification.Show(Me, "Por Favor Seleccione o Agregue un Tipo de Documento".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
@@ -713,6 +712,19 @@ Public Class F3_Personal
                 tbNombre.Focus()
                 Return False
             End If
+            If (cbEstCivil.SelectedIndex < 0) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor Seleccione o Agregue Estado Civil".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                cbEstCivil.Focus()
+                Return False
+            End If
+            If (cbGenero.SelectedIndex < 0) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor Seleccione Género".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                cbGenero.Focus()
+                Return False
+            End If
+
 
             Return True
         Catch ex As Exception
@@ -872,7 +884,6 @@ Public Class F3_Personal
             grContrato.DataSource = TablaContrato
 
             btnNuevoCont.Enabled = True
-            btnModificarCont.Enabled = False
             btnAgregarCont.Enabled = False
 
         Catch ex As Exception
@@ -883,12 +894,12 @@ Public Class F3_Personal
         Try
             If cbGeneroFlia.Value = Nothing Then
                 Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-                ToastNotification.Show(Me, "Debe elegir o agregar Género".ToUpper, img, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                ToastNotification.Show(Me, "Debe elegir Género".ToUpper, img, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
                 Exit Sub
             End If
             If cbTipoDocFlia.Value = Nothing Then
                 Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
-                ToastNotification.Show(Me, "Debe elegir o agregar Tipo de Documento".ToUpper, img, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                ToastNotification.Show(Me, "Debe elegir Tipo de Documento".ToUpper, img, 3000, eToastGlowColor.Red, eToastPosition.TopCenter)
                 Exit Sub
             End If
             If cbDependecia.Value = Nothing Then
@@ -904,7 +915,6 @@ Public Class F3_Personal
             grFamilia.DataSource = TablaFamilia
 
             btnNuevoF.Enabled = True
-            btnModificarF.Enabled = False
             btnAgregarF.Enabled = False
 
         Catch ex As Exception
@@ -921,12 +931,11 @@ Public Class F3_Personal
 
             TablaGargo = CType(grCargo.DataSource, DataTable)
 
-            TablaGargo.Rows.Add(0, 0, dtFechaCargo.Value.ToString("yyyy/MM/dd"), cbCargo.Value, swEstadoCont.Value, 0)
+            TablaGargo.Rows.Add(0, 0, dtFechaCargo.Value.ToString("yyyy/MM/dd"), cbCargo.Value, cbCargo.Text, swEstadoCont.Value, 0)
 
             grCargo.DataSource = TablaGargo
 
             btnNuevoC.Enabled = True
-            btnModificarC.Enabled = False
             btnAgregarC.Enabled = False
 
 
@@ -1081,7 +1090,13 @@ Public Class F3_Personal
             grPersonal.Row = _pos
         End If
     End Sub
-
+    Private Sub _prAgregarCombo(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo, cod1 As String, cod2 As String)
+        Dim numi As String = ""
+        If L_prLibreriaGrabar(numi, cod1, cod2, mCombo.Text, "") Then
+            _prCargarComboLibreria(mCombo, cod1, cod2)
+            mCombo.SelectedIndex = CType(mCombo.DataSource, DataTable).Rows.Count - 1
+        End If
+    End Sub
     Private Sub _prSalir()
         If btnGrabar.Enabled = True Then
             _prInhabilitar()
@@ -1110,7 +1125,6 @@ Public Class F3_Personal
     Private Sub btnNuevoCont_Click(sender As Object, e As EventArgs) Handles btnNuevoCont.Click
         _prLimpiarContrato()
         btnNuevoCont.Enabled = False
-        btnModificarCont.Enabled = False
         btnAgregarCont.Enabled = True
     End Sub
 
@@ -1121,7 +1135,6 @@ Public Class F3_Personal
     Private Sub btnNuevoF_Click(sender As Object, e As EventArgs) Handles btnNuevoF.Click
         _prLimpiarFamilia()
         btnNuevoF.Enabled = False
-        btnModificarF.Enabled = False
         btnAgregarF.Enabled = True
     End Sub
     Private Sub btnAgregarF_Click(sender As Object, e As EventArgs) Handles btnAgregarF.Click
@@ -1135,7 +1148,6 @@ Public Class F3_Personal
     Private Sub btnNuevoC_Click(sender As Object, e As EventArgs) Handles btnNuevoC.Click
         _prLimpiarCargo()
         btnNuevoC.Enabled = False
-        btnModificarC.Enabled = False
         btnAgregarC.Enabled = True
     End Sub
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -1344,11 +1356,7 @@ Public Class F3_Personal
     End Sub
 
     Private Sub btEstado_Click(sender As Object, e As EventArgs) Handles btEstado.Click
-        Dim numi As String = ""
-        If L_prLibreriaGrabar(numi, 1, 1, cbEstado.Text, "") Then
-            _prCargarComboLibreria(cbEstado, 1, 1)
-            cbEstado.SelectedIndex = CType(cbEstado.DataSource, DataTable).Rows.Count - 1
-        End If
+        _prAgregarCombo(cbTipoDoc, 1, 1)
     End Sub
 
     Private Sub cbTipoDoc_ValueChanged(sender As Object, e As EventArgs) Handles cbTipoDoc.ValueChanged
@@ -1368,18 +1376,66 @@ Public Class F3_Personal
         _prAgregarCombo(cbTipoDoc, 1, 2)
     End Sub
 
-
-    Private Sub _prAgregarCombo(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo, cod1 As String, cod2 As String)
-        Dim numi As String = ""
-        If L_prLibreriaGrabar(numi, cod1, cod2, mCombo.Text, "") Then
-            _prCargarComboLibreria(mCombo, cod1, cod2)
-            mCombo.SelectedIndex = CType(mCombo.DataSource, DataTable).Rows.Count - 1
-        End If
-    End Sub
-
     Private Sub EliminarItem_Click(sender As Object, e As EventArgs) Handles EliminarItem.Click
         btnEliminar.PerformClick()
     End Sub
+
+    Private Sub cbEstCivil_ValueChanged(sender As Object, e As EventArgs) Handles cbEstCivil.ValueChanged
+        If cbEstCivil.SelectedIndex < 0 And cbEstCivil.Text <> String.Empty Then
+            btEstadoCivil.Visible = True
+        Else
+            btEstadoCivil.Visible = False
+        End If
+    End Sub
+
+    Private Sub btEstadoCivil_Click(sender As Object, e As EventArgs) Handles btEstadoCivil.Click
+        _prAgregarCombo(cbEstCivil, 1, 3)
+    End Sub
+
+    Private Sub cbTipoContrato_ValueChanged(sender As Object, e As EventArgs) Handles cbTipoContrato.ValueChanged
+        If cbTipoContrato.SelectedIndex < 0 And cbTipoContrato.Text <> String.Empty Then
+            btTContrato.Visible = True
+        Else
+            btTContrato.Visible = False
+        End If
+    End Sub
+
+    Private Sub btTContrato_Click(sender As Object, e As EventArgs) Handles btTContrato.Click
+        _prAgregarCombo(cbTipoContrato, 2, 1)
+    End Sub
+
+    Private Sub cbDependecia_ValueChanged(sender As Object, e As EventArgs) Handles cbDependecia.ValueChanged
+        If cbDependecia.SelectedIndex < 0 And cbDependecia.Text <> String.Empty Then
+            btDependencia.Visible = True
+        Else
+            btDependencia.Visible = False
+        End If
+    End Sub
+
+    Private Sub btDependencia_Click(sender As Object, e As EventArgs) Handles btDependencia.Click
+        _prAgregarCombo(cbDependecia, 6, 1)
+    End Sub
+
+    Private Sub cbCargo_ValueChanged(sender As Object, e As EventArgs) Handles cbCargo.ValueChanged
+        If cbCargo.SelectedIndex < 0 And cbCargo.Text <> String.Empty Then
+            btCargo.Visible = True
+        Else
+            btCargo.Visible = False
+        End If
+    End Sub
+
+    Private Sub btCargo_Click(sender As Object, e As EventArgs) Handles btCargo.Click
+        _prAgregarCombo(cbCargo, 7, 1)
+    End Sub
+
+    Private Sub VerRegistro_Click(sender As Object, e As EventArgs) Handles VerRegistro.Click
+        If (grPersonal.RowCount >= 0 And grPersonal.Row >= 0) Then
+            _prMostrarRegistro(grPersonal.Row)
+            superTabControl1.SelectedTabIndex = 0
+        End If
+    End Sub
+
+
 
 
 

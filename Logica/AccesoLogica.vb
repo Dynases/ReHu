@@ -6001,7 +6001,7 @@ Public Class AccesoLogica
     Public Shared Function L_prGrabarPersonal(ByRef _numi As String, _estado As String, _tipoDoc As String, _nroDoc As String,
                                               _fnac As String, _fing As String, _nombres As String, _direc As String,
                                               _telf1 As String, _telf2 As String, _estcivil As String, _genero As String,
-                                              _email As String, _obs As String, _img As String, Contrato As DataTable,
+                                              _email As String, _obs As String, ByRef _img As String, Contrato As DataTable,
                                               Familia As DataTable, Cargo As DataTable, Sueldos As DataTable) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
@@ -6038,6 +6038,9 @@ Public Class AccesoLogica
 
         If _Tabla.Rows.Count > 0 Then
             _numi = _Tabla.Rows(0).Item(0)
+            If _img <> "" Then
+                _img = "personal_" + _numi
+            End If
             _resultado = True
         Else
             _resultado = False
@@ -6048,7 +6051,7 @@ Public Class AccesoLogica
     Public Shared Function L_prModificarPersonal(ByRef _numi As String, _estado As String, _tipoDoc As String, _nroDoc As String,
                                               _fnac As String, _fing As String, _nombres As String, _direc As String,
                                               _telf1 As String, _telf2 As String, _estcivil As String, _genero As String,
-                                              _email As String, _obs As String, _img As String, Contrato As DataTable,
+                                              _email As String, _obs As String, ByRef _img As String, Contrato As DataTable,
                                               Familia As DataTable, Cargo As DataTable, Sueldos As DataTable) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
@@ -6085,6 +6088,9 @@ Public Class AccesoLogica
 
         If _Tabla.Rows.Count > 0 Then
             _numi = _Tabla.Rows(0).Item(0)
+            If _img <> "" Then
+                _img = "personal_" + _numi
+            End If
             _resultado = True
         Else
             _resultado = False
