@@ -1432,6 +1432,7 @@ Public Class F3_Personal
         If (grPersonal.RowCount >= 0 And grPersonal.Row >= 0) Then
             _prMostrarRegistro(grPersonal.Row)
             superTabControl1.SelectedTabIndex = 0
+            RLAccion.Text = "VISUALIZACIÓN"
         End If
     End Sub
 

@@ -534,7 +534,7 @@ Partial Class ModeloF3
         Me.superTabControlPanel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.superTabControlPanel2.Location = New System.Drawing.Point(0, 25)
         Me.superTabControlPanel2.Name = "superTabControlPanel2"
-        Me.superTabControlPanel2.Size = New System.Drawing.Size(1350, 704)
+        Me.superTabControlPanel2.Size = New System.Drawing.Size(1350, 694)
         Me.superTabControlPanel2.TabIndex = 2
         Me.superTabControlPanel2.TabItem = Me.superTabItem2
         '
@@ -544,7 +544,7 @@ Partial Class ModeloF3
         Me.MpanelBuscador.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MpanelBuscador.Location = New System.Drawing.Point(0, 0)
         Me.MpanelBuscador.Name = "MpanelBuscador"
-        Me.MpanelBuscador.Size = New System.Drawing.Size(1350, 704)
+        Me.MpanelBuscador.Size = New System.Drawing.Size(1350, 694)
         Me.MpanelBuscador.TabIndex = 104
         '
         'superTabItem2
