@@ -286,9 +286,6 @@ Public Class P_Principal
         'tab3.Icon = frm.Icon
 
     End Sub
-
-
-
     Private Sub Ventana_Click(sender As Object, e As EventArgs) Handles Ventana.Click
         SideNav1.IsMenuExpanded = False
     End Sub
@@ -306,13 +303,10 @@ Public Class P_Principal
         SideNav_Conf.Select()
 
     End Sub
-
     Private Sub rmSesion_MenuClosed(sender As Object, e As EventArgs) Handles rmSesion.MenuClosed
         FP_Configuracion.Select()
 
     End Sub
-
-
 
     Private Sub superTabControl3_TabItemClose(sender As Object, e As SuperTabStripTabItemCloseEventArgs) Handles superTabControl3.TabItemClose
         Dim cantidad As Integer = superTabControl3.Tabs.Count
@@ -320,8 +314,6 @@ Public Class P_Principal
             FP_Configuracion.Select()
         End If
     End Sub
-
-
 
     Private Sub btConfAccesorio_Click(sender As Object, e As EventArgs) Handles btConfLibreria.Click
         'SideNav1.IsMenuExpanded = False
@@ -340,17 +332,17 @@ Public Class P_Principal
         'Dim ico As Icon = Icon.FromHandle(blah.GetHicon())
         'tab3.Icon = ico
     End Sub
-
-
-
-
-
-
-
     Private Sub btPersonal_Click(sender As Object, e As EventArgs) Handles btPersonal.Click
         Dim frm As New F3_Personal
         frm._nameButton = btPersonal.Name
         frm._modulo = FP_RH
         frm.Show()
+    End Sub
+
+    Private Sub btConfiguracion_Click(sender As Object, e As EventArgs) Handles btConfiguracion.Click
+        Dim frm As New F3_Configuracion
+        frm._nameButton = btConfiguracion.Name
+        frm._modulo = FP_Configuracion
+        frm.ShowDialog()
     End Sub
 End Class

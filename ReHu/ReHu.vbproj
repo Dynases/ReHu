@@ -1750,6 +1750,7 @@
     <None Include="Resources\Salir5.png" />
     <None Include="Resources\folder.png" />
     <None Include="Resources\Guardar2.png" />
+    <None Include="Resources\configuracion.png" />
     <Content Include="Resources\PERSONAL.png" />
     <None Include="Resources\VENT_PAGOS.png" />
     <None Include="Resources\pie-chart1.png" />

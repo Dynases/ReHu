@@ -6163,4 +6163,18 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 #End Region
+#Region "PARÁMETROS"
+    Public Shared Function L_prDescuentoGeneral() As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@dauact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_Descuentos", _listParam)
+
+        Return _Tabla
+    End Function
+#End Region
 End Class
