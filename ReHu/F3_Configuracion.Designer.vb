@@ -42,15 +42,19 @@ Partial Class F3_Configuracion
         Me.GroupPanel1 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.JGr_Buscador = New Janus.Windows.GridEX.GridEX()
         Me.Panel4 = New System.Windows.Forms.Panel()
+        Me.dtFInicio = New System.Windows.Forms.DateTimePicker()
+        Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
+        Me.swTipoDesc = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.dtFVencimiento = New System.Windows.Forms.DateTimePicker()
         Me.swVencimiento = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.tbObservacion = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
-        Me.tbValor = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.tbMonto = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.swTMonto = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
-        Me.Tb_Id = New DevComponents.DotNetBar.Controls.TextBoxX()
+        Me.tbNumi = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.SuperTabItem3 = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel3 = New DevComponents.DotNetBar.SuperTabControlPanel()
@@ -70,10 +74,7 @@ Partial Class F3_Configuracion
         Me.ButtonX8 = New DevComponents.DotNetBar.ButtonX()
         Me.ButtonX9 = New DevComponents.DotNetBar.ButtonX()
         Me.ButtonX10 = New DevComponents.DotNetBar.ButtonX()
-        Me.swTipoDesc = New DevComponents.DotNetBar.Controls.SwitchButton()
-        Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
-        Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
-        Me.dtFInicio = New System.Windows.Forms.DateTimePicker()
+        Me.RLAccion = New DevComponents.DotNetBar.Controls.ReflectionLabel()
         Me.MpanelSuperior.SuspendLayout()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelToolBar1.SuspendLayout()
@@ -116,6 +117,7 @@ Partial Class F3_Configuracion
         '
         'PanelSuperior
         '
+        Me.PanelSuperior.Controls.Add(Me.RLAccion)
         Me.PanelSuperior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelSuperior.Style.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelSuperior.Style.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
@@ -128,6 +130,17 @@ Partial Class F3_Configuracion
         Me.PanelSuperior.StyleMouseDown.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelSuperior.StyleMouseOver.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelSuperior.StyleMouseOver.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
+        Me.PanelSuperior.Controls.SetChildIndex(Me.PanelToolBar1, 0)
+        Me.PanelSuperior.Controls.SetChildIndex(Me.RLAccion, 0)
+        '
+        'btnGrabar
+        '
+        '
+        'btnModificar
+        '
+        '
+        'btnNuevo
+        '
         '
         'PanelInferior
         '
@@ -144,7 +157,6 @@ Partial Class F3_Configuracion
         'MpanelBuscador
         '
         Me.MpanelBuscador.Controls.Add(Me.PanelEx6)
-        Me.MpanelBuscador.Size = New System.Drawing.Size(1350, 716)
         '
         'TxtNombreUsu
         '
@@ -213,7 +225,7 @@ Partial Class F3_Configuracion
         Me.PanelEx6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx6.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx6.Name = "PanelEx6"
-        Me.PanelEx6.Size = New System.Drawing.Size(1350, 716)
+        Me.PanelEx6.Size = New System.Drawing.Size(1350, 694)
         Me.PanelEx6.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx6.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -233,7 +245,7 @@ Partial Class F3_Configuracion
         Me.GroupPanel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel2.Location = New System.Drawing.Point(0, 72)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(1350, 644)
+        Me.GroupPanel2.Size = New System.Drawing.Size(1350, 622)
         '
         '
         '
@@ -270,7 +282,7 @@ Partial Class F3_Configuracion
         Me.JGr_BonoAntiguedad.Dock = System.Windows.Forms.DockStyle.Fill
         Me.JGr_BonoAntiguedad.Location = New System.Drawing.Point(0, 82)
         Me.JGr_BonoAntiguedad.Name = "JGr_BonoAntiguedad"
-        Me.JGr_BonoAntiguedad.Size = New System.Drawing.Size(1344, 539)
+        Me.JGr_BonoAntiguedad.Size = New System.Drawing.Size(1344, 517)
         Me.JGr_BonoAntiguedad.TabIndex = 1
         '
         'Panel2
@@ -543,10 +555,10 @@ Partial Class F3_Configuracion
         Me.Panel4.Controls.Add(Me.GroupPanel3)
         Me.Panel4.Controls.Add(Me.tbObservacion)
         Me.Panel4.Controls.Add(Me.LabelX1)
-        Me.Panel4.Controls.Add(Me.tbValor)
+        Me.Panel4.Controls.Add(Me.tbMonto)
         Me.Panel4.Controls.Add(Me.swTMonto)
         Me.Panel4.Controls.Add(Me.LabelX5)
-        Me.Panel4.Controls.Add(Me.Tb_Id)
+        Me.Panel4.Controls.Add(Me.tbNumi)
         Me.Panel4.Controls.Add(Me.LabelX6)
         Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -554,6 +566,54 @@ Partial Class F3_Configuracion
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(1350, 170)
         Me.Panel4.TabIndex = 91
+        '
+        'dtFInicio
+        '
+        Me.dtFInicio.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtFInicio.Location = New System.Drawing.Point(665, 17)
+        Me.dtFInicio.Name = "dtFInicio"
+        Me.dtFInicio.Size = New System.Drawing.Size(147, 22)
+        Me.dtFInicio.TabIndex = 24
+        '
+        'LabelX9
+        '
+        '
+        '
+        '
+        Me.LabelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX9.Location = New System.Drawing.Point(555, 16)
+        Me.LabelX9.Name = "LabelX9"
+        Me.LabelX9.Size = New System.Drawing.Size(104, 23)
+        Me.LabelX9.TabIndex = 23
+        Me.LabelX9.Text = "FECHA INICIO.:"
+        '
+        'swTipoDesc
+        '
+        '
+        '
+        '
+        Me.swTipoDesc.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swTipoDesc.Location = New System.Drawing.Point(178, 45)
+        Me.swTipoDesc.Name = "swTipoDesc"
+        Me.swTipoDesc.OffText = "DESC. LEY EMPRESA"
+        Me.swTipoDesc.OnText = "DESC. LEY PERSONAL"
+        Me.swTipoDesc.Size = New System.Drawing.Size(195, 22)
+        Me.swTipoDesc.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swTipoDesc.TabIndex = 22
+        Me.swTipoDesc.Value = True
+        Me.swTipoDesc.ValueObject = "Y"
+        '
+        'LabelX2
+        '
+        '
+        '
+        '
+        Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX2.Location = New System.Drawing.Point(40, 44)
+        Me.LabelX2.Name = "LabelX2"
+        Me.LabelX2.Size = New System.Drawing.Size(124, 23)
+        Me.LabelX2.TabIndex = 21
+        Me.LabelX2.Text = "TIPO DESCUENTO:"
         '
         'GroupPanel3
         '
@@ -623,6 +683,7 @@ Partial Class F3_Configuracion
         Me.tbObservacion.Border.Class = "TextBoxBorder"
         Me.tbObservacion.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.tbObservacion.Location = New System.Drawing.Point(178, 104)
+        Me.tbObservacion.MaxLength = 200
         Me.tbObservacion.Name = "tbObservacion"
         Me.tbObservacion.PreventEnterBeep = True
         Me.tbObservacion.Size = New System.Drawing.Size(299, 22)
@@ -640,18 +701,19 @@ Partial Class F3_Configuracion
         Me.LabelX1.TabIndex = 17
         Me.LabelX1.Text = "OBSERVACIÓN.:"
         '
-        'tbValor
+        'tbMonto
+        '
+        Me.tbMonto.AcceptsReturn = True
         '
         '
         '
-        '
-        Me.tbValor.Border.Class = "TextBoxBorder"
-        Me.tbValor.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbValor.Location = New System.Drawing.Point(337, 76)
-        Me.tbValor.Name = "tbValor"
-        Me.tbValor.PreventEnterBeep = True
-        Me.tbValor.Size = New System.Drawing.Size(137, 22)
-        Me.tbValor.TabIndex = 15
+        Me.tbMonto.Border.Class = "TextBoxBorder"
+        Me.tbMonto.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbMonto.Location = New System.Drawing.Point(337, 76)
+        Me.tbMonto.Name = "tbMonto"
+        Me.tbMonto.PreventEnterBeep = True
+        Me.tbMonto.Size = New System.Drawing.Size(137, 22)
+        Me.tbMonto.TabIndex = 15
         '
         'swTMonto
         '
@@ -679,18 +741,18 @@ Partial Class F3_Configuracion
         Me.LabelX5.TabIndex = 13
         Me.LabelX5.Text = "MONTO:"
         '
-        'Tb_Id
+        'tbNumi
         '
         '
         '
         '
-        Me.Tb_Id.Border.Class = "TextBoxBorder"
-        Me.Tb_Id.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Tb_Id.Location = New System.Drawing.Point(178, 17)
-        Me.Tb_Id.Name = "Tb_Id"
-        Me.Tb_Id.PreventEnterBeep = True
-        Me.Tb_Id.Size = New System.Drawing.Size(112, 22)
-        Me.Tb_Id.TabIndex = 12
+        Me.tbNumi.Border.Class = "TextBoxBorder"
+        Me.tbNumi.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbNumi.Location = New System.Drawing.Point(178, 17)
+        Me.tbNumi.Name = "tbNumi"
+        Me.tbNumi.PreventEnterBeep = True
+        Me.tbNumi.Size = New System.Drawing.Size(112, 22)
+        Me.tbNumi.TabIndex = 12
         '
         'LabelX6
         '
@@ -1003,53 +1065,19 @@ Partial Class F3_Configuracion
         Me.ButtonX10.Text = "NUEVO"
         Me.ButtonX10.TextColor = System.Drawing.Color.White
         '
-        'swTipoDesc
+        'RLAccion
         '
         '
         '
         '
-        Me.swTipoDesc.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.swTipoDesc.Location = New System.Drawing.Point(178, 45)
-        Me.swTipoDesc.Name = "swTipoDesc"
-        Me.swTipoDesc.OffText = "DESC. LEY EMPRESA"
-        Me.swTipoDesc.OnText = "DESC. LEY PERSONAL"
-        Me.swTipoDesc.Size = New System.Drawing.Size(195, 22)
-        Me.swTipoDesc.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swTipoDesc.TabIndex = 22
-        Me.swTipoDesc.Value = True
-        Me.swTipoDesc.ValueObject = "Y"
-        '
-        'LabelX2
-        '
-        '
-        '
-        '
-        Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(40, 44)
-        Me.LabelX2.Name = "LabelX2"
-        Me.LabelX2.Size = New System.Drawing.Size(124, 23)
-        Me.LabelX2.TabIndex = 21
-        Me.LabelX2.Text = "TIPO DESCUENTO:"
-        '
-        'LabelX9
-        '
-        '
-        '
-        '
-        Me.LabelX9.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX9.Location = New System.Drawing.Point(555, 16)
-        Me.LabelX9.Name = "LabelX9"
-        Me.LabelX9.Size = New System.Drawing.Size(104, 23)
-        Me.LabelX9.TabIndex = 23
-        Me.LabelX9.Text = "FECHA INICIO.:"
-        '
-        'dtFInicio
-        '
-        Me.dtFInicio.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtFInicio.Location = New System.Drawing.Point(665, 17)
-        Me.dtFInicio.Name = "dtFInicio"
-        Me.dtFInicio.Size = New System.Drawing.Size(147, 22)
-        Me.dtFInicio.TabIndex = 24
+        Me.RLAccion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RLAccion.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RLAccion.ForeColor = System.Drawing.Color.Black
+        Me.RLAccion.Location = New System.Drawing.Point(382, 6)
+        Me.RLAccion.Name = "RLAccion"
+        Me.RLAccion.Size = New System.Drawing.Size(409, 60)
+        Me.RLAccion.TabIndex = 9
+        Me.RLAccion.Text = "<b><font size=""+10""><font color=""#FF0000""></font></font></b>"
         '
         'F3_Configuracion
         '
@@ -1112,10 +1140,10 @@ Partial Class F3_Configuracion
     Friend WithEvents swVencimiento As DevComponents.DotNetBar.Controls.SwitchButton
     Friend WithEvents tbObservacion As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents tbValor As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents tbMonto As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents swTMonto As DevComponents.DotNetBar.Controls.SwitchButton
     Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents Tb_Id As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents tbNumi As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
     Protected WithEvents PanelEx1 As DevComponents.DotNetBar.PanelEx
     Protected WithEvents Panel3 As Panel
@@ -1146,4 +1174,5 @@ Partial Class F3_Configuracion
     Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents dtFInicio As DateTimePicker
     Friend WithEvents LabelX9 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents RLAccion As DevComponents.DotNetBar.Controls.ReflectionLabel
 End Class

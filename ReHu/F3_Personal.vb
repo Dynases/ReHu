@@ -48,10 +48,6 @@ Public Class F3_Personal
     Private Sub _prIniciarTodo()
         Me.Text = "P E R S O N A L"
 
-        '_prCargarComboLibreria(tbTipo, gi_LibPERSONAL, gi_LibPERSTipo)
-        '_prCargarComboLibreria(tbEstCivil, gi_LibPERSONAL, gi_LibPERSEstCivil)
-        '_prCargarComboSucursal()
-
         _prAsignarPermisos()
         _prCargarComboLibreria(cbEstado, 1, 1)
         _prCargarComboLibreria(cbTipoDoc, 1, 2)
@@ -703,7 +699,7 @@ Public Class F3_Personal
             If (tbNroDoc.Text = String.Empty) Then
                 Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
                 ToastNotification.Show(Me, "Por Favor ingrese el Nro de Documento del personal.".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
-                tbNombre.Focus()
+                tbNroDoc.Focus()
                 Return False
             End If
             If (tbNombre.Text = String.Empty) Then
@@ -1435,9 +1431,6 @@ Public Class F3_Personal
             RLAccion.Text = "VISUALIZACIÓN"
         End If
     End Sub
-
-
-
 
 
 #End Region
