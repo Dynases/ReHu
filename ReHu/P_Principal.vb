@@ -343,6 +343,6 @@ Public Class P_Principal
         Dim frm As New F3_Configuracion
         frm._nameButton = btConfiguracion.Name
         frm._modulo = FP_Configuracion
-        frm.ShowDialog()
+        frm.Show()
     End Sub
 End Class
