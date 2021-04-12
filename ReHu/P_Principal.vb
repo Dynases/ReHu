@@ -27,7 +27,7 @@ Public Class P_Principal
         _prLeerArchivoConfig()
 
         L_prAbrirConexion(gs_Ip, gs_UsuarioSql, gs_ClaveSql, gs_NombreBD)
-        L_prAbrirConexionBitacora(gs_Ip, gs_UsuarioSql, gs_ClaveSql, "BDDiconDinoEco")
+        'L_prAbrirConexionBitacora(gs_Ip, gs_UsuarioSql, gs_ClaveSql, "BDDiconDinoEco")
 
         Me.WindowState = FormWindowState.Maximized
 
@@ -221,7 +221,6 @@ Public Class P_Principal
     Private Sub P_Principal_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         FP_COMPRAS.Visible = False
         FP_VENTAS.Visible = False
-
         _prIniciarTodo()
     End Sub
     Private Sub P_Principal_MouseClick(sender As Object, e As MouseEventArgs) Handles MyBase.MouseClick
@@ -286,7 +285,7 @@ Public Class P_Principal
         'tab3.Icon = frm.Icon
 
     End Sub
-    Private Sub Ventana_Click(sender As Object, e As EventArgs) Handles Ventana.Click
+    Private Sub Ventana_Click(sender As Object, e As EventArgs)
         SideNav1.IsMenuExpanded = False
     End Sub
 
@@ -306,13 +305,6 @@ Public Class P_Principal
     Private Sub rmSesion_MenuClosed(sender As Object, e As EventArgs) Handles rmSesion.MenuClosed
         FP_Configuracion.Select()
 
-    End Sub
-
-    Private Sub superTabControl3_TabItemClose(sender As Object, e As SuperTabStripTabItemCloseEventArgs) Handles superTabControl3.TabItemClose
-        Dim cantidad As Integer = superTabControl3.Tabs.Count
-        If cantidad = 1 Then
-            FP_Configuracion.Select()
-        End If
     End Sub
 
     Private Sub btConfAccesorio_Click(sender As Object, e As EventArgs) Handles btConfLibreria.Click

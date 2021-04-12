@@ -28,12 +28,14 @@ Partial Class F3_Configuracion
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.JGr_BonoAntiguedad = New Janus.Windows.GridEX.GridEX()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.LabelX12 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.tbNumiBono = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.tbBonoImporte = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.tbBonoMeses = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
+        Me.RLAccionBono = New DevComponents.DotNetBar.Controls.ReflectionLabel()
         Me.Panel3 = New System.Windows.Forms.Panel()
         Me.btnSalirBono = New DevComponents.DotNetBar.ButtonX()
         Me.btnGrabarBono = New DevComponents.DotNetBar.ButtonX()
@@ -63,14 +65,8 @@ Partial Class F3_Configuracion
         Me.GroupPanel4 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.JGr_Vacacion = New Janus.Windows.GridEX.GridEX()
         Me.Panel5 = New System.Windows.Forms.Panel()
-        Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
-        Me.Panel6 = New System.Windows.Forms.Panel()
-        Me.btnSalirVacacion = New DevComponents.DotNetBar.ButtonX()
-        Me.btnGrabarVacacion = New DevComponents.DotNetBar.ButtonX()
-        Me.btnEliminarVacacion = New DevComponents.DotNetBar.ButtonX()
-        Me.btnModificarVacacion = New DevComponents.DotNetBar.ButtonX()
-        Me.btnNuevoVacacion = New DevComponents.DotNetBar.ButtonX()
-        Me.RLAccion = New DevComponents.DotNetBar.Controls.ReflectionLabel()
+        Me.LabelX13 = New DevComponents.DotNetBar.LabelX()
+        Me.tbNumiVacacion = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX7 = New DevComponents.DotNetBar.LabelX()
         Me.swVacacionTipo = New DevComponents.DotNetBar.Controls.SwitchButton()
         Me.LabelX8 = New DevComponents.DotNetBar.LabelX()
@@ -79,12 +75,16 @@ Partial Class F3_Configuracion
         Me.LabelX11 = New DevComponents.DotNetBar.LabelX()
         Me.tbVacacionDias = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.dtVacacionFecha = New System.Windows.Forms.DateTimePicker()
+        Me.PanelEx3 = New DevComponents.DotNetBar.PanelEx()
+        Me.RLAccionVacacion = New DevComponents.DotNetBar.Controls.ReflectionLabel()
+        Me.Panel6 = New System.Windows.Forms.Panel()
+        Me.btnSalirVacacion = New DevComponents.DotNetBar.ButtonX()
+        Me.btnGrabarVacacion = New DevComponents.DotNetBar.ButtonX()
+        Me.btnEliminarVacacion = New DevComponents.DotNetBar.ButtonX()
+        Me.btnModificarVacacion = New DevComponents.DotNetBar.ButtonX()
+        Me.btnNuevoVacacion = New DevComponents.DotNetBar.ButtonX()
+        Me.RLAccion = New DevComponents.DotNetBar.Controls.ReflectionLabel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
-        Me.LabelX12 = New DevComponents.DotNetBar.LabelX()
-        Me.ReflectionLabel1 = New DevComponents.DotNetBar.Controls.ReflectionLabel()
-        Me.ReflectionLabel2 = New DevComponents.DotNetBar.Controls.ReflectionLabel()
-        Me.LabelX13 = New DevComponents.DotNetBar.LabelX()
-        Me.tbNumiVacacion = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.MpanelSuperior.SuspendLayout()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelToolBar1.SuspendLayout()
@@ -169,6 +169,7 @@ Partial Class F3_Configuracion
         Me.PanelInferior.Style.BorderColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
         Me.PanelInferior.Style.ForeColor.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
         Me.PanelInferior.Style.GradientAngle = 90
+        Me.PanelInferior.Visible = False
         '
         'MpanelBuscador
         '
@@ -316,6 +317,21 @@ Partial Class F3_Configuracion
         Me.Panel2.Size = New System.Drawing.Size(1344, 130)
         Me.Panel2.TabIndex = 22
         '
+        'LabelX12
+        '
+        Me.LabelX12.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX12.Location = New System.Drawing.Point(17, 17)
+        Me.LabelX12.Name = "LabelX12"
+        Me.LabelX12.Size = New System.Drawing.Size(156, 23)
+        Me.LabelX12.TabIndex = 19
+        Me.LabelX12.Text = "CÓDIGO:"
+        '
         'LabelX4
         '
         Me.LabelX4.BackColor = System.Drawing.Color.Transparent
@@ -340,6 +356,7 @@ Partial Class F3_Configuracion
         Me.tbNumiBono.Border.Class = "TextBoxBorder"
         Me.tbNumiBono.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.tbNumiBono.DisabledBackColor = System.Drawing.Color.White
+        Me.tbNumiBono.Enabled = False
         Me.tbNumiBono.ForeColor = System.Drawing.Color.Black
         Me.tbNumiBono.Location = New System.Drawing.Point(179, 18)
         Me.tbNumiBono.Name = "tbNumiBono"
@@ -398,7 +415,7 @@ Partial Class F3_Configuracion
         '
         Me.PanelEx1.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx1.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.PanelEx1.Controls.Add(Me.ReflectionLabel1)
+        Me.PanelEx1.Controls.Add(Me.RLAccionBono)
         Me.PanelEx1.Controls.Add(Me.Panel3)
         Me.PanelEx1.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx1.Dock = System.Windows.Forms.DockStyle.Top
@@ -418,6 +435,20 @@ Partial Class F3_Configuracion
         Me.PanelEx1.StyleMouseOver.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelEx1.StyleMouseOver.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelEx1.TabIndex = 8
+        '
+        'RLAccionBono
+        '
+        '
+        '
+        '
+        Me.RLAccionBono.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RLAccionBono.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RLAccionBono.ForeColor = System.Drawing.Color.Black
+        Me.RLAccionBono.Location = New System.Drawing.Point(405, 6)
+        Me.RLAccionBono.Name = "RLAccionBono"
+        Me.RLAccionBono.Size = New System.Drawing.Size(409, 60)
+        Me.RLAccionBono.TabIndex = 10
+        Me.RLAccionBono.Text = "<b><font size=""+10""><font color=""#FF0000""></font></font></b>"
         '
         'Panel3
         '
@@ -905,11 +936,157 @@ Partial Class F3_Configuracion
         Me.Panel5.Size = New System.Drawing.Size(1344, 170)
         Me.Panel5.TabIndex = 22
         '
+        'LabelX13
+        '
+        Me.LabelX13.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX13.Location = New System.Drawing.Point(25, 12)
+        Me.LabelX13.Name = "LabelX13"
+        Me.LabelX13.Size = New System.Drawing.Size(156, 23)
+        Me.LabelX13.TabIndex = 35
+        Me.LabelX13.Text = "CÓDIGO:"
+        '
+        'tbNumiVacacion
+        '
+        Me.tbNumiVacacion.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.tbNumiVacacion.Border.Class = "TextBoxBorder"
+        Me.tbNumiVacacion.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbNumiVacacion.DisabledBackColor = System.Drawing.Color.White
+        Me.tbNumiVacacion.Enabled = False
+        Me.tbNumiVacacion.ForeColor = System.Drawing.Color.Black
+        Me.tbNumiVacacion.Location = New System.Drawing.Point(188, 12)
+        Me.tbNumiVacacion.Name = "tbNumiVacacion"
+        Me.tbNumiVacacion.PreventEnterBeep = True
+        Me.tbNumiVacacion.Size = New System.Drawing.Size(100, 22)
+        Me.tbNumiVacacion.TabIndex = 36
+        '
+        'LabelX7
+        '
+        Me.LabelX7.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX7.Location = New System.Drawing.Point(25, 40)
+        Me.LabelX7.Name = "LabelX7"
+        Me.LabelX7.Size = New System.Drawing.Size(145, 23)
+        Me.LabelX7.TabIndex = 27
+        Me.LabelX7.Text = "MESES:"
+        '
+        'swVacacionTipo
+        '
+        '
+        '
+        '
+        Me.swVacacionTipo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swVacacionTipo.Location = New System.Drawing.Point(188, 129)
+        Me.swVacacionTipo.Name = "swVacacionTipo"
+        Me.swVacacionTipo.OffText = "CALENDARIO"
+        Me.swVacacionTipo.OnText = "DIAS HÁBILES"
+        Me.swVacacionTipo.Size = New System.Drawing.Size(158, 22)
+        Me.swVacacionTipo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swVacacionTipo.TabIndex = 34
+        '
+        'LabelX8
+        '
+        Me.LabelX8.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX8.Location = New System.Drawing.Point(25, 69)
+        Me.LabelX8.Name = "LabelX8"
+        Me.LabelX8.Size = New System.Drawing.Size(157, 23)
+        Me.LabelX8.TabIndex = 28
+        Me.LabelX8.Text = "DIAS DE VACACION:"
+        '
+        'LabelX10
+        '
+        Me.LabelX10.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX10.Location = New System.Drawing.Point(25, 129)
+        Me.LabelX10.Name = "LabelX10"
+        Me.LabelX10.Size = New System.Drawing.Size(133, 22)
+        Me.LabelX10.TabIndex = 33
+        Me.LabelX10.Text = "TIPO:"
+        '
+        'tbVacacionMeses
+        '
+        Me.tbVacacionMeses.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.tbVacacionMeses.Border.Class = "TextBoxBorder"
+        Me.tbVacacionMeses.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbVacacionMeses.DisabledBackColor = System.Drawing.Color.White
+        Me.tbVacacionMeses.ForeColor = System.Drawing.Color.Black
+        Me.tbVacacionMeses.Location = New System.Drawing.Point(188, 40)
+        Me.tbVacacionMeses.Name = "tbVacacionMeses"
+        Me.tbVacacionMeses.PreventEnterBeep = True
+        Me.tbVacacionMeses.Size = New System.Drawing.Size(100, 22)
+        Me.tbVacacionMeses.TabIndex = 29
+        '
+        'LabelX11
+        '
+        Me.LabelX11.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX11.Location = New System.Drawing.Point(25, 98)
+        Me.LabelX11.Name = "LabelX11"
+        Me.LabelX11.Size = New System.Drawing.Size(135, 23)
+        Me.LabelX11.TabIndex = 32
+        Me.LabelX11.Text = "FECHA VIGENCIA:"
+        '
+        'tbVacacionDias
+        '
+        Me.tbVacacionDias.BackColor = System.Drawing.Color.White
+        '
+        '
+        '
+        Me.tbVacacionDias.Border.Class = "TextBoxBorder"
+        Me.tbVacacionDias.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbVacacionDias.DisabledBackColor = System.Drawing.Color.White
+        Me.tbVacacionDias.ForeColor = System.Drawing.Color.Black
+        Me.tbVacacionDias.Location = New System.Drawing.Point(188, 68)
+        Me.tbVacacionDias.Name = "tbVacacionDias"
+        Me.tbVacacionDias.PreventEnterBeep = True
+        Me.tbVacacionDias.Size = New System.Drawing.Size(100, 22)
+        Me.tbVacacionDias.TabIndex = 30
+        '
+        'dtVacacionFecha
+        '
+        Me.dtVacacionFecha.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtVacacionFecha.Location = New System.Drawing.Point(188, 99)
+        Me.dtVacacionFecha.Name = "dtVacacionFecha"
+        Me.dtVacacionFecha.Size = New System.Drawing.Size(100, 22)
+        Me.dtVacacionFecha.TabIndex = 31
+        '
         'PanelEx3
         '
         Me.PanelEx3.CanvasColor = System.Drawing.SystemColors.Control
         Me.PanelEx3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP
-        Me.PanelEx3.Controls.Add(Me.ReflectionLabel2)
+        Me.PanelEx3.Controls.Add(Me.RLAccionVacacion)
         Me.PanelEx3.Controls.Add(Me.Panel6)
         Me.PanelEx3.DisabledBackColor = System.Drawing.Color.Empty
         Me.PanelEx3.Dock = System.Windows.Forms.DockStyle.Top
@@ -929,6 +1106,20 @@ Partial Class F3_Configuracion
         Me.PanelEx3.StyleMouseOver.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelEx3.StyleMouseOver.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelEx3.TabIndex = 8
+        '
+        'RLAccionVacacion
+        '
+        '
+        '
+        '
+        Me.RLAccionVacacion.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.RLAccionVacacion.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RLAccionVacacion.ForeColor = System.Drawing.Color.Black
+        Me.RLAccionVacacion.Location = New System.Drawing.Point(396, 6)
+        Me.RLAccionVacacion.Name = "RLAccionVacacion"
+        Me.RLAccionVacacion.Size = New System.Drawing.Size(409, 60)
+        Me.RLAccionVacacion.TabIndex = 10
+        Me.RLAccionVacacion.Text = "<b><font size=""+10""><font color=""#FF0000""></font></font></b>"
         '
         'Panel6
         '
@@ -1044,204 +1235,17 @@ Partial Class F3_Configuracion
         Me.RLAccion.TabIndex = 9
         Me.RLAccion.Text = "<b><font size=""+10""><font color=""#FF0000""></font></font></b>"
         '
-        'LabelX7
-        '
-        Me.LabelX7.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX7.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX7.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX7.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX7.Location = New System.Drawing.Point(25, 40)
-        Me.LabelX7.Name = "LabelX7"
-        Me.LabelX7.Size = New System.Drawing.Size(145, 23)
-        Me.LabelX7.TabIndex = 27
-        Me.LabelX7.Text = "MESES:"
-        '
-        'swVacacionTipo
-        '
-        '
-        '
-        '
-        Me.swVacacionTipo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.swVacacionTipo.Location = New System.Drawing.Point(188, 129)
-        Me.swVacacionTipo.Name = "swVacacionTipo"
-        Me.swVacacionTipo.OffText = "CALENDARIO"
-        Me.swVacacionTipo.OnText = "DIAS HABILES"
-        Me.swVacacionTipo.Size = New System.Drawing.Size(158, 22)
-        Me.swVacacionTipo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swVacacionTipo.TabIndex = 34
-        '
-        'LabelX8
-        '
-        Me.LabelX8.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX8.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX8.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX8.Location = New System.Drawing.Point(25, 69)
-        Me.LabelX8.Name = "LabelX8"
-        Me.LabelX8.Size = New System.Drawing.Size(157, 23)
-        Me.LabelX8.TabIndex = 28
-        Me.LabelX8.Text = "DIAS DE VACACION:"
-        '
-        'LabelX10
-        '
-        Me.LabelX10.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX10.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX10.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX10.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX10.Location = New System.Drawing.Point(25, 129)
-        Me.LabelX10.Name = "LabelX10"
-        Me.LabelX10.Size = New System.Drawing.Size(133, 22)
-        Me.LabelX10.TabIndex = 33
-        Me.LabelX10.Text = "TIPO:"
-        '
-        'tbVacacionMeses
-        '
-        Me.tbVacacionMeses.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.tbVacacionMeses.Border.Class = "TextBoxBorder"
-        Me.tbVacacionMeses.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbVacacionMeses.DisabledBackColor = System.Drawing.Color.White
-        Me.tbVacacionMeses.ForeColor = System.Drawing.Color.Black
-        Me.tbVacacionMeses.Location = New System.Drawing.Point(188, 40)
-        Me.tbVacacionMeses.Name = "tbVacacionMeses"
-        Me.tbVacacionMeses.PreventEnterBeep = True
-        Me.tbVacacionMeses.Size = New System.Drawing.Size(100, 22)
-        Me.tbVacacionMeses.TabIndex = 29
-        '
-        'LabelX11
-        '
-        Me.LabelX11.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX11.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX11.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX11.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX11.Location = New System.Drawing.Point(25, 98)
-        Me.LabelX11.Name = "LabelX11"
-        Me.LabelX11.Size = New System.Drawing.Size(135, 23)
-        Me.LabelX11.TabIndex = 32
-        Me.LabelX11.Text = "FECHA VIGENCIA:"
-        '
-        'tbVacacionDias
-        '
-        Me.tbVacacionDias.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.tbVacacionDias.Border.Class = "TextBoxBorder"
-        Me.tbVacacionDias.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbVacacionDias.DisabledBackColor = System.Drawing.Color.White
-        Me.tbVacacionDias.ForeColor = System.Drawing.Color.Black
-        Me.tbVacacionDias.Location = New System.Drawing.Point(188, 68)
-        Me.tbVacacionDias.Name = "tbVacacionDias"
-        Me.tbVacacionDias.PreventEnterBeep = True
-        Me.tbVacacionDias.Size = New System.Drawing.Size(100, 22)
-        Me.tbVacacionDias.TabIndex = 30
-        '
-        'dtVacacionFecha
-        '
-        Me.dtVacacionFecha.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
-        Me.dtVacacionFecha.Location = New System.Drawing.Point(188, 99)
-        Me.dtVacacionFecha.Name = "dtVacacionFecha"
-        Me.dtVacacionFecha.Size = New System.Drawing.Size(100, 22)
-        Me.dtVacacionFecha.TabIndex = 31
-        '
         'Timer1
         '
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
-        '
-        'LabelX12
-        '
-        Me.LabelX12.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX12.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX12.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX12.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX12.Location = New System.Drawing.Point(17, 17)
-        Me.LabelX12.Name = "LabelX12"
-        Me.LabelX12.Size = New System.Drawing.Size(156, 23)
-        Me.LabelX12.TabIndex = 19
-        Me.LabelX12.Text = "CÓDIGO:"
-        '
-        'ReflectionLabel1
-        '
-        '
-        '
-        '
-        Me.ReflectionLabel1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ReflectionLabel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ReflectionLabel1.ForeColor = System.Drawing.Color.Black
-        Me.ReflectionLabel1.Location = New System.Drawing.Point(405, 6)
-        Me.ReflectionLabel1.Name = "ReflectionLabel1"
-        Me.ReflectionLabel1.Size = New System.Drawing.Size(409, 60)
-        Me.ReflectionLabel1.TabIndex = 10
-        Me.ReflectionLabel1.Text = "<b><font size=""+10""><font color=""#FF0000""></font></font></b>"
-        '
-        'ReflectionLabel2
-        '
-        '
-        '
-        '
-        Me.ReflectionLabel2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.ReflectionLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 22.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ReflectionLabel2.ForeColor = System.Drawing.Color.Black
-        Me.ReflectionLabel2.Location = New System.Drawing.Point(396, 6)
-        Me.ReflectionLabel2.Name = "ReflectionLabel2"
-        Me.ReflectionLabel2.Size = New System.Drawing.Size(409, 60)
-        Me.ReflectionLabel2.TabIndex = 10
-        Me.ReflectionLabel2.Text = "<b><font size=""+10""><font color=""#FF0000""></font></font></b>"
-        '
-        'LabelX13
-        '
-        Me.LabelX13.BackColor = System.Drawing.Color.Transparent
-        '
-        '
-        '
-        Me.LabelX13.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX13.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX13.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX13.Location = New System.Drawing.Point(25, 12)
-        Me.LabelX13.Name = "LabelX13"
-        Me.LabelX13.Size = New System.Drawing.Size(156, 23)
-        Me.LabelX13.TabIndex = 35
-        Me.LabelX13.Text = "CÓDIGO:"
-        '
-        'tbNumiVacacion
-        '
-        Me.tbNumiVacacion.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.tbNumiVacacion.Border.Class = "TextBoxBorder"
-        Me.tbNumiVacacion.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbNumiVacacion.DisabledBackColor = System.Drawing.Color.White
-        Me.tbNumiVacacion.ForeColor = System.Drawing.Color.Black
-        Me.tbNumiVacacion.Location = New System.Drawing.Point(188, 12)
-        Me.tbNumiVacacion.Name = "tbNumiVacacion"
-        Me.tbNumiVacacion.PreventEnterBeep = True
-        Me.tbNumiVacacion.Size = New System.Drawing.Size(100, 22)
-        Me.tbNumiVacacion.TabIndex = 36
         '
         'F3_Configuracion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1350, 741)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Name = "F3_Configuracion"
         Me.Opacity = 0.05R
@@ -1339,8 +1343,8 @@ Partial Class F3_Configuracion
     Friend WithEvents dtVacacionFecha As DateTimePicker
     Friend WithEvents Timer1 As Timer
     Friend WithEvents LabelX12 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents ReflectionLabel1 As DevComponents.DotNetBar.Controls.ReflectionLabel
-    Friend WithEvents ReflectionLabel2 As DevComponents.DotNetBar.Controls.ReflectionLabel
+    Friend WithEvents RLAccionBono As DevComponents.DotNetBar.Controls.ReflectionLabel
+    Friend WithEvents RLAccionVacacion As DevComponents.DotNetBar.Controls.ReflectionLabel
     Friend WithEvents LabelX13 As DevComponents.DotNetBar.LabelX
     Friend WithEvents tbNumiVacacion As DevComponents.DotNetBar.Controls.TextBoxX
 End Class

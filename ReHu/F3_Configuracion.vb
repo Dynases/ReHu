@@ -26,6 +26,8 @@ Public Class F3_Configuracion
         _PCargarBuscadorBono()
         _PCargarBuscadorVacacion()
         _PInhabilitar()
+        _PInhabilitarBono()
+        _PInhabilitarVacacion()
 
         superTabControl1.SelectedTabIndex = 0
 
@@ -41,12 +43,18 @@ Public Class F3_Configuracion
 
         If add = False Then
             btnNuevo.Visible = False
+            btnNuevoBono.Visible = False
+            btnNuevoVacacion.Visible = False
         End If
         If modif = False Then
             btnModificar.Visible = False
+            btnModificarBono.Visible = False
+            btnModificarVacacion.Visible = False
         End If
         If del = False Then
             btnEliminar.Visible = False
+            btnEliminarBono.Visible = False
+            btnEliminarVacacion.Visible = False
         End If
 
     End Sub
@@ -140,11 +148,12 @@ Public Class F3_Configuracion
             .GroupByBoxVisible = False
             'diseño de la grilla
             JGr_Buscador.VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
         End With
     End Sub
     Private Sub _PCargarBuscadorBono()
         Dim dt As New DataTable
-        dt = L_prDescuentoGeneral()
+        dt = L_prBonoGeneral()
 
         JGr_BonoAntiguedad.BoundMode = BoundMode.Bound
         JGr_BonoAntiguedad.DataSource = dt
@@ -199,6 +208,7 @@ Public Class F3_Configuracion
             .GroupByBoxVisible = False
             'diseño de la grilla
             JGr_BonoAntiguedad.VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
         End With
     End Sub
     Private Sub _PCargarBuscadorVacacion()
@@ -239,7 +249,7 @@ Public Class F3_Configuracion
 
         With JGr_Vacacion.RootTable.Columns("vafvig")
             .Caption = "Fecha Vigencia"
-            .Width = 1500
+            .Width = 150
             .Visible = True
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
         End With
@@ -266,6 +276,7 @@ Public Class F3_Configuracion
             .GroupByBoxVisible = False
             'diseño de la grilla
             JGr_Vacacion.VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
         End With
     End Sub
     Private Sub _PInhabilitar()
@@ -306,7 +317,6 @@ Public Class F3_Configuracion
         btnGrabarVacacion.Enabled = False
     End Sub
     Private Sub _PHabilitar()
-
         swTipoDesc.Enabled = True
         swTMonto.Enabled = True
         tbMonto.ReadOnly = False
@@ -319,10 +329,29 @@ Public Class F3_Configuracion
         btnModificar.Enabled = False
         btnEliminar.Enabled = False
         btnGrabar.Enabled = True
+    End Sub
+    Private Sub _PHabilitarBono()
+        tbBonoMeses.ReadOnly = False
+        tbBonoImporte.ReadOnly = False
+
+        btnNuevoBono.Enabled = False
+        btnModificarBono.Enabled = False
+        btnEliminarBono.Enabled = False
+        btnGrabarBono.Enabled = True
+    End Sub
+    Private Sub _PHabilitarVacacion()
+        tbVacacionMeses.ReadOnly = False
+        tbVacacionDias.ReadOnly = False
+        dtVacacionFecha.Enabled = True
+        swVacacionTipo.Enabled = True
+
+        btnNuevoVacacion.Enabled = False
+        btnModificarVacacion.Enabled = False
+        btnEliminarVacacion.Enabled = False
+        btnGrabarVacacion.Enabled = True
 
     End Sub
     Private Sub _PLimpiar()
-        'Datos Generales
         tbNumi.Text = ""
         swTipoDesc.Text = ""
         swTMonto.Text = ""
@@ -332,14 +361,48 @@ Public Class F3_Configuracion
         swVencimiento.Value = False
         dtFVencimiento.Value = Now.Date
     End Sub
+    Private Sub _PLimpiarBono()
+        tbNumiBono.Text = ""
+        tbBonoMeses.Text = ""
+        tbBonoImporte.Text = ""
+    End Sub
+    Private Sub _PLimpiarVacacion()
+        tbNumiVacacion.Text = ""
+        tbVacacionMeses.Text = ""
+        tbVacacionDias.Text = ""
+        dtVacacionFecha.Value = Now.Date
+        swVacacionTipo.Value = False
+
+    End Sub
     Private Sub _PNuevoRegistro()
         _PHabilitar()
         _PLimpiar()
         RLAccion.Text = "NUEVO"
+        tbMonto.Focus()
+    End Sub
+    Private Sub _PNuevoRegistroBono()
+        _PHabilitarBono()
+        _PLimpiarBono()
+        RLAccionBono.Text = "NUEVO"
+        tbBonoMeses.Focus()
+    End Sub
+    Private Sub _PNuevoRegistroVacacion()
+        _PHabilitarVacacion()
+        _PLimpiarVacacion()
+        RLAccionVacacion.Text = "NUEVO"
+        tbVacacionMeses.Focus()
     End Sub
     Private Sub _PModificarRegistro()
         _PHabilitar()
         RLAccion.Text = "MODIFICAR"
+    End Sub
+    Private Sub _PModificarRegistroBono()
+        _PHabilitarBono()
+        RLAccionBono.Text = "MODIFICAR"
+    End Sub
+    Private Sub _PModificarRegistroVacacion()
+        _PHabilitarVacacion()
+        RLAccionVacacion.Text = "MODIFICAR"
     End Sub
     Public Sub _PGuardar()
         Try
@@ -358,6 +421,40 @@ Public Class F3_Configuracion
             MostrarMensajeError(ex.Message)
         End Try
     End Sub
+    Public Sub _PGuardarBono()
+        Try
+            If _ValidarCamposBono() = False Then
+                Exit Sub
+            End If
+
+            If (tbNumiBono.Text = String.Empty) Then
+                _GuardarNuevoBono()
+            Else
+                If (tbNumiBono.Text <> String.Empty) Then
+                    _GuardarModificadoBono()
+                End If
+            End If
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Public Sub _PGuardarVacacion()
+        Try
+            If _ValidarCamposVacacion() = False Then
+                Exit Sub
+            End If
+
+            If (tbNumiVacacion.Text = String.Empty) Then
+                _GuardarNuevoVacacion()
+            Else
+                If (tbNumiVacacion.Text <> String.Empty) Then
+                    _GuardarModificadoVacacion()
+                End If
+            End If
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
     Public Function _ValidarCampos() As Boolean
         Try
             If (tbMonto.Text = String.Empty) Then
@@ -367,6 +464,46 @@ Public Class F3_Configuracion
                 Return False
             End If
 
+            Return True
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+            Return False
+        End Try
+    End Function
+    Public Function _ValidarCamposBono() As Boolean
+        Try
+            If (tbBonoMeses.Text = String.Empty) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor ingrese la cantidad de meses expresado en número.".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                tbBonoMeses.Focus()
+                Return False
+            End If
+            If (tbBonoImporte.Text = String.Empty) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor ingrese importe del bono.".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                tbBonoImporte.Focus()
+                Return False
+            End If
+            Return True
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+            Return False
+        End Try
+    End Function
+    Public Function _ValidarCamposVacacion() As Boolean
+        Try
+            If (tbVacacionMeses.Text = String.Empty) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor ingrese la cantidad de meses expresado en número.".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                tbVacacionMeses.Focus()
+                Return False
+            End If
+            If (tbVacacionDias.Text = String.Empty) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor ingrese la cantidad de dias.".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                tbVacacionDias.Focus()
+                Return False
+            End If
             Return True
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
@@ -401,6 +538,57 @@ Public Class F3_Configuracion
             MostrarMensajeError(ex.Message)
         End Try
     End Sub
+    Public Sub _GuardarNuevoBono()
+        Try
+            Dim res As Boolean = L_prGrabarBono(tbNumiBono.Text, tbBonoMeses.Text, tbBonoImporte.Text)
+            If res Then
+
+                Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
+                ToastNotification.Show(Me, "Código de Parámetro de Bono ".ToUpper + tbNumi.Text + " Grabado con éxito.".ToUpper,
+                                          img, 2000,
+                                          eToastGlowColor.Green,
+                                          eToastPosition.TopCenter
+                                          )
+
+                _PCargarBuscadorBono()
+                _PLimpiarBono()
+
+            Else
+                Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+                ToastNotification.Show(Me, "El Parámetro de Bono no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+
+            End If
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Public Sub _GuardarNuevoVacacion()
+        Try
+            Dim res As Boolean = L_prGrabarVacacion(tbNumiVacacion.Text, tbVacacionMeses.Text, tbVacacionDias.Text,
+                                                    dtVacacionFecha.Value, IIf(swVacacionTipo.Value = True, "1", "0"))
+            If res Then
+
+                Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
+                ToastNotification.Show(Me, "Código de Parámetro de Vacación ".ToUpper + tbNumi.Text + " Grabado con éxito.".ToUpper,
+                                          img, 2000,
+                                          eToastGlowColor.Green,
+                                          eToastPosition.TopCenter
+                                          )
+
+                _PCargarBuscadorVacacion()
+                _PLimpiarVacacion()
+
+            Else
+                Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+                ToastNotification.Show(Me, "El Parámetro de Vacación no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+
+            End If
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
     Private Sub _GuardarModificado()
         Try
 
@@ -414,6 +602,41 @@ Public Class F3_Configuracion
                 ToastNotification.Show(Me, "Código de Descuento ".ToUpper + tbNumi.Text + " modificado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
                 _PCargarBuscador()
                 _prSalir()
+            End If
+
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Private Sub _GuardarModificadoBono()
+        Try
+
+            Dim res As Boolean = L_prModificarBono(tbNumiBono.Text, tbBonoMeses.Text, tbBonoImporte.Text)
+
+            If res Then
+
+                ToastNotification.Show(Me, "Código de Parámetro de Bono ".ToUpper + tbNumi.Text + " modificado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                _PCargarBuscadorBono()
+                _prSalirBono()
+            End If
+
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Private Sub _GuardarModificadoVacacion()
+        Try
+
+            Dim res As Boolean = L_prModificarVacacion(tbNumiVacacion.Text, tbVacacionMeses.Text, tbVacacionDias.Text,
+                                                       dtVacacionFecha.Value, IIf(swVacacionTipo.Value = True, "1", "0"))
+
+            If res Then
+
+                ToastNotification.Show(Me, "Código de Parámetro de Vacación ".ToUpper + tbNumi.Text + " modificado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                _PCargarBuscadorVacacion()
+                _prSalirVacacion()
             End If
 
 
@@ -447,10 +670,50 @@ Public Class F3_Configuracion
                 lbHora.Text = .GetValue("dahact").ToString
                 lbUsuario.Text = .GetValue("dauact").ToString
 
-
             End With
 
             LblPaginacion.Text = Str(JGr_Buscador.Row + 1) + "/" + JGr_Buscador.RowCount.ToString
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Public Sub _prMostrarRegistroBono(_N As Integer)
+        Try
+
+            With JGr_BonoAntiguedad
+                tbNumiBono.Text = .GetValue("banumi").ToString
+                tbBonoMeses.Text = .GetValue("bameses").ToString
+                tbBonoImporte.Text = .GetValue("bamonto").ToString
+
+                lbFecha.Text = CType(.GetValue("bafact"), Date).ToString("dd/MM/yyyy")
+                lbHora.Text = .GetValue("bahact").ToString
+                lbUsuario.Text = .GetValue("bauact").ToString
+            End With
+
+            LblPaginacion.Text = Str(JGr_BonoAntiguedad.Row + 1) + "/" + JGr_BonoAntiguedad.RowCount.ToString
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Public Sub _prMostrarRegistroVacacion(_N As Integer)
+        Try
+
+            With JGr_Vacacion
+                tbNumiVacacion.Text = .GetValue("vanumi").ToString
+                tbVacacionMeses.Text = .GetValue("vameses").ToString
+                tbVacacionDias.Text = .GetValue("vadias").ToString
+                dtVacacionFecha.Value = .GetValue("vafvig")
+                swVacacionTipo.Value = .GetValue("vatipo")
+
+                lbFecha.Text = CType(.GetValue("vafact"), Date).ToString("dd/MM/yyyy")
+                lbHora.Text = .GetValue("vahact").ToString
+                lbUsuario.Text = .GetValue("vauact").ToString
+
+            End With
+
+            LblPaginacion.Text = Str(JGr_Vacacion.Row + 1) + "/" + JGr_Vacacion.RowCount.ToString
 
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
@@ -471,6 +734,36 @@ Public Class F3_Configuracion
             End If
         End If
     End Sub
+    Public Sub _EliminarRegistroBono()
+        Dim info As New TaskDialogInfo("eliminacion".ToUpper, eTaskDialogIcon.Delete, "¿esta seguro de eliminar el registro?".ToUpper, "".ToUpper, eTaskDialogButton.Yes Or eTaskDialogButton.Cancel, eTaskDialogBackgroundColor.Blue)
+        Dim result As eTaskDialogResult = TaskDialog.Show(info)
+        If result = eTaskDialogResult.Yes Then
+            Dim mensajeError As String = ""
+            Dim res As Boolean = L_prEliminarBono(tbNumi.Text, mensajeError)
+            If res Then
+                ToastNotification.Show(Me, "Codigo de Parámetro de Bono ".ToUpper + tbNumi.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                _PCargarBuscadorBono()
+                _PInhabilitarBono()
+            Else
+                ToastNotification.Show(Me, mensajeError, My.Resources.WARNING, 8000, eToastGlowColor.Red, eToastPosition.TopCenter)
+            End If
+        End If
+    End Sub
+    Public Sub _EliminarRegistroVacacion()
+        Dim info As New TaskDialogInfo("eliminacion".ToUpper, eTaskDialogIcon.Delete, "¿esta seguro de eliminar el registro?".ToUpper, "".ToUpper, eTaskDialogButton.Yes Or eTaskDialogButton.Cancel, eTaskDialogBackgroundColor.Blue)
+        Dim result As eTaskDialogResult = TaskDialog.Show(info)
+        If result = eTaskDialogResult.Yes Then
+            Dim mensajeError As String = ""
+            Dim res As Boolean = L_prEliminarVacacion(tbNumi.Text, mensajeError)
+            If res Then
+                ToastNotification.Show(Me, "Codigo de Parámetro de Vacación ".ToUpper + tbNumi.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                _PCargarBuscadorVacacion()
+                _PInhabilitarVacacion()
+            Else
+                ToastNotification.Show(Me, mensajeError, My.Resources.WARNING, 8000, eToastGlowColor.Red, eToastPosition.TopCenter)
+            End If
+        End If
+    End Sub
     Private Sub _prSalir()
         If btnGrabar.Enabled = True Then
             _PInhabilitar()
@@ -478,6 +771,32 @@ Public Class F3_Configuracion
             If JGr_Buscador.RowCount > 0 Then
                 _prMostrarRegistro(0)
             End If
+            RLAccion.Text = ""
+        Else
+            Me.Close()
+            _modulo.Select()
+        End If
+    End Sub
+    Private Sub _prSalirBono()
+        If btnGrabarBono.Enabled = True Then
+            _PInhabilitarBono()
+
+            If JGr_BonoAntiguedad.RowCount > 0 Then
+                _prMostrarRegistroBono(0)
+            End If
+            RLAccionBono.Text = ""
+        Else
+            Me.Close()
+            _modulo.Select()
+        End If
+    End Sub
+    Private Sub _prSalirVacacion()
+        If btnGrabarVacacion.Enabled = True Then
+            _PInhabilitarVacacion()
+            If JGr_Vacacion.RowCount > 0 Then
+                _prMostrarRegistroVacacion(0)
+            End If
+            RLAccionVacacion.Text = " "
         Else
             Me.Close()
             _modulo.Select()
@@ -532,8 +851,62 @@ Public Class F3_Configuracion
     End Sub
 
     Private Sub btnNuevoBono_Click(sender As Object, e As EventArgs) Handles btnNuevoBono.Click
-
+        _PNuevoRegistroBono()
     End Sub
 
+    Private Sub btnModificarBono_Click(sender As Object, e As EventArgs) Handles btnModificarBono.Click
+        _PModificarRegistroBono()
+    End Sub
+    Private Sub btnGrabarBono_Click(sender As Object, e As EventArgs) Handles btnGrabarBono.Click
+        _PGuardarBono()
+    End Sub
+
+    Private Sub btnSalirBono_Click(sender As Object, e As EventArgs) Handles btnSalirBono.Click
+        _prSalirBono()
+    End Sub
+
+    Private Sub btnEliminarBono_Click(sender As Object, e As EventArgs) Handles btnEliminarBono.Click
+        _EliminarRegistroBono()
+    End Sub
+
+    Private Sub JGr_BonoAntiguedad_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGr_BonoAntiguedad.EditingCell
+        e.Cancel = True
+    End Sub
+
+    Private Sub JGr_BonoAntiguedad_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_BonoAntiguedad.SelectionChanged
+        If (JGr_BonoAntiguedad.RowCount >= 0 And JGr_BonoAntiguedad.Row >= 0) Then
+            _prMostrarRegistroBono(JGr_BonoAntiguedad.Row)
+        End If
+    End Sub
+
+    Private Sub btnNuevoVacacion_Click(sender As Object, e As EventArgs) Handles btnNuevoVacacion.Click
+        _PNuevoRegistroVacacion()
+    End Sub
+
+    Private Sub btnModificarVacacion_Click(sender As Object, e As EventArgs) Handles btnModificarVacacion.Click
+        _PModificarRegistroVacacion()
+    End Sub
+
+    Private Sub btnGrabarVacacion_Click(sender As Object, e As EventArgs) Handles btnGrabarVacacion.Click
+        _PGuardarVacacion()
+    End Sub
+
+    Private Sub btnSalirVacacion_Click(sender As Object, e As EventArgs) Handles btnSalirVacacion.Click
+        _prSalirVacacion()
+    End Sub
+
+    Private Sub btnEliminarVacacion_Click(sender As Object, e As EventArgs) Handles btnEliminarVacacion.Click
+        _EliminarRegistroVacacion()
+    End Sub
+
+    Private Sub JGr_Vacacion_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGr_Vacacion.EditingCell
+        e.Cancel = True
+    End Sub
+
+    Private Sub JGr_Vacacion_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_Vacacion.SelectionChanged
+        If (JGr_Vacacion.RowCount >= 0 And JGr_Vacacion.Row >= 0) Then
+            _prMostrarRegistroVacacion(JGr_Vacacion.Row)
+        End If
+    End Sub
 #End Region
 End Class

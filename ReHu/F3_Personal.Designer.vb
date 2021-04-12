@@ -285,7 +285,6 @@ Partial Class F3_Personal
         'MpanelBuscador
         '
         Me.MpanelBuscador.Controls.Add(Me.GroupPanel7)
-        Me.MpanelBuscador.Size = New System.Drawing.Size(1350, 716)
         '
         'TxtNombreUsu
         '
@@ -2048,7 +2047,7 @@ Partial Class F3_Personal
         Me.GroupPanel7.Font = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel7.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel7.Name = "GroupPanel7"
-        Me.GroupPanel7.Size = New System.Drawing.Size(1350, 716)
+        Me.GroupPanel7.Size = New System.Drawing.Size(1350, 694)
         '
         '
         '
@@ -2088,7 +2087,7 @@ Partial Class F3_Personal
         Me.Panel10.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel10.Location = New System.Drawing.Point(0, 0)
         Me.Panel10.Name = "Panel10"
-        Me.Panel10.Size = New System.Drawing.Size(1344, 693)
+        Me.Panel10.Size = New System.Drawing.Size(1344, 671)
         Me.Panel10.TabIndex = 0
         '
         'grPersonal
@@ -2110,7 +2109,7 @@ Partial Class F3_Personal
         Me.grPersonal.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grPersonal.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
         Me.grPersonal.SelectOnExpand = False
-        Me.grPersonal.Size = New System.Drawing.Size(1344, 693)
+        Me.grPersonal.Size = New System.Drawing.Size(1344, 671)
         Me.grPersonal.TabIndex = 0
         Me.grPersonal.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
