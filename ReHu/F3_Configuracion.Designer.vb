@@ -28,12 +28,16 @@ Partial Class F3_Configuracion
         Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.JGr_BonoAntiguedad = New Janus.Windows.GridEX.GridEX()
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.tbBonoMeses = New DevComponents.Editors.IntegerInput()
+        Me.tbBonoImporte = New DevComponents.Editors.DoubleInput()
+        Me.tbSueldoMin = New DevComponents.Editors.DoubleInput()
+        Me.LabelX15 = New DevComponents.DotNetBar.LabelX()
+        Me.LabelX14 = New DevComponents.DotNetBar.LabelX()
+        Me.dtBonoFecha = New System.Windows.Forms.DateTimePicker()
         Me.LabelX12 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX4 = New DevComponents.DotNetBar.LabelX()
         Me.tbNumiBono = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
-        Me.tbBonoImporte = New DevComponents.DotNetBar.Controls.TextBoxX()
-        Me.tbBonoMeses = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.PanelEx1 = New DevComponents.DotNetBar.PanelEx()
         Me.RLAccionBono = New DevComponents.DotNetBar.Controls.ReflectionLabel()
         Me.Panel3 = New System.Windows.Forms.Panel()
@@ -85,6 +89,10 @@ Partial Class F3_Configuracion
         Me.btnNuevoVacacion = New DevComponents.DotNetBar.ButtonX()
         Me.RLAccion = New DevComponents.DotNetBar.Controls.ReflectionLabel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.Panel7 = New System.Windows.Forms.Panel()
+        Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel()
+        Me.GroupPanel5 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.JGr_BuscadorEmp = New Janus.Windows.GridEX.GridEX()
         Me.MpanelSuperior.SuspendLayout()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelToolBar1.SuspendLayout()
@@ -101,6 +109,9 @@ Partial Class F3_Configuracion
         Me.GroupPanel2.SuspendLayout()
         CType(Me.JGr_BonoAntiguedad, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel2.SuspendLayout()
+        CType(Me.tbBonoMeses, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbBonoImporte, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.tbSueldoMin, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.PanelEx1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.GroupPanel1.SuspendLayout()
@@ -114,16 +125,20 @@ Partial Class F3_Configuracion
         Me.Panel5.SuspendLayout()
         Me.PanelEx3.SuspendLayout()
         Me.Panel6.SuspendLayout()
+        Me.Panel7.SuspendLayout()
+        Me.TableLayoutPanel1.SuspendLayout()
+        Me.GroupPanel5.SuspendLayout()
+        CType(Me.JGr_BuscadorEmp, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MpanelSuperior
         '
-        Me.MpanelSuperior.Controls.Add(Me.GroupPanel1)
+        Me.MpanelSuperior.Controls.Add(Me.Panel7)
         Me.MpanelSuperior.Controls.Add(Me.Panel4)
         Me.MpanelSuperior.Size = New System.Drawing.Size(1350, 605)
         Me.MpanelSuperior.Controls.SetChildIndex(Me.PanelUsuario, 0)
         Me.MpanelSuperior.Controls.SetChildIndex(Me.Panel4, 0)
-        Me.MpanelSuperior.Controls.SetChildIndex(Me.GroupPanel1, 0)
+        Me.MpanelSuperior.Controls.SetChildIndex(Me.Panel7, 0)
         '
         'PanelSuperior
         '
@@ -174,7 +189,6 @@ Partial Class F3_Configuracion
         'MpanelBuscador
         '
         Me.MpanelBuscador.Controls.Add(Me.PanelEx6)
-        Me.MpanelBuscador.Size = New System.Drawing.Size(1350, 716)
         '
         'TxtNombreUsu
         '
@@ -243,7 +257,7 @@ Partial Class F3_Configuracion
         Me.PanelEx6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx6.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx6.Name = "PanelEx6"
-        Me.PanelEx6.Size = New System.Drawing.Size(1350, 716)
+        Me.PanelEx6.Size = New System.Drawing.Size(1350, 694)
         Me.PanelEx6.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx6.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -263,7 +277,7 @@ Partial Class F3_Configuracion
         Me.GroupPanel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel2.Location = New System.Drawing.Point(0, 72)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(1350, 644)
+        Me.GroupPanel2.Size = New System.Drawing.Size(1350, 622)
         '
         '
         '
@@ -300,22 +314,111 @@ Partial Class F3_Configuracion
         Me.JGr_BonoAntiguedad.Dock = System.Windows.Forms.DockStyle.Fill
         Me.JGr_BonoAntiguedad.Location = New System.Drawing.Point(0, 130)
         Me.JGr_BonoAntiguedad.Name = "JGr_BonoAntiguedad"
-        Me.JGr_BonoAntiguedad.Size = New System.Drawing.Size(1344, 491)
+        Me.JGr_BonoAntiguedad.Size = New System.Drawing.Size(1344, 469)
         Me.JGr_BonoAntiguedad.TabIndex = 1
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.tbBonoMeses)
+        Me.Panel2.Controls.Add(Me.tbBonoImporte)
+        Me.Panel2.Controls.Add(Me.tbSueldoMin)
+        Me.Panel2.Controls.Add(Me.LabelX15)
+        Me.Panel2.Controls.Add(Me.LabelX14)
+        Me.Panel2.Controls.Add(Me.dtBonoFecha)
         Me.Panel2.Controls.Add(Me.LabelX12)
         Me.Panel2.Controls.Add(Me.LabelX4)
         Me.Panel2.Controls.Add(Me.tbNumiBono)
         Me.Panel2.Controls.Add(Me.LabelX3)
-        Me.Panel2.Controls.Add(Me.tbBonoImporte)
-        Me.Panel2.Controls.Add(Me.tbBonoMeses)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(1344, 130)
         Me.Panel2.TabIndex = 22
+        '
+        'tbBonoMeses
+        '
+        '
+        '
+        '
+        Me.tbBonoMeses.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.tbBonoMeses.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbBonoMeses.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.tbBonoMeses.Location = New System.Drawing.Point(510, 18)
+        Me.tbBonoMeses.Name = "tbBonoMeses"
+        Me.tbBonoMeses.Size = New System.Drawing.Size(100, 22)
+        Me.tbBonoMeses.TabIndex = 40
+        '
+        'tbBonoImporte
+        '
+        '
+        '
+        '
+        Me.tbBonoImporte.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.tbBonoImporte.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbBonoImporte.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.tbBonoImporte.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbBonoImporte.Increment = 1.0R
+        Me.tbBonoImporte.Location = New System.Drawing.Point(510, 49)
+        Me.tbBonoImporte.MinValue = 0R
+        Me.tbBonoImporte.Name = "tbBonoImporte"
+        Me.tbBonoImporte.Size = New System.Drawing.Size(100, 21)
+        Me.tbBonoImporte.TabIndex = 39
+        Me.tbBonoImporte.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
+        '
+        'tbSueldoMin
+        '
+        '
+        '
+        '
+        Me.tbSueldoMin.BackgroundStyle.Class = "DateTimeInputBackground"
+        Me.tbSueldoMin.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.tbSueldoMin.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
+        Me.tbSueldoMin.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.tbSueldoMin.Increment = 1.0R
+        Me.tbSueldoMin.Location = New System.Drawing.Point(178, 83)
+        Me.tbSueldoMin.MinValue = 0R
+        Me.tbSueldoMin.Name = "tbSueldoMin"
+        Me.tbSueldoMin.Size = New System.Drawing.Size(100, 21)
+        Me.tbSueldoMin.TabIndex = 38
+        Me.tbSueldoMin.WatermarkAlignment = DevComponents.Editors.eTextAlignment.Right
+        '
+        'LabelX15
+        '
+        Me.LabelX15.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX15.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX15.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX15.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX15.Location = New System.Drawing.Point(16, 81)
+        Me.LabelX15.Name = "LabelX15"
+        Me.LabelX15.Size = New System.Drawing.Size(156, 23)
+        Me.LabelX15.TabIndex = 35
+        Me.LabelX15.Text = "SUELDO MÍNIMO:"
+        '
+        'LabelX14
+        '
+        Me.LabelX14.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX14.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX14.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX14.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX14.Location = New System.Drawing.Point(16, 49)
+        Me.LabelX14.Name = "LabelX14"
+        Me.LabelX14.Size = New System.Drawing.Size(135, 23)
+        Me.LabelX14.TabIndex = 34
+        Me.LabelX14.Text = "FECHA:"
+        '
+        'dtBonoFecha
+        '
+        Me.dtBonoFecha.Format = System.Windows.Forms.DateTimePickerFormat.[Short]
+        Me.dtBonoFecha.Location = New System.Drawing.Point(179, 50)
+        Me.dtBonoFecha.Name = "dtBonoFecha"
+        Me.dtBonoFecha.Size = New System.Drawing.Size(100, 22)
+        Me.dtBonoFecha.TabIndex = 33
         '
         'LabelX12
         '
@@ -341,7 +444,7 @@ Partial Class F3_Configuracion
         Me.LabelX4.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX4.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX4.Location = New System.Drawing.Point(17, 46)
+        Me.LabelX4.Location = New System.Drawing.Point(348, 17)
         Me.LabelX4.Name = "LabelX4"
         Me.LabelX4.Size = New System.Drawing.Size(156, 23)
         Me.LabelX4.TabIndex = 14
@@ -373,43 +476,11 @@ Partial Class F3_Configuracion
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX3.Location = New System.Drawing.Point(17, 78)
+        Me.LabelX3.Location = New System.Drawing.Point(348, 49)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(156, 23)
         Me.LabelX3.TabIndex = 15
         Me.LabelX3.Text = "IMPORTE DE BONO:"
-        '
-        'tbBonoImporte
-        '
-        Me.tbBonoImporte.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.tbBonoImporte.Border.Class = "TextBoxBorder"
-        Me.tbBonoImporte.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbBonoImporte.DisabledBackColor = System.Drawing.Color.White
-        Me.tbBonoImporte.ForeColor = System.Drawing.Color.Black
-        Me.tbBonoImporte.Location = New System.Drawing.Point(178, 79)
-        Me.tbBonoImporte.Name = "tbBonoImporte"
-        Me.tbBonoImporte.PreventEnterBeep = True
-        Me.tbBonoImporte.Size = New System.Drawing.Size(100, 22)
-        Me.tbBonoImporte.TabIndex = 17
-        '
-        'tbBonoMeses
-        '
-        Me.tbBonoMeses.BackColor = System.Drawing.Color.White
-        '
-        '
-        '
-        Me.tbBonoMeses.Border.Class = "TextBoxBorder"
-        Me.tbBonoMeses.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.tbBonoMeses.DisabledBackColor = System.Drawing.Color.White
-        Me.tbBonoMeses.ForeColor = System.Drawing.Color.Black
-        Me.tbBonoMeses.Location = New System.Drawing.Point(178, 49)
-        Me.tbBonoMeses.Name = "tbBonoMeses"
-        Me.tbBonoMeses.PreventEnterBeep = True
-        Me.tbBonoMeses.Size = New System.Drawing.Size(100, 22)
-        Me.tbBonoMeses.TabIndex = 16
         '
         'PanelEx1
         '
@@ -558,9 +629,9 @@ Partial Class F3_Configuracion
         Me.GroupPanel1.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.GroupPanel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupPanel1.Location = New System.Drawing.Point(0, 170)
+        Me.GroupPanel1.Location = New System.Drawing.Point(3, 3)
         Me.GroupPanel1.Name = "GroupPanel1"
-        Me.GroupPanel1.Size = New System.Drawing.Size(1350, 435)
+        Me.GroupPanel1.Size = New System.Drawing.Size(1344, 211)
         '
         '
         '
@@ -590,14 +661,14 @@ Partial Class F3_Configuracion
         '
         Me.GroupPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.GroupPanel1.TabIndex = 90
-        Me.GroupPanel1.Text = "BUSCADOR DESCUENTOS"
+        Me.GroupPanel1.Text = "BUSCADOR DESCUENTOS LEY PERSONAL"
         '
         'JGr_Buscador
         '
         Me.JGr_Buscador.Dock = System.Windows.Forms.DockStyle.Fill
         Me.JGr_Buscador.Location = New System.Drawing.Point(0, 0)
         Me.JGr_Buscador.Name = "JGr_Buscador"
-        Me.JGr_Buscador.Size = New System.Drawing.Size(1344, 412)
+        Me.JGr_Buscador.Size = New System.Drawing.Size(1338, 188)
         Me.JGr_Buscador.TabIndex = 1
         '
         'Panel4
@@ -1056,7 +1127,7 @@ Partial Class F3_Configuracion
         Me.LabelX11.Name = "LabelX11"
         Me.LabelX11.Size = New System.Drawing.Size(135, 23)
         Me.LabelX11.TabIndex = 32
-        Me.LabelX11.Text = "FECHA VIGENCIA:"
+        Me.LabelX11.Text = "FECHA:"
         '
         'tbVacacionDias
         '
@@ -1240,6 +1311,81 @@ Partial Class F3_Configuracion
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
+        'Panel7
+        '
+        Me.Panel7.Controls.Add(Me.TableLayoutPanel1)
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel7.Location = New System.Drawing.Point(0, 170)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(1350, 435)
+        Me.Panel7.TabIndex = 3
+        '
+        'TableLayoutPanel1
+        '
+        Me.TableLayoutPanel1.ColumnCount = 1
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100.0!))
+        Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 20.0!))
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupPanel5, 0, 1)
+        Me.TableLayoutPanel1.Controls.Add(Me.GroupPanel1, 0, 0)
+        Me.TableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(0, 0)
+        Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
+        Me.TableLayoutPanel1.RowCount = 2
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
+        Me.TableLayoutPanel1.Size = New System.Drawing.Size(1350, 435)
+        Me.TableLayoutPanel1.TabIndex = 2
+        '
+        'GroupPanel5
+        '
+        Me.GroupPanel5.CanvasColor = System.Drawing.SystemColors.Control
+        Me.GroupPanel5.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel5.Controls.Add(Me.JGr_BuscadorEmp)
+        Me.GroupPanel5.DisabledBackColor = System.Drawing.Color.Empty
+        Me.GroupPanel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.GroupPanel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.GroupPanel5.Location = New System.Drawing.Point(3, 220)
+        Me.GroupPanel5.Name = "GroupPanel5"
+        Me.GroupPanel5.Size = New System.Drawing.Size(1344, 212)
+        '
+        '
+        '
+        Me.GroupPanel5.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.GroupPanel5.Style.BackColorGradientAngle = 90
+        Me.GroupPanel5.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.GroupPanel5.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel5.Style.BorderBottomWidth = 1
+        Me.GroupPanel5.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.GroupPanel5.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel5.Style.BorderLeftWidth = 1
+        Me.GroupPanel5.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel5.Style.BorderRightWidth = 1
+        Me.GroupPanel5.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel5.Style.BorderTopWidth = 1
+        Me.GroupPanel5.Style.CornerDiameter = 4
+        Me.GroupPanel5.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
+        Me.GroupPanel5.Style.TextAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Center
+        Me.GroupPanel5.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.GroupPanel5.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
+        '
+        '
+        '
+        Me.GroupPanel5.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.GroupPanel5.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.GroupPanel5.TabIndex = 91
+        Me.GroupPanel5.Text = "BUSCADOR DESCUENTOS LEY EMPRESA"
+        '
+        'JGr_BuscadorEmp
+        '
+        Me.JGr_BuscadorEmp.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.JGr_BuscadorEmp.Location = New System.Drawing.Point(0, 0)
+        Me.JGr_BuscadorEmp.Name = "JGr_BuscadorEmp"
+        Me.JGr_BuscadorEmp.Size = New System.Drawing.Size(1338, 189)
+        Me.JGr_BuscadorEmp.TabIndex = 1
+        '
         'F3_Configuracion
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1269,6 +1415,9 @@ Partial Class F3_Configuracion
         Me.GroupPanel2.ResumeLayout(False)
         CType(Me.JGr_BonoAntiguedad, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel2.ResumeLayout(False)
+        CType(Me.tbBonoMeses, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tbBonoImporte, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.tbSueldoMin, System.ComponentModel.ISupportInitialize).EndInit()
         Me.PanelEx1.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.GroupPanel1.ResumeLayout(False)
@@ -1282,6 +1431,10 @@ Partial Class F3_Configuracion
         Me.Panel5.ResumeLayout(False)
         Me.PanelEx3.ResumeLayout(False)
         Me.Panel6.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
+        Me.TableLayoutPanel1.ResumeLayout(False)
+        Me.GroupPanel5.ResumeLayout(False)
+        CType(Me.JGr_BuscadorEmp, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -1293,8 +1446,6 @@ Partial Class F3_Configuracion
     Friend WithEvents LabelX4 As DevComponents.DotNetBar.LabelX
     Friend WithEvents tbNumiBono As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents LabelX3 As DevComponents.DotNetBar.LabelX
-    Friend WithEvents tbBonoImporte As DevComponents.DotNetBar.Controls.TextBoxX
-    Friend WithEvents tbBonoMeses As DevComponents.DotNetBar.Controls.TextBoxX
     Friend WithEvents GroupPanel1 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents JGr_Buscador As Janus.Windows.GridEX.GridEX
     Friend WithEvents Panel4 As Panel
@@ -1347,4 +1498,14 @@ Partial Class F3_Configuracion
     Friend WithEvents RLAccionVacacion As DevComponents.DotNetBar.Controls.ReflectionLabel
     Friend WithEvents LabelX13 As DevComponents.DotNetBar.LabelX
     Friend WithEvents tbNumiVacacion As DevComponents.DotNetBar.Controls.TextBoxX
+    Friend WithEvents LabelX14 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents dtBonoFecha As DateTimePicker
+    Friend WithEvents LabelX15 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents tbSueldoMin As DevComponents.Editors.DoubleInput
+    Friend WithEvents tbBonoImporte As DevComponents.Editors.DoubleInput
+    Friend WithEvents tbBonoMeses As DevComponents.Editors.IntegerInput
+    Friend WithEvents Panel7 As Panel
+    Friend WithEvents TableLayoutPanel1 As TableLayoutPanel
+    Friend WithEvents GroupPanel5 As DevComponents.DotNetBar.Controls.GroupPanel
+    Friend WithEvents JGr_BuscadorEmp As Janus.Windows.GridEX.GridEX
 End Class

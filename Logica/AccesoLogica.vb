@@ -6252,11 +6252,22 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
-    Public Shared Function L_prDescuentoGeneral() As DataTable
+    Public Shared Function L_prDescuentoGeneralPer() As DataTable
         Dim _Tabla As DataTable
         Dim _listParam As New List(Of Datos.DParametro)
 
         _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@dauact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_Descuentos", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_prDescuentoGeneralEmp() As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 4))
         _listParam.Add(New Datos.DParametro("@dauact", L_Usuario))
 
         _Tabla = D_ProcedimientoConParam("sp_Descuentos", _listParam)
@@ -6292,7 +6303,8 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
-    Public Shared Function L_prGrabarBono(ByRef _numi As String, _meses As String, _importe As String) As Boolean
+    Public Shared Function L_prGrabarBono(ByRef _numi As String, _fecha As String, _sueldom As String,
+                                          _meses As String, _importe As String) As Boolean
 
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
@@ -6300,6 +6312,8 @@ Public Class AccesoLogica
 
         _listParam.Add(New Datos.DParametro("@tipo", 1))
         _listParam.Add(New Datos.DParametro("@banumi", _numi))
+        _listParam.Add(New Datos.DParametro("@bafecha", _fecha))
+        _listParam.Add(New Datos.DParametro("@basueldomin", _sueldom))
         _listParam.Add(New Datos.DParametro("@bameses", _meses))
         _listParam.Add(New Datos.DParametro("@bamonto", _importe))
         _listParam.Add(New Datos.DParametro("@baestado", 1))
@@ -6317,7 +6331,8 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
-    Public Shared Function L_prModificarBono(ByRef _numi As String, _meses As String, _importe As String) As Boolean
+    Public Shared Function L_prModificarBono(ByRef _numi As String, _fecha As String, _sueldom As String,
+                                             _meses As String, _importe As String) As Boolean
 
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
@@ -6325,6 +6340,8 @@ Public Class AccesoLogica
 
         _listParam.Add(New Datos.DParametro("@tipo", 2))
         _listParam.Add(New Datos.DParametro("@banumi", _numi))
+        _listParam.Add(New Datos.DParametro("@bafecha", _fecha))
+        _listParam.Add(New Datos.DParametro("@basueldomin", _sueldom))
         _listParam.Add(New Datos.DParametro("@bameses", _meses))
         _listParam.Add(New Datos.DParametro("@bamonto", _importe))
         _listParam.Add(New Datos.DParametro("@baestado", 2))

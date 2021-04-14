@@ -22,7 +22,8 @@ Public Class F3_Configuracion
         Me.Text = "P A R Á M E T R O S"
 
         _prAsignarPermisos()
-        _PCargarBuscador()
+        _PCargarBuscadorLeyPersonal()
+        _PCargarBuscadorLeyEmpresa()
         _PCargarBuscadorBono()
         _PCargarBuscadorVacacion()
         _PInhabilitar()
@@ -58,9 +59,9 @@ Public Class F3_Configuracion
         End If
 
     End Sub
-    Private Sub _PCargarBuscador()
+    Private Sub _PCargarBuscadorLeyPersonal()
         Dim dt As New DataTable
-        dt = L_prDescuentoGeneral()
+        dt = L_prDescuentoGeneralPer()
 
         JGr_Buscador.BoundMode = BoundMode.Bound
         JGr_Buscador.DataSource = dt
@@ -77,6 +78,7 @@ Public Class F3_Configuracion
         With JGr_Buscador.RootTable.Columns("datipo")
             .Caption = "Tipo Desc."
             .Width = 90
+            .Visible = False
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
@@ -110,7 +112,7 @@ Public Class F3_Configuracion
         With JGr_Buscador.RootTable.Columns("davenc")
             .Caption = "Estado Vencimiento"
             .Visible = True
-            .Width = 60
+            .Width = 160
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .EditType = EditType.CheckBox
             .ColumnType = ColumnType.CheckBox
@@ -151,6 +153,100 @@ Public Class F3_Configuracion
             .RecordNavigator = True
         End With
     End Sub
+    Private Sub _PCargarBuscadorLeyEmpresa()
+        Dim dt As New DataTable
+        dt = L_prDescuentoGeneralEmp()
+
+        JGr_BuscadorEmp.BoundMode = BoundMode.Bound
+        JGr_BuscadorEmp.DataSource = dt
+        JGr_BuscadorEmp.RetrieveStructure()
+
+        'dar formato a las columnas
+        With JGr_BuscadorEmp.RootTable.Columns("danumi")
+            .Caption = "Codigo"
+            .Width = 70
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("datipo")
+            .Caption = "Tipo Desc."
+            .Width = 90
+            .Visible = False
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+        With JGr_BuscadorEmp.RootTable.Columns("datipomonto")
+            .Caption = "Tipo Monto"
+            .Width = 90
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("damonto")
+            .Caption = "Monto"
+            .Width = 130
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .FormatString = "0.00"
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("daobs")
+            .Caption = "Observacion"
+            .Width = 300
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("dafinicio")
+            .Caption = "Fecha Inicio"
+            .Width = 100
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+        With JGr_BuscadorEmp.RootTable.Columns("davenc")
+            .Caption = "Estado Vencimiento"
+            .Visible = True
+            .Width = 160
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .EditType = EditType.CheckBox
+            .ColumnType = ColumnType.CheckBox
+            .CheckBoxFalseValue = 0
+            .CheckBoxTrueValue = 1
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("dafvenc")
+            .Caption = "Fecha Venc."
+            .Width = 100
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("daestado")
+            .Visible = False
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("dafact")
+            .Visible = False
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("dahact")
+            .Visible = False
+        End With
+
+        With JGr_BuscadorEmp.RootTable.Columns("dauact")
+            .Visible = False
+        End With
+        'Habilitar Filtradores
+        With JGr_BuscadorEmp
+            .DefaultFilterRowComparison = FilterConditionOperator.Contains
+            .FilterMode = FilterMode.Automatic
+            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            .GroupByBoxVisible = False
+            'diseño de la grilla
+            JGr_BuscadorEmp.VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
+        End With
+    End Sub
     Private Sub _PCargarBuscadorBono()
         Dim dt As New DataTable
         dt = L_prBonoGeneral()
@@ -162,14 +258,27 @@ Public Class F3_Configuracion
         'dar formato a las columnas
         With JGr_BonoAntiguedad.RootTable.Columns("banumi")
             .Caption = "Codigo"
-            .Width = 70
+            .Width = 90
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+        With JGr_BonoAntiguedad.RootTable.Columns("bafecha")
+            .Caption = "Fecha"
+            .Width = 100
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+        With JGr_BonoAntiguedad.RootTable.Columns("basueldomin")
+            .Caption = "Sueldo Mínimo"
+            .Width = 130
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .FormatString = "0.00"
         End With
 
         With JGr_BonoAntiguedad.RootTable.Columns("bameses")
             .Caption = "Meses"
-            .Width = 90
+            .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
@@ -296,8 +405,10 @@ Public Class F3_Configuracion
     End Sub
     Private Sub _PInhabilitarBono()
         tbNumiBono.ReadOnly = True
-        tbBonoMeses.ReadOnly = True
-        tbBonoImporte.ReadOnly = True
+        dtBonoFecha.Enabled = False
+        tbSueldoMin.IsInputReadOnly = True
+        tbBonoMeses.IsInputReadOnly = True
+        tbBonoImporte.IsInputReadOnly = True
 
         btnNuevoBono.Enabled = True
         btnModificarBono.Enabled = True
@@ -331,8 +442,10 @@ Public Class F3_Configuracion
         btnGrabar.Enabled = True
     End Sub
     Private Sub _PHabilitarBono()
-        tbBonoMeses.ReadOnly = False
-        tbBonoImporte.ReadOnly = False
+        dtBonoFecha.Enabled = True
+        tbSueldoMin.IsInputReadOnly = False
+        tbBonoMeses.IsInputReadOnly = False
+        tbBonoImporte.IsInputReadOnly = False
 
         btnNuevoBono.Enabled = False
         btnModificarBono.Enabled = False
@@ -363,8 +476,10 @@ Public Class F3_Configuracion
     End Sub
     Private Sub _PLimpiarBono()
         tbNumiBono.Text = ""
+        dtBonoFecha.Value = Now.Date
+        tbSueldoMin.Value = 0
         tbBonoMeses.Text = ""
-        tbBonoImporte.Text = ""
+        tbBonoImporte.Value = 0
     End Sub
     Private Sub _PLimpiarVacacion()
         tbNumiVacacion.Text = ""
@@ -525,7 +640,8 @@ Public Class F3_Configuracion
                                           eToastPosition.TopCenter
                                           )
 
-                _PCargarBuscador()
+                _PCargarBuscadorLeyPersonal()
+                _PCargarBuscadorLeyEmpresa()
                 _PLimpiar()
 
             Else
@@ -540,7 +656,7 @@ Public Class F3_Configuracion
     End Sub
     Public Sub _GuardarNuevoBono()
         Try
-            Dim res As Boolean = L_prGrabarBono(tbNumiBono.Text, tbBonoMeses.Text, tbBonoImporte.Text)
+            Dim res As Boolean = L_prGrabarBono(tbNumiBono.Text, dtBonoFecha.Value, tbSueldoMin.Value, tbBonoMeses.Value, tbBonoImporte.Value)
             If res Then
 
                 Dim img As Bitmap = New Bitmap(My.Resources.checked, 50, 50)
@@ -600,7 +716,8 @@ Public Class F3_Configuracion
             If res Then
 
                 ToastNotification.Show(Me, "Código de Descuento ".ToUpper + tbNumi.Text + " modificado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
-                _PCargarBuscador()
+                _PCargarBuscadorLeyPersonal()
+                _PCargarBuscadorLeyEmpresa()
                 _prSalir()
             End If
 
@@ -612,7 +729,7 @@ Public Class F3_Configuracion
     Private Sub _GuardarModificadoBono()
         Try
 
-            Dim res As Boolean = L_prModificarBono(tbNumiBono.Text, tbBonoMeses.Text, tbBonoImporte.Text)
+            Dim res As Boolean = L_prModificarBono(tbNumiBono.Text, dtBonoFecha.Value, tbSueldoMin.Value, tbBonoMeses.Value, tbBonoImporte.Value)
 
             If res Then
 
@@ -678,13 +795,40 @@ Public Class F3_Configuracion
             MostrarMensajeError(ex.Message)
         End Try
     End Sub
+    Public Sub _prMostrarRegistroLeyEmpresa(_N As Integer)
+        Try
+
+            With JGr_BuscadorEmp
+                tbNumi.Text = .GetValue("danumi").ToString
+                swTipoDesc.Value = .GetValue("datipo")
+                swTMonto.Value = .GetValue("datipomonto")
+                tbMonto.Text = .GetValue("damonto").ToString
+                tbObservacion.Text = .GetValue("daobs").ToString
+                dtFInicio.Value = .GetValue("dafinicio")
+                swVencimiento.Value = .GetValue("davenc")
+                dtFVencimiento.Value = .GetValue("dafvenc")
+
+                lbFecha.Text = CType(.GetValue("dafact"), Date).ToString("dd/MM/yyyy")
+                lbHora.Text = .GetValue("dahact").ToString
+                lbUsuario.Text = .GetValue("dauact").ToString
+
+            End With
+
+            LblPaginacion.Text = Str(JGr_BuscadorEmp.Row + 1) + "/" + JGr_BuscadorEmp.RowCount.ToString
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
     Public Sub _prMostrarRegistroBono(_N As Integer)
         Try
 
             With JGr_BonoAntiguedad
                 tbNumiBono.Text = .GetValue("banumi").ToString
-                tbBonoMeses.Text = .GetValue("bameses").ToString
-                tbBonoImporte.Text = .GetValue("bamonto").ToString
+                dtBonoFecha.Value = .GetValue("bafecha")
+                tbSueldoMin.Value = .GetValue("basueldomin")
+                tbBonoMeses.Value = .GetValue("bameses")
+                tbBonoImporte.Value = .GetValue("bamonto")
 
                 lbFecha.Text = CType(.GetValue("bafact"), Date).ToString("dd/MM/yyyy")
                 lbHora.Text = .GetValue("bahact").ToString
@@ -727,7 +871,8 @@ Public Class F3_Configuracion
             Dim res As Boolean = L_prEliminarDescuento(tbNumi.Text, mensajeError)
             If res Then
                 ToastNotification.Show(Me, "Codigo de Descuento ".ToUpper + tbNumi.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
-                _PCargarBuscador()
+                _PCargarBuscadorLeyPersonal()
+                _PCargarBuscadorLeyEmpresa()
                 _PInhabilitar()
             Else
                 ToastNotification.Show(Me, mensajeError, My.Resources.WARNING, 8000, eToastGlowColor.Red, eToastPosition.TopCenter)
@@ -739,9 +884,9 @@ Public Class F3_Configuracion
         Dim result As eTaskDialogResult = TaskDialog.Show(info)
         If result = eTaskDialogResult.Yes Then
             Dim mensajeError As String = ""
-            Dim res As Boolean = L_prEliminarBono(tbNumi.Text, mensajeError)
+            Dim res As Boolean = L_prEliminarBono(tbNumiBono.Text, mensajeError)
             If res Then
-                ToastNotification.Show(Me, "Codigo de Parámetro de Bono ".ToUpper + tbNumi.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                ToastNotification.Show(Me, "Codigo de Parámetro de Bono ".ToUpper + tbNumiBono.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
                 _PCargarBuscadorBono()
                 _PInhabilitarBono()
             Else
@@ -754,9 +899,9 @@ Public Class F3_Configuracion
         Dim result As eTaskDialogResult = TaskDialog.Show(info)
         If result = eTaskDialogResult.Yes Then
             Dim mensajeError As String = ""
-            Dim res As Boolean = L_prEliminarVacacion(tbNumi.Text, mensajeError)
+            Dim res As Boolean = L_prEliminarVacacion(tbNumiVacacion.Text, mensajeError)
             If res Then
-                ToastNotification.Show(Me, "Codigo de Parámetro de Vacación ".ToUpper + tbNumi.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                ToastNotification.Show(Me, "Codigo de Parámetro de Vacación ".ToUpper + tbNumiVacacion.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
                 _PCargarBuscadorVacacion()
                 _PInhabilitarVacacion()
             Else
@@ -906,6 +1051,16 @@ Public Class F3_Configuracion
     Private Sub JGr_Vacacion_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_Vacacion.SelectionChanged
         If (JGr_Vacacion.RowCount >= 0 And JGr_Vacacion.Row >= 0) Then
             _prMostrarRegistroVacacion(JGr_Vacacion.Row)
+        End If
+    End Sub
+
+    Private Sub JGr_BuscadorEmp_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGr_BuscadorEmp.EditingCell
+        e.Cancel = True
+    End Sub
+
+    Private Sub JGr_BuscadorEmp_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_BuscadorEmp.SelectionChanged
+        If (JGr_BuscadorEmp.RowCount >= 0 And JGr_BuscadorEmp.Row >= 0) Then
+            _prMostrarRegistroLeyEmpresa(JGr_BuscadorEmp.Row)
         End If
     End Sub
 #End Region
