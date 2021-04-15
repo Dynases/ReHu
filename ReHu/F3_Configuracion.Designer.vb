@@ -189,6 +189,7 @@ Partial Class F3_Configuracion
         'MpanelBuscador
         '
         Me.MpanelBuscador.Controls.Add(Me.PanelEx6)
+        Me.MpanelBuscador.Size = New System.Drawing.Size(1350, 716)
         '
         'TxtNombreUsu
         '
@@ -257,7 +258,7 @@ Partial Class F3_Configuracion
         Me.PanelEx6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelEx6.Location = New System.Drawing.Point(0, 0)
         Me.PanelEx6.Name = "PanelEx6"
-        Me.PanelEx6.Size = New System.Drawing.Size(1350, 694)
+        Me.PanelEx6.Size = New System.Drawing.Size(1350, 716)
         Me.PanelEx6.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelEx6.Style.BackColor1.ColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
         Me.PanelEx6.Style.Border = DevComponents.DotNetBar.eBorderType.SingleLine
@@ -277,7 +278,7 @@ Partial Class F3_Configuracion
         Me.GroupPanel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel2.Location = New System.Drawing.Point(0, 72)
         Me.GroupPanel2.Name = "GroupPanel2"
-        Me.GroupPanel2.Size = New System.Drawing.Size(1350, 622)
+        Me.GroupPanel2.Size = New System.Drawing.Size(1350, 644)
         '
         '
         '
@@ -314,7 +315,7 @@ Partial Class F3_Configuracion
         Me.JGr_BonoAntiguedad.Dock = System.Windows.Forms.DockStyle.Fill
         Me.JGr_BonoAntiguedad.Location = New System.Drawing.Point(0, 130)
         Me.JGr_BonoAntiguedad.Name = "JGr_BonoAntiguedad"
-        Me.JGr_BonoAntiguedad.Size = New System.Drawing.Size(1344, 469)
+        Me.JGr_BonoAntiguedad.Size = New System.Drawing.Size(1344, 491)
         Me.JGr_BonoAntiguedad.TabIndex = 1
         '
         'Panel2

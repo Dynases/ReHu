@@ -424,6 +424,12 @@
     <Compile Include="F3_Configuracion.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="F3_Descuentos.Designer.vb">
+      <DependentUpon>F3_Descuentos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="F3_Descuentos.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="F3_Personal.Designer.vb">
       <DependentUpon>F3_Personal.vb</DependentUpon>
     </Compile>
@@ -1111,6 +1117,9 @@
     <EmbeddedResource Include="F3_Configuracion.resx">
       <DependentUpon>F3_Configuracion.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="F3_Descuentos.resx">
+      <DependentUpon>F3_Descuentos.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="F3_Personal.resx">
       <DependentUpon>F3_Personal.vb</DependentUpon>
     </EmbeddedResource>
@@ -1751,6 +1760,7 @@
     <None Include="Resources\folder.png" />
     <None Include="Resources\Guardar2.png" />
     <None Include="Resources\configuracion.png" />
+    <None Include="Resources\DESCUENTOS_FIJOS.png" />
     <Content Include="Resources\PERSONAL.png" />
     <None Include="Resources\VENT_PAGOS.png" />
     <None Include="Resources\pie-chart1.png" />

@@ -337,4 +337,11 @@ Public Class P_Principal
         frm._modulo = FP_Configuracion
         frm.Show()
     End Sub
+
+    Private Sub btDescuentos_Click(sender As Object, e As EventArgs) Handles btDescuentos.Click
+        Dim frm As New F3_Descuentos
+        frm._nameButton = btDescuentos.Name
+        frm._modulo = FP_Configuracion
+        frm.Show()
+    End Sub
 End Class
