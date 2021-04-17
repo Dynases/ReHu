@@ -6274,7 +6274,17 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+    Public Shared Function L_prDescuentoGeneralOtros() As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
 
+        _listParam.Add(New Datos.DParametro("@tipo", 5))
+        _listParam.Add(New Datos.DParametro("@dauact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_Descuentos", _listParam)
+
+        Return _Tabla
+    End Function
 
     ''PESTAÑA BONOS
     Public Shared Function L_prEliminarBono(_numi As String, ByRef _mensaje As String) As Boolean
@@ -6467,5 +6477,107 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+#End Region
+
+#Region "DESCUENTOS"
+
+    '' PESTAÑA DESCUENTOS PERSONAL
+    Public Shared Function L_prEliminarDescuentoPer(_numi As String, ByRef _mensaje As String) As Boolean
+
+        Dim _resultado As Boolean
+
+        If L_fnbValidarEliminacion(_numi, "DescuentoPer", "dbnumi", _mensaje) = True Then
+            Dim _Tabla As DataTable
+
+            Dim _listParam As New List(Of Datos.DParametro)
+
+            _listParam.Add(New Datos.DParametro("@tipo", -1))
+            _listParam.Add(New Datos.DParametro("@dbnumi", _numi))
+            _listParam.Add(New Datos.DParametro("@dbuact", L_Usuario))
+
+            _Tabla = D_ProcedimientoConParam("sp_DescuentoPer", _listParam)
+
+            If _Tabla.Rows.Count > 0 Then
+                _resultado = True
+            Else
+                _resultado = False
+            End If
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+    Public Shared Function L_prGrabarDescuentoPer(ByRef _numi As String, _codPersona As String, _tipo As String, _monto As String,
+                                              _obs As String, _finicio As String, _venc As String, _fvenc As String) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
+        _listParam.Add(New Datos.DParametro("@dbnumi", _numi))
+        _listParam.Add(New Datos.DParametro("@dbcper", _codPersona))
+        _listParam.Add(New Datos.DParametro("@dbtipo", _tipo))
+        _listParam.Add(New Datos.DParametro("@dbvalor", _monto))
+        _listParam.Add(New Datos.DParametro("@dbobs", _obs))
+        _listParam.Add(New Datos.DParametro("@dbfinicio", _finicio))
+        _listParam.Add(New Datos.DParametro("@dbvenc", _venc))
+        _listParam.Add(New Datos.DParametro("@dbfvenc", _fvenc))
+        _listParam.Add(New Datos.DParametro("@dbestado", 1))
+        _listParam.Add(New Datos.DParametro("@dbuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_DescuentoPer", _listParam)
+
+
+        If _Tabla.Rows.Count > 0 Then
+            _numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+    Public Shared Function L_prModificarDescuentoPer(ByRef _numi As String, _codPersona As String, _tipo As String, _monto As String,
+                                              _obs As String, _finicio As String, _venc As String, _fvenc As String) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 2))
+        _listParam.Add(New Datos.DParametro("@dbnumi", _numi))
+        _listParam.Add(New Datos.DParametro("@dbcper", _codPersona))
+        _listParam.Add(New Datos.DParametro("@dbtipo", _tipo))
+        _listParam.Add(New Datos.DParametro("@dbvalor", _monto))
+        _listParam.Add(New Datos.DParametro("@dbobs", _obs))
+        _listParam.Add(New Datos.DParametro("@dbfinicio", _finicio))
+        _listParam.Add(New Datos.DParametro("@dbvenc", _venc))
+        _listParam.Add(New Datos.DParametro("@dbfvenc", _fvenc))
+        _listParam.Add(New Datos.DParametro("@dbestado", 1))
+        _listParam.Add(New Datos.DParametro("@dbuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_DescuentoPer", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            _numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+    Public Shared Function L_prDescuentoGeneralPersonal() As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@dbuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_DescuentoPer", _listParam)
+
+        Return _Tabla
+    End Function
+
 #End Region
 End Class

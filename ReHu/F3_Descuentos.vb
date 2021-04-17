@@ -13,7 +13,7 @@ Public Class F3_Descuentos
     Dim _Inter As Integer = 0
     Public _modulo As SideNavItem
     Public _nameButton As String
-    Dim _Dsencabezado As DataSet
+    Dim _Dsencabezado As DataTable
     Dim _Pos As Integer
     Dim _Nuevo As Boolean
 
@@ -23,28 +23,41 @@ Public Class F3_Descuentos
 
     Private Sub _PCargarBuscador()
         Dim dt As New DataTable
-        dt = L_DescuentoFijo_General(0).Tables(0)
+        dt = L_prDescuentoGeneralPersonal()
 
         JGr_Buscador.BoundMode = BoundMode.Bound
         JGr_Buscador.DataSource = dt
         JGr_Buscador.RetrieveStructure()
 
         'dar formato a las columnas
-        With JGr_Buscador.RootTable.Columns("panumi")
+        With JGr_Buscador.RootTable.Columns("dbnumi")
             .Caption = "Codigo"
             .Width = 70
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
-
-        With JGr_Buscador.RootTable.Columns("patipo")
-            .Caption = "Tipo Desc."
+        With JGr_Buscador.RootTable.Columns("dbcper")
+            .Caption = "Cod. Persona"
             .Width = 90
+            .Visible = False
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
 
-        With JGr_Buscador.RootTable.Columns("pavalor")
+        With JGr_Buscador.RootTable.Columns("panombre")
+            .Caption = "Nombres"
+            .Width = 250
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+        End With
+        With JGr_Buscador.RootTable.Columns("dbtipo")
+            .Caption = "Tipo Desc."
+            .Width = 90
+            .Visible = False
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With JGr_Buscador.RootTable.Columns("dbvalor")
             .Caption = "Descuento"
             .Width = 130
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
@@ -52,29 +65,21 @@ Public Class F3_Descuentos
             .FormatString = "0.00"
         End With
 
-        With JGr_Buscador.RootTable.Columns("pacper")
-            .Caption = "Cod. Persona"
-            .Width = 90
+        With JGr_Buscador.RootTable.Columns("dbobs")
+            .Caption = "Observación"
+            .Width = 300
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+        End With
+        With JGr_Buscador.RootTable.Columns("dbfinicio")
+            .Caption = "Fecha Inicio"
+            .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
-
-        With JGr_Buscador.RootTable.Columns("cbdesc")
-            .Caption = "Nombre"
-            .Width = 300
-            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
-        End With
-
-        With JGr_Buscador.RootTable.Columns("paobs")
-            .Caption = "Observacion"
-            .Width = 300
-            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
-        End With
-
-        With JGr_Buscador.RootTable.Columns("pavenc")
-            .Caption = "Venci"
-            .Visible = True
-            .Width = 60
+        With JGr_Buscador.RootTable.Columns("dbvenc")
+            .Caption = "Estado Venc."
+            .Visible = False
+            .Width = 120
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .EditType = EditType.CheckBox
             .ColumnType = ColumnType.CheckBox
@@ -82,13 +87,27 @@ Public Class F3_Descuentos
             .CheckBoxTrueValue = 1
         End With
 
-        With JGr_Buscador.RootTable.Columns("pafvenc")
+        With JGr_Buscador.RootTable.Columns("dbfvenc")
             .Caption = "Fecha Venc"
             .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
-
+        With JGr_Buscador.RootTable.Columns("dbestado")
+            .Visible = False
+        End With
+        With JGr_Buscador.RootTable.Columns("dbfact")
+            .Caption = "Fecha Registro"
+            .Width = 100
+        End With
+        With JGr_Buscador.RootTable.Columns("dbhact")
+            .Caption = "Hora Registro"
+            .Width = 100
+        End With
+        With JGr_Buscador.RootTable.Columns("dbuact")
+            .Caption = "Usuario"
+            .Width = 100
+        End With
         'Habilitar Filtradores
         With JGr_Buscador
             .DefaultFilterRowComparison = FilterConditionOperator.Contains
@@ -97,49 +116,44 @@ Public Class F3_Descuentos
             .GroupByBoxVisible = False
             'diseño de la grilla
             JGr_Buscador.VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
         End With
-
 
     End Sub
 
     Private Sub _PCargarComboEmpleados()
         Dim _Ds As New DataSet
-        _Ds.Tables.Add(L_prPersonaAyudaTodosGeneral())
+        _Ds.Tables.Add(L_prPersonalGeneral())
 
         JMc_Persona.DropDownList.Columns.Clear()
 
 
-        JMc_Persona.DropDownList.Columns.Add(_Ds.Tables(0).Columns("panumi").ToString).Width = 50
+        JMc_Persona.DropDownList.Columns.Add(_Ds.Tables(0).Columns("panumi").ToString).Width = 70
         JMc_Persona.DropDownList.Columns(0).Caption = "Código"
-        JMc_Persona.DropDownList.Columns.Add(_Ds.Tables(0).Columns("paci").ToString).Width = 70
-        JMc_Persona.DropDownList.Columns(1).Caption = "CI"
-        JMc_Persona.DropDownList.Columns.Add(_Ds.Tables(0).Columns("panom1").ToString).Width = 250
-        JMc_Persona.DropDownList.Columns(2).Caption = "Descripcion"
+        JMc_Persona.DropDownList.Columns.Add(_Ds.Tables(0).Columns("panombre").ToString).Width = 250
+        JMc_Persona.DropDownList.Columns(1).Caption = "Nombres"
+        JMc_Persona.DropDownList.Columns.Add(_Ds.Tables(0).Columns("panrodoc").ToString).Width = 90
+        JMc_Persona.DropDownList.Columns(2).Caption = "CI"
+
 
         JMc_Persona.ValueMember = _Ds.Tables(0).Columns("panumi").ToString
-        JMc_Persona.DisplayMember = _Ds.Tables(0).Columns("panom1").ToString
+        JMc_Persona.DisplayMember = _Ds.Tables(0).Columns("panombre").ToString
         JMc_Persona.DataSource = _Ds.Tables(0)
         JMc_Persona.Refresh()
     End Sub
 
     Private Sub _PHabilitar()
-        'Tb_Observacion.Enabled = True
-        'Tb_TipoMov.Enabled = True
-        'Tb_Valor.Enabled = True
-        'JMc_Persona.Enabled = True
-        'tbVencimiento.Enabled = True
 
-        Tb_Observacion.ReadOnly = False
-        Tb_TipoMov.Enabled = True
-        Tb_Valor.ReadOnly = False
         JMc_Persona.ReadOnly = False
+        Tb_TipoMov.Enabled = True
+        Tb_Valor.IsInputReadOnly = False
+        Tb_Observacion.ReadOnly = False
+        dtFInicio.Enabled = True
         tbVencimiento.Enabled = True
 
         If tbVencimiento.Value = True Then
-            tbFechaVenci.Enabled = True
+            dtFechaVenc.Enabled = True
         End If
-
-
 
         btnNuevo.Enabled = False
         btnModificar.Enabled = False
@@ -148,53 +162,32 @@ Public Class F3_Descuentos
 
     End Sub
     Private Sub _PInhabilitar()
-        'Tb_Id.Enabled = False
-        'Tb_Observacion.Enabled = False
-        'Tb_TipoMov.Enabled = False
-        'Tb_Valor.Enabled = False
-        'JMc_Persona.Enabled = False
-        'tbFechaVenci.Enabled = False
-        'tbVencimiento.Enabled = False
 
         Tb_Id.ReadOnly = True
-        Tb_Observacion.ReadOnly = True
-        Tb_TipoMov.Enabled = False
-        Tb_Valor.ReadOnly = True
         JMc_Persona.ReadOnly = True
-        tbFechaVenci.Enabled = False
+        Tb_TipoMov.Enabled = False
+        Tb_Valor.IsInputReadOnly = True
+        Tb_Observacion.ReadOnly = True
+        dtFInicio.Enabled = False
+        dtFechaVenc.Enabled = False
         tbVencimiento.Enabled = False
-
 
         btnNuevo.Enabled = True
         btnModificar.Enabled = True
         btnEliminar.Enabled = True
         btnGrabar.Enabled = False
 
-        LblPaginacion.Text = ""
-
-        btnGrabar.Image = My.Resources.GUARDAR
-
-        _PLimpiarErrores()
     End Sub
-    Private Sub _PLimpiarErrores()
-        'Ep1.Clear()
-        'Ep2.Clear()
-        'J_Cb_Ciudad.BackColor = Color.White
-        'J_Cb_Provincia.BackColor = Color.White
-        'J_Cb_Zona.BackColor = Color.White
-        'ButtonX1.BackColor = Color.White
-    End Sub
+
     Private Sub _PLimpiar()
         Tb_Id.Text = ""
-        Tb_Observacion.Text = ""
+        JMc_Persona.Text = ""
         Tb_TipoMov.Value = True
         Tb_Valor.Text = ""
-        tbFechaVenci.Value = Today.Date
+        Tb_Observacion.Text = ""
+        dtFInicio.Value = Today.Date
+        dtFechaVenc.Value = Today.Date
         tbVencimiento.Value = False
-
-        'aumentado 
-        LblPaginacion.Text = ""
-
     End Sub
     Private Sub _PHabilitarFocus()
 
@@ -203,61 +196,59 @@ Public Class F3_Descuentos
         MHighlighterFocus.SetHighlightOnFocus(JMc_Persona, DevComponents.DotNetBar.Validator.eHighlightColor.Blue)
         MHighlighterFocus.SetHighlightOnFocus(Tb_Observacion, DevComponents.DotNetBar.Validator.eHighlightColor.Blue)
         MHighlighterFocus.SetHighlightOnFocus(tbVencimiento, DevComponents.DotNetBar.Validator.eHighlightColor.Blue)
-        MHighlighterFocus.SetHighlightOnFocus(tbFechaVenci, DevComponents.DotNetBar.Validator.eHighlightColor.Blue)
+        MHighlighterFocus.SetHighlightOnFocus(dtFechaVenc, DevComponents.DotNetBar.Validator.eHighlightColor.Blue)
 
-        Tb_TipoMov.TabIndex = 1
-        Tb_Valor.TabIndex = 2
-        JMc_Persona.TabIndex = 3
+        JMc_Persona.TabIndex = 1
+        Tb_TipoMov.TabIndex = 2
+        Tb_Valor.TabIndex = 3
         Tb_Observacion.TabIndex = 4
+        dtFInicio.TabIndex = 5
         GroupPanel1.TabIndex = 5
         tbVencimiento.TabIndex = 1
-        tbFechaVenci.TabIndex = 2
+        dtFechaVenc.TabIndex = 2
     End Sub
 
     Private Sub _PIniciarTodo()
-        Me.Text = "D E S C U E N T O S     F I J O S"
-        Me.WindowState = FormWindowState.Maximized
+        Me.Text = "D E S C U E N T O S   P E R S O N A L"
 
-        'abrir conexion
+        _prAsignarPermisos()
+
         _PCargarBuscador()
-
         _PCargarComboEmpleados()
-
         _PFiltrar()
         _PInhabilitar()
-
         _PHabilitarFocus()
 
-        _pCambiarFuente()
     End Sub
+    Private Sub _prAsignarPermisos()
 
-    Private Sub _pCambiarFuente()
-        'Dim fuente As New Font("Tahoma", gi_fuenteTamano, FontStyle.Regular)
-        'Dim xCtrl As Control
-        'For Each xCtrl In PanelEx3.Controls
-        '    Try
-        '        xCtrl.Font = fuente
-        '    Catch ex As Exception
-        '    End Try
-        'Next
+        Dim dtRolUsu As DataTable = L_prRolDetalleGeneral(gi_userRol, _nameButton)
 
-        'For Each xCtrl In PanelEx4.Controls
-        '    Try
-        '        xCtrl.Font = fuente
-        '    Catch ex As Exception
-        '    End Try
-        'Next
+        Dim show As Boolean = dtRolUsu.Rows(0).Item("ycshow")
+        Dim add As Boolean = dtRolUsu.Rows(0).Item("ycadd")
+        Dim modif As Boolean = dtRolUsu.Rows(0).Item("ycmod")
+        Dim del As Boolean = dtRolUsu.Rows(0).Item("ycdel")
+
+        If add = False Then
+            btnNuevo.Visible = False
+        End If
+        If modif = False Then
+            btnModificar.Visible = False
+        End If
+        If del = False Then
+            btnEliminar.Visible = False
+        End If
 
     End Sub
 
     Private Sub _PFiltrar()
-        _Dsencabezado = New DataSet
-        _Dsencabezado = L_DescuentoFijo_General(0)
+        _Dsencabezado = New DataTable
+        _Dsencabezado = L_prDescuentoGeneralPersonal()
         '_First = False
-        If _Dsencabezado.Tables(0).Rows.Count <> 0 Then
+        If _Dsencabezado.Rows.Count <> 0 Then
             _Pos = 0
             _PMostrarRegistro(_Pos)
-            If _Dsencabezado.Tables(0).Rows.Count > 0 Then
+            If _Dsencabezado.Rows.Count > 0 Then
                 btnPrimero.Visible = True
                 btnAnterior.Visible = True
                 btnSiguiente.Visible = True
@@ -270,47 +261,58 @@ Public Class F3_Descuentos
 
         JGr_Buscador.Row = _Pos
         With JGr_Buscador
-            Tb_Id.Text = .GetValue("panumi").ToString
 
-            Tb_TipoMov.Value = .GetValue("patipo")
-
-            Tb_Valor.Text = .GetValue("pavalor").ToString
-
-            JMc_Persona.Text = .GetValue("cbdesc").ToString
-
-            Tb_Observacion.Text = .GetValue("paobs").ToString
-
-            tbVencimiento.Value = IIf(.GetValue("pavenc") = 1, True, False)
-
-            tbFechaVenci.Value = .GetValue("pafvenc")
+            Tb_Id.Text = .GetValue("dbnumi").ToString
+            JMc_Persona.Value = .GetValue("dbcper")
+            Tb_TipoMov.Value = .GetValue("dbtipo")
+            Tb_Valor.Value = .GetValue("dbvalor")
+            Tb_Observacion.Text = .GetValue("dbobs").ToString
+            dtFInicio.Value = .GetValue("dbfinicio")
+            tbVencimiento.Value = IIf(.GetValue("dbvenc") = 1, True, False)
+            dtFechaVenc.Value = .GetValue("dbfvenc")
 
         End With
         LblPaginacion.Text = Str(_Pos + 1) + "/" + JGr_Buscador.RowCount.ToString
     End Sub
     Private Function _PValidar() As Boolean
         Dim _Error As Boolean = False
+        Try
+            If Tb_Valor.Text = "" Then
+                Tb_Valor.BackColor = Color.Red
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor ingrese el Monto de Descuento.".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                Tb_Valor.Focus()
+                _Error = True
+            Else
+                Tb_Valor.BackColor = Color.White
 
-        If Tb_Valor.Text = "" Then
-            Tb_Valor.BackColor = Color.Red   'error de validacion
-            'Ep1.SetError(Tb_Nombre, "Ingrese el nombre del empleado!")
-            _Error = True
-        Else
-            Tb_Valor.BackColor = Color.White
-            'Ep1.SetError(Tb_Nombre, "")
-        End If
+            End If
 
-        If JMc_Persona.SelectedIndex < 0 Then
-            JMc_Persona.BackColor = Color.Red   'error de validacion
-            'Ep1.SetError(Tb_Nombre, "Ingrese el nombre del empleado!")
-            _Error = True
-        Else
-            JMc_Persona.BackColor = Color.White
-            'Ep1.SetError(Tb_Nombre, "")
-        End If
+            If JMc_Persona.SelectedIndex < 0 Then
+                JMc_Persona.BackColor = Color.Red
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor seleccione un Personal.".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                JMc_Persona.Focus()
+                _Error = True
+            Else
+                JMc_Persona.BackColor = Color.White
+            End If
 
-        Return _Error
+            Return _Error
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+            Return _Error
+        End Try
     End Function
+    Private Sub MostrarMensajeError(mensaje As String)
+        ToastNotification.Show(Me,
+                               mensaje.ToUpper,
+                               My.Resources.WARNING,
+                               5000,
+                               eToastGlowColor.Red,
+                               eToastPosition.TopCenter)
 
+    End Sub
     Private Sub _PGrabarRegistro()
         Dim _Error As Boolean = False
         If _PValidar() Then
@@ -320,12 +322,6 @@ Public Class F3_Descuentos
             Exit Sub
         End If
 
-        'If Lb_Mensaje.Text = "" Then
-        '    Lb_Mensaje.Text = "Esta Seguro de Grabar?"
-        '    Exit Sub
-        'Else
-        '    Lb_Mensaje.Text = ""
-        'End If
         If False Then 'bbtGrabar.Tag = 0 
             'bbtGrabar.Tag = 1
             'bbtGrabar.Image = My.Resources.CONFIRMACION
@@ -345,15 +341,19 @@ Public Class F3_Descuentos
                 tipo = "0"
             End If
 
-            L_DescuentoFijo_Grabar(Tb_Id.Text, tipo, Tb_Valor.Text, JMc_Persona.Value, Tb_Observacion.Text, IIf(tbVencimiento.Value = True, "1", "0"), tbFechaVenci.Value.ToString("yyyy/MM/dd"))
+            Dim res As Boolean = L_prGrabarDescuentoPer(Tb_Id.Text, JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
+                                                        dtFechaVenc.Value.ToString("yyyy/MM/dd"), IIf(tbVencimiento.Value = True, "1", "0"),
+                                                        dtFechaVenc.Value.ToString("yyyy/MM/dd"))
+            If res Then
+                _PCargarBuscador()
+                JMc_Persona.Focus()
+                ToastNotification.Show(Me, "Código de Descuento ".ToUpper + Tb_Id.Text + " Grabado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.BottomLeft)
+                _PLimpiar()
+            Else
+                Dim img As Bitmap = New Bitmap(My.Resources.cancel, 50, 50)
+                ToastNotification.Show(Me, "El Descuento no pudo ser insertado".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+            End If
 
-            'actualizar el grid de buscador
-            _PCargarBuscador()
-
-            Tb_Valor.Focus()
-            ToastNotification.Show(Me, "Codigo de descuento fijo ".ToUpper + Tb_Id.Text + " Grabado con Exito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.BottomLeft)
-            'Tsbl0_Mensaje.Text = ""
-            _PLimpiar()
         Else
             Dim tipo As String
             If Tb_TipoMov.Value Then
@@ -361,47 +361,49 @@ Public Class F3_Descuentos
             Else
                 tipo = "0"
             End If
-            L_DescuentoFijo_Modificar(Tb_Id.Text, tipo, Tb_Valor.Text, JMc_Persona.Value, Tb_Observacion.Text, IIf(tbVencimiento.Value = True, "1", "0"), tbFechaVenci.Value.ToString("yyyy/MM/dd"))
+            Dim res As Boolean = L_prModificarDescuentoPer(Tb_Id.Text, JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
+                                                        dtFechaVenc.Value.ToString("yyyy/MM/dd"), IIf(tbVencimiento.Value = True, "1", "0"),
+                                                        dtFechaVenc.Value.ToString("yyyy/MM/dd"))
+            If res Then
+                ToastNotification.Show(Me, "Código de descuento ".ToUpper + Tb_Id.Text + " Modificado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.BottomLeft)
+                _Nuevo = False 'aumentado danny
 
-            ToastNotification.Show(Me, "Codigo de descuento fijo ".ToUpper + Tb_Id.Text + " Modificado con Exito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.BottomLeft)
-            '_Deshabilitar()
+                _PInhabilitar()
+                _PCargarBuscador()
+                _PFiltrar()
 
-            'TSB0_5.PerformClick()
-            _Nuevo = False 'aumentado danny
-            '_Modificar = False 'aumentado danny
-            _PInhabilitar()
-            _PCargarBuscador()
-            _PFiltrar()
+            End If
         End If
     End Sub
 
     Private Sub _PNuevoRegistro()
         _PHabilitar()
-        btnNuevo.Enabled = True
-
         _PLimpiar()
         Tb_Valor.Focus()
         _Nuevo = True
+        RLAccion.Text = "NUEVO"
     End Sub
 
     Private Sub _PModificarRegistro()
         _Nuevo = False
-        '_Modificar = True
         _PHabilitar()
+        RLAccion.Text = "MODIFICAR"
     End Sub
 
     Private Sub _PEliminarRegistro()
-        Dim _Result As MsgBoxResult
-        _Result = MsgBox("Esta seguro de Eliminar el Registro?", MsgBoxStyle.YesNo, "Advertencia")
-        If _Result = MsgBoxResult.Yes Then
-            L_DescuentoFijo_Borrar(Tb_Id.Text)
-            'borro el detalle del encabezado
-            'L_Borrar_LibreriasDetalle(Tb_Id.Text)
-            _PFiltrar()
+        Dim info As New TaskDialogInfo("eliminacion".ToUpper, eTaskDialogIcon.Delete, "¿esta seguro de eliminar el registro?".ToUpper, "".ToUpper, eTaskDialogButton.Yes Or eTaskDialogButton.Cancel, eTaskDialogBackgroundColor.Blue)
+        Dim result As eTaskDialogResult = TaskDialog.Show(info)
+        If result = eTaskDialogResult.Yes Then
+            Dim mensajeError As String = ""
+            Dim res As Boolean = L_prEliminarDescuentoPer(Tb_Id.Text, mensajeError)
+            If res Then
+                ToastNotification.Show(Me, "Código de Descuento ".ToUpper + Tb_Id.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                _PCargarBuscador()
 
-            'mi codigo, actualizo el sub
-            _Pos = 0
-            LblPaginacion.Text = Str(_Pos + 1) + "/" + _Dsencabezado.Tables(0).Rows.Count.ToString
+                _PInhabilitar()
+            Else
+                ToastNotification.Show(Me, mensajeError, My.Resources.WARNING, 8000, eToastGlowColor.Red, eToastPosition.TopCenter)
+            End If
         End If
     End Sub
 
@@ -409,34 +411,10 @@ Public Class F3_Descuentos
         If btnGrabar.Enabled = True Then
             _PInhabilitar()
             _PFiltrar()
+            RLAccion.Text = ""
         Else
             Me.Close()
         End If
-    End Sub
-
-    Private Sub _PGrabarNuevasLibrerias()
-        ''Dim codCiu, codProv, codZona As Integer
-        ''If J_Cb_Ciudad.SelectedIndex < 0 Then
-        ''    L_Grabar_LibreriaDetalle(13, 13, codCiu, J_Cb_Ciudad.Text)
-        ''    _LlenarComboLibreria(J_Cb_Ciudad, 13)
-        ''    J_Cb_Ciudad.Value = codCiu
-        ''    Ep2.SetError(J_Cb_Ciudad, "")
-        ''End If
-
-        ''If J_Cb_Provincia.SelectedIndex < 0 Then
-        ''    L_Grabar_LibreriaDetalle(4, 4, codProv, J_Cb_Provincia.Text)
-        ''    _LlenarComboLibreria(J_Cb_Provincia, 4)
-        ''    J_Cb_Provincia.Value = codProv
-        ''    Ep2.SetError(J_Cb_Provincia, "")
-        ''End If
-
-        ''If J_Cb_Zona.SelectedIndex < 0 Then
-        ''    L_Grabar_LibreriaDetalle(2, 2, codZona, J_Cb_Zona.Text)
-        ''    _LlenarComboLibreria(J_Cb_Zona, 2)
-        ''    J_Cb_Zona.Value = codZona
-        ''    Ep2.SetError(J_Cb_Zona, "")
-        ''End If
-        ''Pan_Dialogo.Visible = False
     End Sub
 
     Private Sub _PPrimerRegistro()
@@ -512,7 +490,7 @@ Public Class F3_Descuentos
 
     Private Sub tbVencimiento_ValueChanged(sender As Object, e As EventArgs) Handles tbVencimiento.ValueChanged
         If btnGrabar.Enabled = True Then
-            tbFechaVenci.Enabled = tbVencimiento.Value
+            dtFechaVenc.Enabled = tbVencimiento.Value
         End If
     End Sub
 
@@ -521,6 +499,16 @@ Public Class F3_Descuentos
         If JGr_Buscador.Row >= 0 Then
             _Pos = JGr_Buscador.Row
             _PMostrarRegistro(_Pos)
+        End If
+    End Sub
+
+    Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
+        _Inter = _Inter + 1
+        If _Inter = 1 Then
+            Me.WindowState = FormWindowState.Normal
+        Else
+            Me.Opacity = 100
+            Timer1.Enabled = False
         End If
     End Sub
 End Class

@@ -22,10 +22,14 @@ Public Class F3_Configuracion
         Me.Text = "P A R Á M E T R O S"
 
         _prAsignarPermisos()
+        _prCargarComboLibreria(cbTipoDesc, 8, 1)
+
         _PCargarBuscadorLeyPersonal()
         _PCargarBuscadorLeyEmpresa()
+        _PCargarBuscadorOtros()
         _PCargarBuscadorBono()
         _PCargarBuscadorVacacion()
+
         _PInhabilitar()
         _PInhabilitarBono()
         _PInhabilitarVacacion()
@@ -59,6 +63,21 @@ Public Class F3_Configuracion
         End If
 
     End Sub
+    Private Sub _prCargarComboLibreria(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo, cod1 As String, cod2 As String)
+        Dim dt As New DataTable
+        dt = L_prLibreriaClienteLGeneral(cod1, cod2)
+        With mCombo
+            .DropDownList.Columns.Clear()
+            .DropDownList.Columns.Add("yccod3").Width = 70
+            .DropDownList.Columns("yccod3").Caption = "COD"
+            .DropDownList.Columns.Add("ycdes3").Width = 230
+            .DropDownList.Columns("ycdes3").Caption = "DESCRIPCION"
+            .ValueMember = "yccod3"
+            .DisplayMember = "ycdes3"
+            .DataSource = dt
+            .Refresh()
+        End With
+    End Sub
     Private Sub _PCargarBuscadorLeyPersonal()
         Dim dt As New DataTable
         dt = L_prDescuentoGeneralPer()
@@ -83,15 +102,15 @@ Public Class F3_Configuracion
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
         With JGr_Buscador.RootTable.Columns("datipomonto")
-            .Caption = "Tipo Monto"
-            .Width = 90
+            .Caption = "TipoMonto"
+            .Width = 70
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
 
         With JGr_Buscador.RootTable.Columns("damonto")
             .Caption = "Monto"
-            .Width = 130
+            .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .FormatString = "0.00"
@@ -99,7 +118,7 @@ Public Class F3_Configuracion
 
         With JGr_Buscador.RootTable.Columns("daobs")
             .Caption = "Observacion"
-            .Width = 300
+            .Width = 200
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
         End With
 
@@ -108,16 +127,17 @@ Public Class F3_Configuracion
             .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = False
         End With
         With JGr_Buscador.RootTable.Columns("davenc")
             .Caption = "Estado Vencimiento"
-            .Visible = True
             .Width = 160
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .EditType = EditType.CheckBox
             .ColumnType = ColumnType.CheckBox
             .CheckBoxFalseValue = 0
             .CheckBoxTrueValue = 1
+            .Visible = False
         End With
 
         With JGr_Buscador.RootTable.Columns("dafvenc")
@@ -125,6 +145,7 @@ Public Class F3_Configuracion
             .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = False
         End With
 
         With JGr_Buscador.RootTable.Columns("daestado")
@@ -177,15 +198,15 @@ Public Class F3_Configuracion
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
         With JGr_BuscadorEmp.RootTable.Columns("datipomonto")
-            .Caption = "Tipo Monto"
-            .Width = 90
+            .Caption = "TipoMonto"
+            .Width = 70
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
 
         With JGr_BuscadorEmp.RootTable.Columns("damonto")
             .Caption = "Monto"
-            .Width = 130
+            .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
             .FormatString = "0.00"
@@ -193,7 +214,7 @@ Public Class F3_Configuracion
 
         With JGr_BuscadorEmp.RootTable.Columns("daobs")
             .Caption = "Observacion"
-            .Width = 300
+            .Width = 200
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
         End With
 
@@ -202,21 +223,23 @@ Public Class F3_Configuracion
             .Width = 100
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .Visible = False
         End With
         With JGr_BuscadorEmp.RootTable.Columns("davenc")
             .Caption = "Estado Vencimiento"
-            .Visible = True
             .Width = 160
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .EditType = EditType.CheckBox
             .ColumnType = ColumnType.CheckBox
             .CheckBoxFalseValue = 0
             .CheckBoxTrueValue = 1
+            .Visible = False
         End With
 
         With JGr_BuscadorEmp.RootTable.Columns("dafvenc")
             .Caption = "Fecha Venc."
             .Width = 100
+            .Visible = False
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
@@ -244,6 +267,102 @@ Public Class F3_Configuracion
             .GroupByBoxVisible = False
             'diseño de la grilla
             JGr_BuscadorEmp.VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
+        End With
+    End Sub
+    Private Sub _PCargarBuscadorOtros()
+        Dim dt As New DataTable
+        dt = L_prDescuentoGeneralOtros()
+
+        JGr_BuscadorOtros.BoundMode = BoundMode.Bound
+        JGr_BuscadorOtros.DataSource = dt
+        JGr_BuscadorOtros.RetrieveStructure()
+
+        'dar formato a las columnas
+        With JGr_BuscadorOtros.RootTable.Columns("danumi")
+            .Caption = "Codigo"
+            .Width = 70
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("datipo")
+            .Caption = "Tipo Desc."
+            .Width = 90
+            .Visible = False
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+        With JGr_BuscadorOtros.RootTable.Columns("datipomonto")
+            .Caption = "TipoMonto"
+            .Width = 70
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("damonto")
+            .Caption = "Monto"
+            .Width = 100
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .FormatString = "0.00"
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("daobs")
+            .Caption = "Observacion"
+            .Width = 200
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("dafinicio")
+            .Caption = "Fecha Inicio"
+            .Width = 100
+            .Visible = False
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+        With JGr_BuscadorOtros.RootTable.Columns("davenc")
+            .Caption = "Estado Vencimiento"
+            .Visible = False
+            .Width = 160
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .EditType = EditType.CheckBox
+            .ColumnType = ColumnType.CheckBox
+            .CheckBoxFalseValue = 0
+            .CheckBoxTrueValue = 1
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("dafvenc")
+            .Caption = "Fecha Venc."
+            .Width = 100
+            .Visible = False
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("daestado")
+            .Visible = False
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("dafact")
+            .Visible = False
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("dahact")
+            .Visible = False
+        End With
+
+        With JGr_BuscadorOtros.RootTable.Columns("dauact")
+            .Visible = False
+        End With
+        'Habilitar Filtradores
+        With JGr_BuscadorOtros
+            .DefaultFilterRowComparison = FilterConditionOperator.Contains
+            .FilterMode = FilterMode.Automatic
+            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            .GroupByBoxVisible = False
+            'diseño de la grilla
+            JGr_BuscadorOtros.VisualStyle = VisualStyle.Office2007
             .RecordNavigator = True
         End With
     End Sub
@@ -390,9 +509,9 @@ Public Class F3_Configuracion
     End Sub
     Private Sub _PInhabilitar()
         tbNumi.ReadOnly = True
-        swTipoDesc.Enabled = False
+        cbTipoDesc.Enabled = False
         swTMonto.Enabled = False
-        tbMonto.ReadOnly = True
+        tbMonto.IsInputReadOnly = True
         tbObservacion.ReadOnly = True
         dtFInicio.Enabled = False
         swVencimiento.Enabled = False
@@ -428,9 +547,9 @@ Public Class F3_Configuracion
         btnGrabarVacacion.Enabled = False
     End Sub
     Private Sub _PHabilitar()
-        swTipoDesc.Enabled = True
+        cbTipoDesc.Enabled = True
         swTMonto.Enabled = True
-        tbMonto.ReadOnly = False
+        tbMonto.IsInputReadOnly = False
         tbObservacion.ReadOnly = False
         dtFInicio.Enabled = True
         swVencimiento.Enabled = True
@@ -466,7 +585,7 @@ Public Class F3_Configuracion
     End Sub
     Private Sub _PLimpiar()
         tbNumi.Text = ""
-        swTipoDesc.Text = ""
+        cbTipoDesc.Text = ""
         swTMonto.Text = ""
         tbMonto.Text = ""
         tbObservacion.Text = ""
@@ -572,6 +691,12 @@ Public Class F3_Configuracion
     End Sub
     Public Function _ValidarCampos() As Boolean
         Try
+            If (cbTipoDesc.SelectedIndex < 0) Then
+                Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
+                ToastNotification.Show(Me, "Por Favor Seleccione un Tipo de Descuento".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
+                cbTipoDesc.Focus()
+                Return False
+            End If
             If (tbMonto.Text = String.Empty) Then
                 Dim img As Bitmap = New Bitmap(My.Resources.mensaje, 50, 50)
                 ToastNotification.Show(Me, "Por Favor ingrese el Monto de Descuento.".ToUpper, img, 2000, eToastGlowColor.Red, eToastPosition.BottomCenter)
@@ -627,9 +752,9 @@ Public Class F3_Configuracion
     End Function
     Public Sub _GuardarNuevo()
         Try
-            Dim res As Boolean = L_prGrabarDescuento(tbNumi.Text, IIf(swTipoDesc.Value = True, "1", "0"),
-                                                     IIf(swTMonto.Value = True, "1", "0"), tbMonto.Text, tbObservacion.Text,
-                                                     dtFInicio.Value.ToString("yyyy/MM/dd"), IIf(swVencimiento.Value = True, "1", "0"),
+            Dim res As Boolean = L_prGrabarDescuento(tbNumi.Text, cbTipoDesc.Value, IIf(swTMonto.Value = True, "1", "0"),
+                                                     tbMonto.Value, tbObservacion.Text, dtFInicio.Value.ToString("yyyy/MM/dd"),
+                                                     IIf(swVencimiento.Value = True, "1", "0"),
                                                      dtFVencimiento.Value.ToString("yyyy/MM/dd"))
             If res Then
 
@@ -642,6 +767,7 @@ Public Class F3_Configuracion
 
                 _PCargarBuscadorLeyPersonal()
                 _PCargarBuscadorLeyEmpresa()
+                _PCargarBuscadorOtros()
                 _PLimpiar()
 
             Else
@@ -708,9 +834,9 @@ Public Class F3_Configuracion
     Private Sub _GuardarModificado()
         Try
 
-            Dim res As Boolean = L_prModificarDescuento(tbNumi.Text, IIf(swTipoDesc.Value = True, "1", "0"),
-                                                        IIf(swTMonto.Value = True, "1", "0"), tbMonto.Text, tbObservacion.Text,
-                                                        dtFInicio.Value.ToString("yyyy/MM/dd"), IIf(swVencimiento.Value = True, "1", "0"),
+            Dim res As Boolean = L_prModificarDescuento(tbNumi.Text, cbTipoDesc.Value, IIf(swTMonto.Value = True, "1", "0"),
+                                                        tbMonto.Value, tbObservacion.Text, dtFInicio.Value.ToString("yyyy/MM/dd"),
+                                                        IIf(swVencimiento.Value = True, "1", "0"),
                                                         dtFVencimiento.Value.ToString("yyyy/MM/dd"))
 
             If res Then
@@ -718,6 +844,7 @@ Public Class F3_Configuracion
                 ToastNotification.Show(Me, "Código de Descuento ".ToUpper + tbNumi.Text + " modificado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
                 _PCargarBuscadorLeyPersonal()
                 _PCargarBuscadorLeyEmpresa()
+                _PCargarBuscadorOtros()
                 _prSalir()
             End If
 
@@ -775,9 +902,9 @@ Public Class F3_Configuracion
 
             With JGr_Buscador
                 tbNumi.Text = .GetValue("danumi").ToString
-                swTipoDesc.Value = .GetValue("datipo")
+                cbTipoDesc.Value = .GetValue("datipo")
                 swTMonto.Value = .GetValue("datipomonto")
-                tbMonto.Text = .GetValue("damonto").ToString
+                tbMonto.Value = .GetValue("damonto")
                 tbObservacion.Text = .GetValue("daobs").ToString
                 dtFInicio.Value = .GetValue("dafinicio")
                 swVencimiento.Value = .GetValue("davenc")
@@ -800,7 +927,7 @@ Public Class F3_Configuracion
 
             With JGr_BuscadorEmp
                 tbNumi.Text = .GetValue("danumi").ToString
-                swTipoDesc.Value = .GetValue("datipo")
+                cbTipoDesc.Value = .GetValue("datipo")
                 swTMonto.Value = .GetValue("datipomonto")
                 tbMonto.Text = .GetValue("damonto").ToString
                 tbObservacion.Text = .GetValue("daobs").ToString
@@ -815,6 +942,31 @@ Public Class F3_Configuracion
             End With
 
             LblPaginacion.Text = Str(JGr_BuscadorEmp.Row + 1) + "/" + JGr_BuscadorEmp.RowCount.ToString
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+    Public Sub _prMostrarRegistroOtros(_N As Integer)
+        Try
+
+            With JGr_BuscadorOtros
+                tbNumi.Text = .GetValue("danumi").ToString
+                cbTipoDesc.Value = .GetValue("datipo")
+                swTMonto.Value = .GetValue("datipomonto")
+                tbMonto.Text = .GetValue("damonto").ToString
+                tbObservacion.Text = .GetValue("daobs").ToString
+                dtFInicio.Value = .GetValue("dafinicio")
+                swVencimiento.Value = .GetValue("davenc")
+                dtFVencimiento.Value = .GetValue("dafvenc")
+
+                lbFecha.Text = CType(.GetValue("dafact"), Date).ToString("dd/MM/yyyy")
+                lbHora.Text = .GetValue("dahact").ToString
+                lbUsuario.Text = .GetValue("dauact").ToString
+
+            End With
+
+            LblPaginacion.Text = Str(JGr_BuscadorOtros.Row + 1) + "/" + JGr_BuscadorOtros.RowCount.ToString
 
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
@@ -873,6 +1025,7 @@ Public Class F3_Configuracion
                 ToastNotification.Show(Me, "Codigo de Descuento ".ToUpper + tbNumi.Text + " eliminado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.TopCenter)
                 _PCargarBuscadorLeyPersonal()
                 _PCargarBuscadorLeyEmpresa()
+                _PCargarBuscadorOtros()
                 _PInhabilitar()
             Else
                 ToastNotification.Show(Me, mensajeError, My.Resources.WARNING, 8000, eToastGlowColor.Red, eToastPosition.TopCenter)
@@ -1059,9 +1212,30 @@ Public Class F3_Configuracion
     End Sub
 
     Private Sub JGr_BuscadorEmp_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_BuscadorEmp.SelectionChanged
+        Dim pos As Integer = JGr_BuscadorEmp.CurrentRow.RowIndex
         If (JGr_BuscadorEmp.RowCount >= 0 And JGr_BuscadorEmp.Row >= 0) Then
+            '_prMostrarRegistroLeyEmpresa(CType(JGr_BuscadorEmp.DataSource, DataTable).Rows(pos).Item("danumi"))
             _prMostrarRegistroLeyEmpresa(JGr_BuscadorEmp.Row)
         End If
     End Sub
+
+
+    Private Sub JGr_BuscadorOtros_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGr_BuscadorOtros.EditingCell
+        e.Cancel = True
+    End Sub
+
+    Private Sub JGr_BuscadorOtros_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_BuscadorOtros.SelectionChanged
+        If (JGr_BuscadorOtros.RowCount >= 0 And JGr_BuscadorOtros.Row >= 0) Then
+            _prMostrarRegistroOtros(JGr_BuscadorOtros.Row)
+        End If
+    End Sub
+
+    Private Sub JGr_BuscadorOtros_Click(sender As Object, e As EventArgs) Handles JGr_BuscadorOtros.Click
+        If (JGr_BuscadorOtros.RowCount >= 0 And JGr_BuscadorOtros.Row >= 0) Then
+            _prMostrarRegistroOtros(JGr_BuscadorOtros.CurrentRow.RowIndex)
+        End If
+    End Sub
+
+
 #End Region
 End Class
