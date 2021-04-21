@@ -91,7 +91,6 @@ Partial Class F3_Personal
         Me.btnNuevoCont = New DevComponents.DotNetBar.ButtonX()
         Me.LabelX18 = New DevComponents.DotNetBar.LabelX()
         Me.swEstadoCont = New DevComponents.DotNetBar.Controls.SwitchButton()
-        Me.btTContrato = New DevComponents.DotNetBar.ButtonX()
         Me.cbTipoContrato = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
         Me.LabelX14 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
@@ -158,6 +157,10 @@ Partial Class F3_Personal
         Me.EliminarFamilia = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmEliminarCargo = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarCargo = New System.Windows.Forms.ToolStripMenuItem()
+        Me.SuperTabItem6 = New DevComponents.DotNetBar.SuperTabItem()
+        Me.SuperTabControlPanel7 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.grDescuentos = New Janus.Windows.GridEX.GridEX()
         Me.MpanelSuperior.SuspendLayout()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelToolBar1.SuspendLayout()
@@ -216,6 +219,9 @@ Partial Class F3_Personal
         Me.cmEliminarContrato.SuspendLayout()
         Me.cmEliminarFamilia.SuspendLayout()
         Me.cmEliminarCargo.SuspendLayout()
+        Me.SuperTabControlPanel7.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        CType(Me.grDescuentos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MpanelSuperior
@@ -961,6 +967,7 @@ Partial Class F3_Personal
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.MenuBox.Name = ""
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.Name = ""
         Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.MenuBox, Me.SuperTabControl_Imagenes_DetalleProducto.ControlBox.CloseBox})
+        Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel7)
         Me.SuperTabControl_Imagenes_DetalleProducto.Controls.Add(Me.SuperTabControlPanel3)
         Me.SuperTabControl_Imagenes_DetalleProducto.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControl_Imagenes_DetalleProducto.Location = New System.Drawing.Point(0, 0)
@@ -971,7 +978,7 @@ Partial Class F3_Personal
         Me.SuperTabControl_Imagenes_DetalleProducto.Size = New System.Drawing.Size(420, 593)
         Me.SuperTabControl_Imagenes_DetalleProducto.TabFont = New System.Drawing.Font("Georgia", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SuperTabControl_Imagenes_DetalleProducto.TabIndex = 224
-        Me.SuperTabControl_Imagenes_DetalleProducto.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem_Imagenes})
+        Me.SuperTabControl_Imagenes_DetalleProducto.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem_Imagenes, Me.SuperTabItem6})
         Me.SuperTabControl_Imagenes_DetalleProducto.Text = "SuperTabControl1"
         '
         'SuperTabControlPanel3
@@ -1189,7 +1196,6 @@ Partial Class F3_Personal
         Me.Panel5.Controls.Add(Me.btnNuevoCont)
         Me.Panel5.Controls.Add(Me.LabelX18)
         Me.Panel5.Controls.Add(Me.swEstadoCont)
-        Me.Panel5.Controls.Add(Me.btTContrato)
         Me.Panel5.Controls.Add(Me.cbTipoContrato)
         Me.Panel5.Controls.Add(Me.LabelX14)
         Me.Panel5.Controls.Add(Me.LabelX9)
@@ -1288,19 +1294,6 @@ Partial Class F3_Personal
         Me.swEstadoCont.TabStop = False
         Me.swEstadoCont.Value = True
         Me.swEstadoCont.ValueObject = "Y"
-        '
-        'btTContrato
-        '
-        Me.btTContrato.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
-        Me.btTContrato.ColorTable = DevComponents.DotNetBar.eButtonColor.Flat
-        Me.btTContrato.Image = Global.ReHu.My.Resources.Resources.add
-        Me.btTContrato.ImageFixedSize = New System.Drawing.Size(28, 28)
-        Me.btTContrato.Location = New System.Drawing.Point(315, 91)
-        Me.btTContrato.Name = "btTContrato"
-        Me.btTContrato.Size = New System.Drawing.Size(34, 29)
-        Me.btTContrato.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.btTContrato.TabIndex = 258
-        Me.btTContrato.Visible = False
         '
         'cbTipoContrato
         '
@@ -2223,6 +2216,43 @@ Partial Class F3_Personal
         Me.EliminarCargo.Size = New System.Drawing.Size(153, 22)
         Me.EliminarCargo.Text = "ELIMINAR FILA"
         '
+        'SuperTabItem6
+        '
+        Me.SuperTabItem6.AttachedControl = Me.SuperTabControlPanel7
+        Me.SuperTabItem6.GlobalItem = False
+        Me.SuperTabItem6.Name = "SuperTabItem6"
+        Me.SuperTabItem6.Text = "CONF. DESCUENTOS"
+        '
+        'SuperTabControlPanel7
+        '
+        Me.SuperTabControlPanel7.Controls.Add(Me.Panel11)
+        Me.SuperTabControlPanel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SuperTabControlPanel7.Location = New System.Drawing.Point(0, 27)
+        Me.SuperTabControlPanel7.Name = "SuperTabControlPanel7"
+        Me.SuperTabControlPanel7.Size = New System.Drawing.Size(420, 566)
+        Me.SuperTabControlPanel7.TabIndex = 2
+        Me.SuperTabControlPanel7.TabItem = Me.SuperTabItem6
+        '
+        'Panel11
+        '
+        Me.Panel11.AutoScroll = True
+        Me.Panel11.AutoSize = True
+        Me.Panel11.BackColor = System.Drawing.Color.Transparent
+        Me.Panel11.Controls.Add(Me.grDescuentos)
+        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel11.Location = New System.Drawing.Point(0, 0)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(420, 566)
+        Me.Panel11.TabIndex = 223
+        '
+        'grDescuentos
+        '
+        Me.grDescuentos.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grDescuentos.Location = New System.Drawing.Point(0, 0)
+        Me.grDescuentos.Name = "grDescuentos"
+        Me.grDescuentos.Size = New System.Drawing.Size(420, 566)
+        Me.grDescuentos.TabIndex = 2
+        '
         'F3_Personal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2299,6 +2329,10 @@ Partial Class F3_Personal
         Me.cmEliminarContrato.ResumeLayout(False)
         Me.cmEliminarFamilia.ResumeLayout(False)
         Me.cmEliminarCargo.ResumeLayout(False)
+        Me.SuperTabControlPanel7.ResumeLayout(False)
+        Me.SuperTabControlPanel7.PerformLayout()
+        Me.Panel11.ResumeLayout(False)
+        CType(Me.grDescuentos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -2359,7 +2393,6 @@ Partial Class F3_Personal
     Friend WithEvents btnNuevoCont As DevComponents.DotNetBar.ButtonX
     Friend WithEvents LabelX18 As DevComponents.DotNetBar.LabelX
     Friend WithEvents swEstadoCont As DevComponents.DotNetBar.Controls.SwitchButton
-    Friend WithEvents btTContrato As DevComponents.DotNetBar.ButtonX
     Friend WithEvents cbTipoContrato As Janus.Windows.GridEX.EditControls.MultiColumnCombo
     Friend WithEvents LabelX14 As DevComponents.DotNetBar.LabelX
     Friend WithEvents LabelX9 As DevComponents.DotNetBar.LabelX
@@ -2428,4 +2461,8 @@ Partial Class F3_Personal
     Friend WithEvents cmEliminarCargo As ContextMenuStrip
     Friend WithEvents EliminarCargo As ToolStripMenuItem
     Friend WithEvents VerRegistro As ToolStripMenuItem
+    Friend WithEvents SuperTabControlPanel7 As DevComponents.DotNetBar.SuperTabControlPanel
+    Friend WithEvents Panel11 As Panel
+    Friend WithEvents SuperTabItem6 As DevComponents.DotNetBar.SuperTabItem
+    Friend WithEvents grDescuentos As Janus.Windows.GridEX.GridEX
 End Class

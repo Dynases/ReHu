@@ -6002,7 +6002,8 @@ Public Class AccesoLogica
                                               _fnac As String, _fing As String, _nombres As String, _direc As String,
                                               _telf1 As String, _telf2 As String, _estcivil As String, _genero As String,
                                               _email As String, _obs As String, ByRef _img As String, Contrato As DataTable,
-                                              Familia As DataTable, Cargo As DataTable, Sueldos As DataTable) As Boolean
+                                              Familia As DataTable, Cargo As DataTable, Sueldos As DataTable,
+                                              Descuentos As DataTable) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
         Dim _listParam As New List(Of Datos.DParametro)
@@ -6031,6 +6032,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@Personal12", "", Familia))
         _listParam.Add(New Datos.DParametro("@Personal13", "", Cargo))
         _listParam.Add(New Datos.DParametro("@Personal14", "", Sueldos))
+        _listParam.Add(New Datos.DParametro("@Personal15", "", Descuentos))
 
 
         _Tabla = D_ProcedimientoConParam("sp_Personal", _listParam)
@@ -6052,7 +6054,8 @@ Public Class AccesoLogica
                                               _fnac As String, _fing As String, _nombres As String, _direc As String,
                                               _telf1 As String, _telf2 As String, _estcivil As String, _genero As String,
                                               _email As String, _obs As String, ByRef _img As String, Contrato As DataTable,
-                                              Familia As DataTable, Cargo As DataTable, Sueldos As DataTable) As Boolean
+                                              Familia As DataTable, Cargo As DataTable, Sueldos As DataTable,
+                                              Descuentos As DataTable) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
         Dim _listParam As New List(Of Datos.DParametro)
@@ -6081,6 +6084,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@Personal12", "", Familia))
         _listParam.Add(New Datos.DParametro("@Personal13", "", Cargo))
         _listParam.Add(New Datos.DParametro("@Personal14", "", Sueldos))
+        _listParam.Add(New Datos.DParametro("@Personal15", "", Descuentos))
 
 
         _Tabla = D_ProcedimientoConParam("sp_Personal", _listParam)
@@ -6285,7 +6289,18 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+    Public Shared Function L_prDescuentoGeneralOtros2(_numi As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
 
+        _listParam.Add(New Datos.DParametro("@tipo", 6))
+        _listParam.Add(New Datos.DParametro("@panumi", _numi))
+        _listParam.Add(New Datos.DParametro("@dauact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_Descuentos", _listParam)
+
+        Return _Tabla
+    End Function
     ''PESTAÑA BONOS
     Public Shared Function L_prEliminarBono(_numi As String, ByRef _mensaje As String) As Boolean
 

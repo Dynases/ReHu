@@ -201,8 +201,8 @@ Partial Class P_Principal
         'SideNav1
         '
         Me.SideNav1.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
-        Me.SideNav1.Controls.Add(Me.SideNav_Conf)
         Me.SideNav1.Controls.Add(Me.SideNavPanel5)
+        Me.SideNav1.Controls.Add(Me.SideNav_Conf)
         Me.SideNav1.Controls.Add(Me.SideNavPanel7)
         Me.SideNav1.Controls.Add(Me.SideNavPanel4)
         Me.SideNav1.Controls.Add(Me.SideNav_Ventas)
@@ -228,6 +228,7 @@ Partial Class P_Principal
         Me.SideNav_Conf.Name = "SideNav_Conf"
         Me.SideNav_Conf.Size = New System.Drawing.Size(737, 524)
         Me.SideNav_Conf.TabIndex = 2
+        Me.SideNav_Conf.Visible = False
         '
         'MetroTilePanel1
         '
@@ -348,7 +349,6 @@ Partial Class P_Principal
         Me.SideNavPanel5.Name = "SideNavPanel5"
         Me.SideNavPanel5.Size = New System.Drawing.Size(737, 524)
         Me.SideNavPanel5.TabIndex = 87
-        Me.SideNavPanel5.Visible = False
         '
         'Panel1
         '
@@ -1614,7 +1614,6 @@ Partial Class P_Principal
         '
         'FP_Configuracion
         '
-        Me.FP_Configuracion.Checked = True
         Me.FP_Configuracion.Name = "FP_Configuracion"
         Me.FP_Configuracion.Panel = Me.SideNav_Conf
         Me.FP_Configuracion.Symbol = ""
@@ -1631,6 +1630,7 @@ Partial Class P_Principal
         '
         'FP_RH
         '
+        Me.FP_RH.Checked = True
         Me.FP_RH.Name = "FP_RH"
         Me.FP_RH.Panel = Me.SideNavPanel5
         Me.FP_RH.Symbol = ""

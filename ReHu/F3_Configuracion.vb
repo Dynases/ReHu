@@ -1132,11 +1132,7 @@ Public Class F3_Configuracion
         _EliminarRegistro()
     End Sub
 
-    Private Sub JGr_Buscador_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_Buscador.SelectionChanged
-        If (JGr_Buscador.RowCount >= 0 And JGr_Buscador.Row >= 0) Then
-            _prMostrarRegistro(JGr_Buscador.Row)
-        End If
-    End Sub
+
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
         _Inter = _Inter + 1
@@ -1211,28 +1207,36 @@ Public Class F3_Configuracion
         e.Cancel = True
     End Sub
 
-    Private Sub JGr_BuscadorEmp_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_BuscadorEmp.SelectionChanged
-        Dim pos As Integer = JGr_BuscadorEmp.CurrentRow.RowIndex
-        If (JGr_BuscadorEmp.RowCount >= 0 And JGr_BuscadorEmp.Row >= 0) Then
-            '_prMostrarRegistroLeyEmpresa(CType(JGr_BuscadorEmp.DataSource, DataTable).Rows(pos).Item("danumi"))
-            _prMostrarRegistroLeyEmpresa(JGr_BuscadorEmp.Row)
-        End If
-    End Sub
+    'Private Sub JGr_BuscadorEmp_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_BuscadorEmp.SelectionChanged
+    '    Dim pos As Integer = JGr_BuscadorEmp.CurrentRow.RowIndex
+    '    If (JGr_BuscadorEmp.RowCount >= 0 And JGr_BuscadorEmp.Row >= 0) Then
+    '        ' _prMostrarRegistroLeyEmpresa(CType(JGr_BuscadorEmp.DataSource, DataTable).Rows(pos).Item("danumi"))
+    '        _prMostrarRegistroLeyEmpresa(JGr_BuscadorEmp.Row)
+    '    End If
+    'End Sub
 
 
     Private Sub JGr_BuscadorOtros_EditingCell(sender As Object, e As EditingCellEventArgs) Handles JGr_BuscadorOtros.EditingCell
         e.Cancel = True
     End Sub
 
-    Private Sub JGr_BuscadorOtros_SelectionChanged(sender As Object, e As EventArgs) Handles JGr_BuscadorOtros.SelectionChanged
-        If (JGr_BuscadorOtros.RowCount >= 0 And JGr_BuscadorOtros.Row >= 0) Then
-            _prMostrarRegistroOtros(JGr_BuscadorOtros.Row)
-        End If
-    End Sub
+
 
     Private Sub JGr_BuscadorOtros_Click(sender As Object, e As EventArgs) Handles JGr_BuscadorOtros.Click
         If (JGr_BuscadorOtros.RowCount >= 0 And JGr_BuscadorOtros.Row >= 0) Then
             _prMostrarRegistroOtros(JGr_BuscadorOtros.CurrentRow.RowIndex)
+        End If
+    End Sub
+
+    Private Sub JGr_BuscadorEmp_Click(sender As Object, e As EventArgs) Handles JGr_BuscadorEmp.Click
+        If (JGr_BuscadorEmp.RowCount >= 0 And JGr_BuscadorEmp.Row >= 0) Then
+            _prMostrarRegistroLeyEmpresa(JGr_BuscadorEmp.CurrentRow.RowIndex)
+        End If
+    End Sub
+
+    Private Sub JGr_Buscador_Click(sender As Object, e As EventArgs) Handles JGr_Buscador.Click
+        If (JGr_Buscador.RowCount >= 0 And JGr_Buscador.Row >= 0) Then
+            _prMostrarRegistro(JGr_Buscador.CurrentRow.RowIndex)
         End If
     End Sub
 

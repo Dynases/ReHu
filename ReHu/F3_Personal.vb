@@ -59,6 +59,7 @@ Public Class F3_Personal
         _prCargarComboLibreria(cbDependecia, 6, 1)
         _prCargarComboLibreria(cbCargo, 7, 1)
 
+
         _prCargarPersonal()
         _prInhabilitar()
         If grPersonal.RowCount > 0 Then
@@ -107,6 +108,75 @@ Public Class F3_Personal
             .DisplayMember = "ycdes3"
             .DataSource = dt
             .Refresh()
+        End With
+    End Sub
+    Private Sub _PCargarBuscadorOtros(numi As String)
+        Dim dt As New DataTable
+        dt = L_prDescuentoGeneralOtros2(numi)
+
+        grDescuentos.BoundMode = BoundMode.Bound
+        grDescuentos.DataSource = dt
+        grDescuentos.RetrieveStructure()
+
+        'dar formato a las columnas
+
+        With grDescuentos.RootTable.Columns("pfnumi")
+            .Visible = False
+
+        End With
+        With grDescuentos.RootTable.Columns("pfpanumi")
+            .Visible = False
+
+        End With
+        With grDescuentos.RootTable.Columns("danumi")
+            .Caption = "Codigo"
+            .Width = 70
+            .Visible = False
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With grDescuentos.RootTable.Columns("tipo")
+            .Caption = "TipoMonto"
+            .Width = 90
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+
+        With grDescuentos.RootTable.Columns("damonto")
+            .Caption = "Monto"
+            .Width = 80
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            .FormatString = "0.00"
+        End With
+
+        With grDescuentos.RootTable.Columns("daobs")
+            .Caption = "Observacion"
+            .Width = 200
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+        End With
+
+        With grDescuentos.RootTable.Columns("pfestado")
+            .Caption = "Estado"
+            .Width = 60
+            .Visible = True
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+        End With
+
+        With grDescuentos.RootTable.Columns("estado")
+            .Visible = False
+        End With
+
+        'Habilitar Filtradores
+        With grDescuentos
+            .DefaultFilterRowComparison = FilterConditionOperator.Contains
+            .FilterMode = FilterMode.Automatic
+            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            .GroupByBoxVisible = False
+            'diseño de la grilla
+            grDescuentos.VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
         End With
     End Sub
     Private Sub _prCargarPersonal()
@@ -426,6 +496,7 @@ Public Class F3_Personal
         _prCargarGridDetalleSueldos(-1)
         grDetalleSueldos.AllowUserToAddRows = True
 
+        _PCargarBuscadorOtros(-1)
 
     End Sub
     Private Sub _prEliminarImagen()
@@ -745,12 +816,13 @@ Public Class F3_Personal
             Else
                 nomImg = vlImagen.nombre
             End If
-
+            Dim dtDescuentos As DataTable = CType(grDescuentos.DataSource, DataTable).DefaultView.ToTable(True, "pfnumi", "pfpanumi", "danumi", "pfestado", "estado")
             Dim res As Boolean = L_prGrabarPersonal(tbNumi.Text, cbEstado.Value, cbTipoDoc.Value, tbNroDoc.Text, dtFNac.Value.ToString("yyyy/MM/dd"),
                                                     dtFIng.Value.ToString("yyyy/MM/dd"), tbNombre.Text, tbDireccion.Text, tbTelef1.Text,
                                                     tbTelef2.Text, cbEstCivil.Value, cbGenero.Value, tbEmail.Text, tbObs.Text, nomImg,
                                                     CType(grContrato.DataSource, DataTable), CType(grFamilia.DataSource, DataTable),
-                                                    CType(grCargo.DataSource, DataTable), CType(grDetalleSueldos.DataSource, DataTable))
+                                                    CType(grCargo.DataSource, DataTable), CType(grDetalleSueldos.DataSource, DataTable),
+                                                    dtDescuentos)
             If res Then
                 If IsNothing(vlImagen) = False Then
                     vlImagen.nombre = nomImg
@@ -804,12 +876,13 @@ Public Class F3_Personal
             Else
                 nomImg = vlImagen.nombre
             End If
-
+            Dim dtDescuentos As DataTable = CType(grDescuentos.DataSource, DataTable).DefaultView.ToTable(True, "pfnumi", "pfpanumi", "danumi", "pfestado", "estado")
             Dim res As Boolean = L_prModificarPersonal(tbNumi.Text, cbEstado.Value, cbTipoDoc.Value, tbNroDoc.Text, dtFNac.Value.ToString("yyyy/MM/dd"),
                                                     dtFIng.Value.ToString("yyyy/MM/dd"), tbNombre.Text, tbDireccion.Text, tbTelef1.Text,
                                                     tbTelef2.Text, cbEstCivil.Value, cbGenero.Value, tbEmail.Text, tbObs.Text, nomImg,
                                                     CType(grContrato.DataSource, DataTable), CType(grFamilia.DataSource, DataTable),
-                                                    CType(grCargo.DataSource, DataTable), CType(grDetalleSueldos.DataSource, DataTable))
+                                                    CType(grCargo.DataSource, DataTable), CType(grDetalleSueldos.DataSource, DataTable),
+                                                    dtDescuentos)
 
             If res Then
                 If IsNothing(vlImagen) = False Then
@@ -977,6 +1050,7 @@ Public Class F3_Personal
                 _prCargarGridDetalleFamilia(tbNumi.Text)
                 _prCargarGridDetalleCargo(tbNumi.Text)
                 _prCargarGridDetalleSueldos(tbNumi.Text)
+                _PCargarBuscadorOtros(tbNumi.Text)
 
                 lbFecha.Text = CType(.GetValue("pafact"), Date).ToString("dd/MM/yyyy")
                 lbHora.Text = .GetValue("pahact").ToString
@@ -1099,6 +1173,7 @@ Public Class F3_Personal
             If grPersonal.RowCount > 0 Then
                 _prMostrarRegistro(0)
             End If
+            RLAccion.Text = "VISUALIZACIÓN"
         Else
             Me.Close()
             _modulo.Select()
@@ -1388,15 +1463,15 @@ Public Class F3_Personal
         _prAgregarCombo(cbEstCivil, 1, 3)
     End Sub
 
-    Private Sub cbTipoContrato_ValueChanged(sender As Object, e As EventArgs) Handles cbTipoContrato.ValueChanged
-        If cbTipoContrato.SelectedIndex < 0 And cbTipoContrato.Text <> String.Empty Then
-            btTContrato.Visible = True
-        Else
-            btTContrato.Visible = False
-        End If
-    End Sub
+    'Private Sub cbTipoContrato_ValueChanged(sender As Object, e As EventArgs) Handles cbTipoContrato.ValueChanged
+    '    If cbTipoContrato.SelectedIndex < 0 And cbTipoContrato.Text <> String.Empty Then
+    '        btTContrato.Visible = True
+    '    Else
+    '        btTContrato.Visible = False
+    '    End If
+    'End Sub
 
-    Private Sub btTContrato_Click(sender As Object, e As EventArgs) Handles btTContrato.Click
+    Private Sub btTContrato_Click(sender As Object, e As EventArgs)
         _prAgregarCombo(cbTipoContrato, 2, 1)
     End Sub
 
@@ -1429,6 +1504,15 @@ Public Class F3_Personal
             _prMostrarRegistro(grPersonal.Row)
             superTabControl1.SelectedTabIndex = 0
             RLAccion.Text = "VISUALIZACIÓN"
+        End If
+    End Sub
+
+    Private Sub grDescuentos_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles grDescuentos.CellEdited
+
+        Dim pos As Integer = grDescuentos.CurrentRow.RowIndex
+        Dim estado As Integer = CType(grDescuentos.DataSource, DataTable).Rows(pos).Item("estado")
+        If (estado = 1) Then
+            CType(grDescuentos.DataSource, DataTable).Rows(pos).Item("estado") = 2
         End If
     End Sub
 
