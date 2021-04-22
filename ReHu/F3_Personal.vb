@@ -170,9 +170,9 @@ Public Class F3_Personal
 
         'Habilitar Filtradores
         With grDescuentos
-            .DefaultFilterRowComparison = FilterConditionOperator.Contains
-            .FilterMode = FilterMode.Automatic
-            .FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            '.DefaultFilterRowComparison = FilterConditionOperator.Contains
+            '.FilterMode = FilterMode.Automatic
+            '.FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
             .GroupByBoxVisible = False
             'diseño de la grilla
             grDescuentos.VisualStyle = VisualStyle.Office2007
@@ -338,6 +338,7 @@ Public Class F3_Personal
 
         grDetalleSueldos.Enabled = True
         grDetalleSueldos.AllowUserToAddRows = True
+        grDescuentos.Enabled = True
 
         btnNuevo.Enabled = False
         btnModificar.Enabled = False
@@ -396,6 +397,7 @@ Public Class F3_Personal
         _PInHabilitarCargo()
 
         grDetalleSueldos.Enabled = False
+        grDescuentos.Enabled = False
 
 
         btnNuevo.Enabled = True
@@ -1513,6 +1515,14 @@ Public Class F3_Personal
         Dim estado As Integer = CType(grDescuentos.DataSource, DataTable).Rows(pos).Item("estado")
         If (estado = 1) Then
             CType(grDescuentos.DataSource, DataTable).Rows(pos).Item("estado") = 2
+        End If
+    End Sub
+
+    Private Sub grDescuentos_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grDescuentos.EditingCell
+        If (e.Column.Index = grDescuentos.RootTable.Columns("pfestado").Index) Then
+            e.Cancel = False
+        Else
+            e.Cancel = True
         End If
     End Sub
 

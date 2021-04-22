@@ -24,12 +24,12 @@ Partial Class F3_Personal
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim cbEstado_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
-        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(F3_Personal))
         Dim cbGenero_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim cbTipoDoc_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim cbEstCivil_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim cbTipoContrato_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim cbCargo_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(F3_Personal))
         Dim cbDependecia_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim cbTipoDocFlia_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim cbGeneroFlia_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
@@ -74,6 +74,10 @@ Partial Class F3_Personal
         Me.tbNumi = New DevComponents.DotNetBar.Controls.TextBoxX()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.SuperTabControl_Imagenes_DetalleProducto = New DevComponents.DotNetBar.SuperTabControl()
+        Me.SuperTabControlPanel7 = New DevComponents.DotNetBar.SuperTabControlPanel()
+        Me.Panel11 = New System.Windows.Forms.Panel()
+        Me.grDescuentos = New Janus.Windows.GridEX.GridEX()
+        Me.SuperTabItem6 = New DevComponents.DotNetBar.SuperTabItem()
         Me.SuperTabControlPanel3 = New DevComponents.DotNetBar.SuperTabControlPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.grDetalleSueldos = New System.Windows.Forms.DataGridView()
@@ -157,10 +161,6 @@ Partial Class F3_Personal
         Me.EliminarFamilia = New System.Windows.Forms.ToolStripMenuItem()
         Me.cmEliminarCargo = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.EliminarCargo = New System.Windows.Forms.ToolStripMenuItem()
-        Me.SuperTabItem6 = New DevComponents.DotNetBar.SuperTabItem()
-        Me.SuperTabControlPanel7 = New DevComponents.DotNetBar.SuperTabControlPanel()
-        Me.Panel11 = New System.Windows.Forms.Panel()
-        Me.grDescuentos = New Janus.Windows.GridEX.GridEX()
         Me.MpanelSuperior.SuspendLayout()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelToolBar1.SuspendLayout()
@@ -184,6 +184,9 @@ Partial Class F3_Personal
         Me.GroupPanel3.SuspendLayout()
         CType(Me.SuperTabControl_Imagenes_DetalleProducto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControl_Imagenes_DetalleProducto.SuspendLayout()
+        Me.SuperTabControlPanel7.SuspendLayout()
+        Me.Panel11.SuspendLayout()
+        CType(Me.grDescuentos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabControlPanel3.SuspendLayout()
         Me.Panel2.SuspendLayout()
         CType(Me.grDetalleSueldos, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -219,9 +222,6 @@ Partial Class F3_Personal
         Me.cmEliminarContrato.SuspendLayout()
         Me.cmEliminarFamilia.SuspendLayout()
         Me.cmEliminarCargo.SuspendLayout()
-        Me.SuperTabControlPanel7.SuspendLayout()
-        Me.Panel11.SuspendLayout()
-        CType(Me.grDescuentos, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MpanelSuperior
@@ -981,6 +981,43 @@ Partial Class F3_Personal
         Me.SuperTabControl_Imagenes_DetalleProducto.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem_Imagenes, Me.SuperTabItem6})
         Me.SuperTabControl_Imagenes_DetalleProducto.Text = "SuperTabControl1"
         '
+        'SuperTabControlPanel7
+        '
+        Me.SuperTabControlPanel7.Controls.Add(Me.Panel11)
+        Me.SuperTabControlPanel7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SuperTabControlPanel7.Location = New System.Drawing.Point(0, 27)
+        Me.SuperTabControlPanel7.Name = "SuperTabControlPanel7"
+        Me.SuperTabControlPanel7.Size = New System.Drawing.Size(420, 566)
+        Me.SuperTabControlPanel7.TabIndex = 2
+        Me.SuperTabControlPanel7.TabItem = Me.SuperTabItem6
+        '
+        'Panel11
+        '
+        Me.Panel11.AutoScroll = True
+        Me.Panel11.AutoSize = True
+        Me.Panel11.BackColor = System.Drawing.Color.Transparent
+        Me.Panel11.Controls.Add(Me.grDescuentos)
+        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel11.Location = New System.Drawing.Point(0, 0)
+        Me.Panel11.Name = "Panel11"
+        Me.Panel11.Size = New System.Drawing.Size(420, 566)
+        Me.Panel11.TabIndex = 223
+        '
+        'grDescuentos
+        '
+        Me.grDescuentos.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.grDescuentos.Location = New System.Drawing.Point(0, 0)
+        Me.grDescuentos.Name = "grDescuentos"
+        Me.grDescuentos.Size = New System.Drawing.Size(420, 566)
+        Me.grDescuentos.TabIndex = 2
+        '
+        'SuperTabItem6
+        '
+        Me.SuperTabItem6.AttachedControl = Me.SuperTabControlPanel7
+        Me.SuperTabItem6.GlobalItem = False
+        Me.SuperTabItem6.Name = "SuperTabItem6"
+        Me.SuperTabItem6.Text = "CONF. DESCUENTOS"
+        '
         'SuperTabControlPanel3
         '
         Me.SuperTabControlPanel3.Controls.Add(Me.Panel2)
@@ -1088,15 +1125,16 @@ Partial Class F3_Personal
         Me.SuperTabControl2.ControlBox.MenuBox.Name = ""
         Me.SuperTabControl2.ControlBox.Name = ""
         Me.SuperTabControl2.ControlBox.SubItems.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabControl2.ControlBox.MenuBox, Me.SuperTabControl2.ControlBox.CloseBox})
-        Me.SuperTabControl2.Controls.Add(Me.SuperTabControlPanel4)
         Me.SuperTabControl2.Controls.Add(Me.SuperTabControlPanel5)
         Me.SuperTabControl2.Controls.Add(Me.SuperTabControlPanel6)
-        Me.SuperTabControl2.Location = New System.Drawing.Point(8, 2)
+        Me.SuperTabControl2.Controls.Add(Me.SuperTabControlPanel4)
+        Me.SuperTabControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SuperTabControl2.Location = New System.Drawing.Point(0, 0)
         Me.SuperTabControl2.Name = "SuperTabControl2"
         Me.SuperTabControl2.ReorderTabsEnabled = True
         Me.SuperTabControl2.SelectedTabFont = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Bold)
         Me.SuperTabControl2.SelectedTabIndex = 0
-        Me.SuperTabControl2.Size = New System.Drawing.Size(402, 545)
+        Me.SuperTabControl2.Size = New System.Drawing.Size(420, 576)
         Me.SuperTabControl2.TabFont = New System.Drawing.Font("Arial", 11.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SuperTabControl2.TabIndex = 105
         Me.SuperTabControl2.Tabs.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SuperTabItem3, Me.SuperTabItem4, Me.SuperTabItem5})
@@ -1109,7 +1147,7 @@ Partial Class F3_Personal
         Me.SuperTabControlPanel4.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel4.Location = New System.Drawing.Point(0, 27)
         Me.SuperTabControlPanel4.Name = "SuperTabControlPanel4"
-        Me.SuperTabControlPanel4.Size = New System.Drawing.Size(402, 518)
+        Me.SuperTabControlPanel4.Size = New System.Drawing.Size(420, 549)
         Me.SuperTabControlPanel4.TabIndex = 1
         Me.SuperTabControlPanel4.TabItem = Me.SuperTabItem3
         '
@@ -1120,7 +1158,7 @@ Partial Class F3_Personal
         Me.PanelInfo.Dock = System.Windows.Forms.DockStyle.Fill
         Me.PanelInfo.Location = New System.Drawing.Point(0, 0)
         Me.PanelInfo.Name = "PanelInfo"
-        Me.PanelInfo.Size = New System.Drawing.Size(402, 518)
+        Me.PanelInfo.Size = New System.Drawing.Size(420, 549)
         Me.PanelInfo.TabIndex = 0
         '
         'GroupPanel4
@@ -1133,7 +1171,7 @@ Partial Class F3_Personal
         Me.GroupPanel4.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel4.Location = New System.Drawing.Point(0, 210)
         Me.GroupPanel4.Name = "GroupPanel4"
-        Me.GroupPanel4.Size = New System.Drawing.Size(402, 308)
+        Me.GroupPanel4.Size = New System.Drawing.Size(420, 339)
         '
         '
         '
@@ -1185,7 +1223,7 @@ Partial Class F3_Personal
         Me.grContrato.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.grContrato.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grContrato.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
-        Me.grContrato.Size = New System.Drawing.Size(396, 285)
+        Me.grContrato.Size = New System.Drawing.Size(414, 316)
         Me.grContrato.TabIndex = 0
         Me.grContrato.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -1207,7 +1245,7 @@ Partial Class F3_Personal
         Me.Panel5.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel5.Location = New System.Drawing.Point(0, 0)
         Me.Panel5.Name = "Panel5"
-        Me.Panel5.Size = New System.Drawing.Size(402, 210)
+        Me.Panel5.Size = New System.Drawing.Size(420, 210)
         Me.Panel5.TabIndex = 47
         '
         'btnExaminar
@@ -1412,7 +1450,7 @@ Partial Class F3_Personal
         Me.SuperTabControlPanel5.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel5.Location = New System.Drawing.Point(0, 27)
         Me.SuperTabControlPanel5.Name = "SuperTabControlPanel5"
-        Me.SuperTabControlPanel5.Size = New System.Drawing.Size(402, 518)
+        Me.SuperTabControlPanel5.Size = New System.Drawing.Size(420, 549)
         Me.SuperTabControlPanel5.TabIndex = 2
         Me.SuperTabControlPanel5.TabItem = Me.SuperTabItem5
         '
@@ -1423,7 +1461,7 @@ Partial Class F3_Personal
         Me.Panel7.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel7.Location = New System.Drawing.Point(0, 0)
         Me.Panel7.Name = "Panel7"
-        Me.Panel7.Size = New System.Drawing.Size(402, 518)
+        Me.Panel7.Size = New System.Drawing.Size(420, 549)
         Me.Panel7.TabIndex = 2
         '
         'GroupPanel6
@@ -1436,7 +1474,7 @@ Partial Class F3_Personal
         Me.GroupPanel6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel6.Location = New System.Drawing.Point(0, 200)
         Me.GroupPanel6.Name = "GroupPanel6"
-        Me.GroupPanel6.Size = New System.Drawing.Size(402, 318)
+        Me.GroupPanel6.Size = New System.Drawing.Size(420, 349)
         '
         '
         '
@@ -1488,7 +1526,7 @@ Partial Class F3_Personal
         Me.grCargo.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.grCargo.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grCargo.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
-        Me.grCargo.Size = New System.Drawing.Size(396, 295)
+        Me.grCargo.Size = New System.Drawing.Size(414, 326)
         Me.grCargo.TabIndex = 0
         Me.grCargo.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -1506,7 +1544,7 @@ Partial Class F3_Personal
         Me.Panel8.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel8.Location = New System.Drawing.Point(0, 0)
         Me.Panel8.Name = "Panel8"
-        Me.Panel8.Size = New System.Drawing.Size(402, 200)
+        Me.Panel8.Size = New System.Drawing.Size(420, 200)
         Me.Panel8.TabIndex = 47
         '
         'btnAgregarC
@@ -1663,7 +1701,7 @@ Partial Class F3_Personal
         Me.SuperTabControlPanel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SuperTabControlPanel6.Location = New System.Drawing.Point(0, 27)
         Me.SuperTabControlPanel6.Name = "SuperTabControlPanel6"
-        Me.SuperTabControlPanel6.Size = New System.Drawing.Size(402, 518)
+        Me.SuperTabControlPanel6.Size = New System.Drawing.Size(420, 549)
         Me.SuperTabControlPanel6.TabIndex = 0
         Me.SuperTabControlPanel6.TabItem = Me.SuperTabItem4
         '
@@ -1674,7 +1712,7 @@ Partial Class F3_Personal
         Me.Panel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel6.Location = New System.Drawing.Point(0, 0)
         Me.Panel6.Name = "Panel6"
-        Me.Panel6.Size = New System.Drawing.Size(402, 518)
+        Me.Panel6.Size = New System.Drawing.Size(420, 549)
         Me.Panel6.TabIndex = 1
         '
         'GroupPanel5
@@ -1687,7 +1725,7 @@ Partial Class F3_Personal
         Me.GroupPanel5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.GroupPanel5.Location = New System.Drawing.Point(0, 280)
         Me.GroupPanel5.Name = "GroupPanel5"
-        Me.GroupPanel5.Size = New System.Drawing.Size(402, 238)
+        Me.GroupPanel5.Size = New System.Drawing.Size(420, 269)
         '
         '
         '
@@ -1739,7 +1777,7 @@ Partial Class F3_Personal
         Me.grFamilia.SelectedFormatStyle.BackColor = System.Drawing.Color.DodgerBlue
         Me.grFamilia.SelectedFormatStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.grFamilia.SelectedFormatStyle.ForeColor = System.Drawing.Color.White
-        Me.grFamilia.Size = New System.Drawing.Size(396, 215)
+        Me.grFamilia.Size = New System.Drawing.Size(414, 246)
         Me.grFamilia.TabIndex = 0
         Me.grFamilia.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
@@ -1765,7 +1803,7 @@ Partial Class F3_Personal
         Me.Panel9.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel9.Location = New System.Drawing.Point(0, 0)
         Me.Panel9.Name = "Panel9"
-        Me.Panel9.Size = New System.Drawing.Size(402, 280)
+        Me.Panel9.Size = New System.Drawing.Size(420, 280)
         Me.Panel9.TabIndex = 47
         '
         'btnAgregarF
@@ -2216,43 +2254,6 @@ Partial Class F3_Personal
         Me.EliminarCargo.Size = New System.Drawing.Size(153, 22)
         Me.EliminarCargo.Text = "ELIMINAR FILA"
         '
-        'SuperTabItem6
-        '
-        Me.SuperTabItem6.AttachedControl = Me.SuperTabControlPanel7
-        Me.SuperTabItem6.GlobalItem = False
-        Me.SuperTabItem6.Name = "SuperTabItem6"
-        Me.SuperTabItem6.Text = "CONF. DESCUENTOS"
-        '
-        'SuperTabControlPanel7
-        '
-        Me.SuperTabControlPanel7.Controls.Add(Me.Panel11)
-        Me.SuperTabControlPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SuperTabControlPanel7.Location = New System.Drawing.Point(0, 27)
-        Me.SuperTabControlPanel7.Name = "SuperTabControlPanel7"
-        Me.SuperTabControlPanel7.Size = New System.Drawing.Size(420, 566)
-        Me.SuperTabControlPanel7.TabIndex = 2
-        Me.SuperTabControlPanel7.TabItem = Me.SuperTabItem6
-        '
-        'Panel11
-        '
-        Me.Panel11.AutoScroll = True
-        Me.Panel11.AutoSize = True
-        Me.Panel11.BackColor = System.Drawing.Color.Transparent
-        Me.Panel11.Controls.Add(Me.grDescuentos)
-        Me.Panel11.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel11.Location = New System.Drawing.Point(0, 0)
-        Me.Panel11.Name = "Panel11"
-        Me.Panel11.Size = New System.Drawing.Size(420, 566)
-        Me.Panel11.TabIndex = 223
-        '
-        'grDescuentos
-        '
-        Me.grDescuentos.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.grDescuentos.Location = New System.Drawing.Point(0, 0)
-        Me.grDescuentos.Name = "grDescuentos"
-        Me.grDescuentos.Size = New System.Drawing.Size(420, 566)
-        Me.grDescuentos.TabIndex = 2
-        '
         'F3_Personal
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -2290,6 +2291,10 @@ Partial Class F3_Personal
         Me.GroupPanel3.ResumeLayout(False)
         CType(Me.SuperTabControl_Imagenes_DetalleProducto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControl_Imagenes_DetalleProducto.ResumeLayout(False)
+        Me.SuperTabControlPanel7.ResumeLayout(False)
+        Me.SuperTabControlPanel7.PerformLayout()
+        Me.Panel11.ResumeLayout(False)
+        CType(Me.grDescuentos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.SuperTabControlPanel3.ResumeLayout(False)
         Me.SuperTabControlPanel3.PerformLayout()
         Me.Panel2.ResumeLayout(False)
@@ -2329,10 +2334,6 @@ Partial Class F3_Personal
         Me.cmEliminarContrato.ResumeLayout(False)
         Me.cmEliminarFamilia.ResumeLayout(False)
         Me.cmEliminarCargo.ResumeLayout(False)
-        Me.SuperTabControlPanel7.ResumeLayout(False)
-        Me.SuperTabControlPanel7.PerformLayout()
-        Me.Panel11.ResumeLayout(False)
-        CType(Me.grDescuentos, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
