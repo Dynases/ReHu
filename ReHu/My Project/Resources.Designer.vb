@@ -1063,6 +1063,16 @@ Namespace My.Resources
         '''<summary>
         '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
         '''</summary>
+        Friend ReadOnly Property PLANILLA_SUELDOS() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("PLANILLA_SUELDOS", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
         Friend ReadOnly Property plus() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("plus", resourceCulture)
@@ -1206,6 +1216,16 @@ Namespace My.Resources
         Friend ReadOnly Property street_map() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("street_map", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Busca un recurso adaptado de tipo System.Drawing.Bitmap.
+        '''</summary>
+        Friend ReadOnly Property sueldos() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("sueldos", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

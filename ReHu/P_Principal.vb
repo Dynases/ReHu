@@ -344,4 +344,11 @@ Public Class P_Principal
         frm._modulo = FP_Configuracion
         frm.Show()
     End Sub
+
+    Private Sub btPlanillaSueldos_Click(sender As Object, e As EventArgs) Handles btPlanillaSueldos.Click
+        Dim frm As New R_PlanillaSueldos
+        frm._nameButton = btPlanillaSueldos.Name
+        frm._modulo = FP_RH
+        frm.Show()
+    End Sub
 End Class

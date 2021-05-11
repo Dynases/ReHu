@@ -701,6 +701,12 @@
       <DependentUpon>R_NotaVenta_Carta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reporte\R_PlanillaSueldo.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>R_PlanillaSueldo.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="Reporte\R_Productos.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -951,6 +957,12 @@
       <DependentUpon>R_KardexCreditoPagos.vb</DependentUpon>
     </Compile>
     <Compile Include="R_KardexCreditoPagos.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="R_PlanillaSueldos.Designer.vb">
+      <DependentUpon>R_PlanillaSueldos.vb</DependentUpon>
+    </Compile>
+    <Compile Include="R_PlanillaSueldos.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Utils\Efecto.Designer.vb">
@@ -1275,6 +1287,10 @@
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>R_NotaVenta_Carta.vb</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\R_PlanillaSueldo.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>R_PlanillaSueldo.vb</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Reporte\R_Productos.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>R_Productos.vb</LastGenOutput>
@@ -1440,6 +1456,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="R_KardexCreditoPagos.resx">
       <DependentUpon>R_KardexCreditoPagos.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="R_PlanillaSueldos.resx">
+      <DependentUpon>R_PlanillaSueldos.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Utils\Efecto.resx">
       <DependentUpon>Efecto.vb</DependentUpon>
@@ -1756,6 +1775,8 @@
     <None Include="Resources\trash.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\PLANILLA_SUELDOS.png" />
+    <None Include="Resources\sueldos.png" />
     <None Include="Resources\Salir5.png" />
     <None Include="Resources\folder.png" />
     <None Include="Resources\Guardar2.png" />

@@ -6595,4 +6595,17 @@ Public Class AccesoLogica
     End Function
 
 #End Region
+
+#Region "PLANILLA DE SUELDOS"
+    Public Shared Function L_PlanillaSueldos(fecha As String) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@fecha", fecha))
+        _Tabla = D_ProcedimientoConParam("PlanillaSueldo", _listParam)
+        Return _Tabla
+    End Function
+
+#End Region
 End Class
