@@ -6523,7 +6523,7 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
-    Public Shared Function L_prGrabarDescuentoPer(ByRef _numi As String, _codPersona As String, _tipo As String, _monto As String,
+    Public Shared Function L_prGrabarDescuentoPer(ByRef _numi As String, _tipo As String, _codPersona As String, _tipoM As String, _monto As String,
                                               _obs As String, _finicio As String, _venc As String, _fvenc As String) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
@@ -6531,8 +6531,9 @@ Public Class AccesoLogica
 
         _listParam.Add(New Datos.DParametro("@tipo", 1))
         _listParam.Add(New Datos.DParametro("@dbnumi", _numi))
-        _listParam.Add(New Datos.DParametro("@dbcper", _codPersona))
         _listParam.Add(New Datos.DParametro("@dbtipo", _tipo))
+        _listParam.Add(New Datos.DParametro("@dbcper", _codPersona))
+        _listParam.Add(New Datos.DParametro("@dbtipomonto", _tipoM))
         _listParam.Add(New Datos.DParametro("@dbvalor", _monto))
         _listParam.Add(New Datos.DParametro("@dbobs", _obs))
         _listParam.Add(New Datos.DParametro("@dbfinicio", _finicio))
@@ -6553,7 +6554,7 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
-    Public Shared Function L_prModificarDescuentoPer(ByRef _numi As String, _codPersona As String, _tipo As String, _monto As String,
+    Public Shared Function L_prModificarDescuentoPer(ByRef _numi As String, _tipo As String, _codPersona As String, _tipoM As String, _monto As String,
                                               _obs As String, _finicio As String, _venc As String, _fvenc As String) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
@@ -6561,8 +6562,9 @@ Public Class AccesoLogica
 
         _listParam.Add(New Datos.DParametro("@tipo", 2))
         _listParam.Add(New Datos.DParametro("@dbnumi", _numi))
-        _listParam.Add(New Datos.DParametro("@dbcper", _codPersona))
         _listParam.Add(New Datos.DParametro("@dbtipo", _tipo))
+        _listParam.Add(New Datos.DParametro("@dbcper", _codPersona))
+        _listParam.Add(New Datos.DParametro("@dbtipomonto", _tipoM))
         _listParam.Add(New Datos.DParametro("@dbvalor", _monto))
         _listParam.Add(New Datos.DParametro("@dbobs", _obs))
         _listParam.Add(New Datos.DParametro("@dbfinicio", _finicio))

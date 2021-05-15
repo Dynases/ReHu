@@ -145,6 +145,7 @@ Public Class F3_Descuentos
     Private Sub _PHabilitar()
 
         JMc_Persona.ReadOnly = False
+        swTipo.Enabled = True
         Tb_TipoMov.Enabled = True
         Tb_Valor.IsInputReadOnly = False
         Tb_Observacion.ReadOnly = False
@@ -164,6 +165,7 @@ Public Class F3_Descuentos
     Private Sub _PInhabilitar()
 
         Tb_Id.ReadOnly = True
+        swTipo.Enabled = False
         JMc_Persona.ReadOnly = True
         Tb_TipoMov.Enabled = False
         Tb_Valor.IsInputReadOnly = True
@@ -181,6 +183,7 @@ Public Class F3_Descuentos
 
     Private Sub _PLimpiar()
         Tb_Id.Text = ""
+        swTipo.Value = False
         JMc_Persona.Text = ""
         Tb_TipoMov.Value = True
         Tb_Valor.Text = ""
@@ -209,7 +212,7 @@ Public Class F3_Descuentos
     End Sub
 
     Private Sub _PIniciarTodo()
-        Me.Text = "D E S C U E N T O S   P E R S O N A L"
+        Me.Text = "D E S C U E N T O S / B O N O S   P E R S O N A L"
 
         _prAsignarPermisos()
 
@@ -263,8 +266,9 @@ Public Class F3_Descuentos
         With JGr_Buscador
 
             Tb_Id.Text = .GetValue("dbnumi").ToString
+            swTipo.Value = .GetValue("dbtipo")
             JMc_Persona.Value = .GetValue("dbcper")
-            Tb_TipoMov.Value = .GetValue("dbtipo")
+            Tb_TipoMov.Value = .GetValue("dbtipomonto")
             Tb_Valor.Value = .GetValue("dbvalor")
             Tb_Observacion.Text = .GetValue("dbobs").ToString
             dtFInicio.Value = .GetValue("dbfinicio")
@@ -341,7 +345,7 @@ Public Class F3_Descuentos
                 tipo = "0"
             End If
 
-            Dim res As Boolean = L_prGrabarDescuentoPer(Tb_Id.Text, JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
+            Dim res As Boolean = L_prGrabarDescuentoPer(Tb_Id.Text, IIf(swTipo.Value = True, "1", "0"), JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
                                                         dtFechaVenc.Value.ToString("yyyy/MM/dd"), IIf(tbVencimiento.Value = True, "1", "0"),
                                                         dtFechaVenc.Value.ToString("yyyy/MM/dd"))
             If res Then
@@ -361,7 +365,7 @@ Public Class F3_Descuentos
             Else
                 tipo = "0"
             End If
-            Dim res As Boolean = L_prModificarDescuentoPer(Tb_Id.Text, JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
+            Dim res As Boolean = L_prModificarDescuentoPer(Tb_Id.Text, IIf(swTipo.Value = True, "1", "0"), JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
                                                         dtFechaVenc.Value.ToString("yyyy/MM/dd"), IIf(tbVencimiento.Value = True, "1", "0"),
                                                         dtFechaVenc.Value.ToString("yyyy/MM/dd"))
             If res Then
