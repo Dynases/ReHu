@@ -25,12 +25,18 @@ Partial Class R_PlanillaSueldos
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(R_PlanillaSueldos))
+        Dim JMc_Persona_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Me.tbMes = New DevComponents.Editors.IntegerInput()
         Me.tbAnio = New DevComponents.Editors.IntegerInput()
         Me.LabelX3 = New DevComponents.DotNetBar.LabelX()
         Me.LabelX2 = New DevComponents.DotNetBar.LabelX()
         Me.GroupPanel3 = New DevComponents.DotNetBar.Controls.GroupPanel()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
+        Me.LabelX1 = New DevComponents.DotNetBar.LabelX()
+        Me.swFiltrar = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.swTipo = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.GroupPanel2 = New DevComponents.DotNetBar.Controls.GroupPanel()
+        Me.JMc_Persona = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
         CType(Me.SuperTabPrincipal, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuperTabPrincipal.SuspendLayout()
         Me.SuperTabControlPanelRegistro.SuspendLayout()
@@ -48,6 +54,8 @@ Partial Class R_PlanillaSueldos
         CType(Me.tbMes, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.tbAnio, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel3.SuspendLayout()
+        Me.GroupPanel2.SuspendLayout()
+        CType(Me.JMc_Persona, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'SuperTabPrincipal
@@ -148,6 +156,7 @@ Partial Class R_PlanillaSueldos
         '
         'MGPFiltros
         '
+        Me.MGPFiltros.Controls.Add(Me.GroupPanel2)
         Me.MGPFiltros.Controls.Add(Me.GroupPanel3)
         Me.MGPFiltros.Size = New System.Drawing.Size(363, 553)
         '
@@ -193,7 +202,7 @@ Partial Class R_PlanillaSueldos
         Me.tbMes.BackgroundStyle.Class = "DateTimeInputBackground"
         Me.tbMes.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.tbMes.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
-        Me.tbMes.Location = New System.Drawing.Point(70, 41)
+        Me.tbMes.Location = New System.Drawing.Point(159, 111)
         Me.tbMes.MaxValue = 12
         Me.tbMes.MinValue = 1
         Me.tbMes.Name = "tbMes"
@@ -210,7 +219,7 @@ Partial Class R_PlanillaSueldos
         Me.tbAnio.BackgroundStyle.Class = "DateTimeInputBackground"
         Me.tbAnio.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.tbAnio.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
-        Me.tbAnio.Location = New System.Drawing.Point(70, 11)
+        Me.tbAnio.Location = New System.Drawing.Point(159, 81)
         Me.tbAnio.MaxValue = 4000
         Me.tbAnio.MinValue = 1980
         Me.tbAnio.Name = "tbAnio"
@@ -226,7 +235,7 @@ Partial Class R_PlanillaSueldos
         '
         '
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX3.Location = New System.Drawing.Point(18, 41)
+        Me.LabelX3.Location = New System.Drawing.Point(107, 111)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(37, 23)
         Me.LabelX3.TabIndex = 21
@@ -239,7 +248,7 @@ Partial Class R_PlanillaSueldos
         '
         '
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX2.Location = New System.Drawing.Point(17, 11)
+        Me.LabelX2.Location = New System.Drawing.Point(106, 81)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(46, 23)
         Me.LabelX2.TabIndex = 20
@@ -250,17 +259,14 @@ Partial Class R_PlanillaSueldos
         Me.GroupPanel3.BackColor = System.Drawing.Color.Transparent
         Me.GroupPanel3.CanvasColor = System.Drawing.SystemColors.Control
         Me.GroupPanel3.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
-        Me.GroupPanel3.Controls.Add(Me.tbAnio)
-        Me.GroupPanel3.Controls.Add(Me.tbMes)
-        Me.GroupPanel3.Controls.Add(Me.LabelX2)
-        Me.GroupPanel3.Controls.Add(Me.LabelX3)
+        Me.GroupPanel3.Controls.Add(Me.swTipo)
         Me.GroupPanel3.DisabledBackColor = System.Drawing.Color.Empty
         Me.GroupPanel3.Dock = System.Windows.Forms.DockStyle.Top
         Me.GroupPanel3.Location = New System.Drawing.Point(0, 0)
         Me.GroupPanel3.Margin = New System.Windows.Forms.Padding(15)
         Me.GroupPanel3.Name = "GroupPanel3"
         Me.GroupPanel3.Padding = New System.Windows.Forms.Padding(15)
-        Me.GroupPanel3.Size = New System.Drawing.Size(357, 100)
+        Me.GroupPanel3.Size = New System.Drawing.Size(357, 80)
         '
         '
         '
@@ -296,6 +302,112 @@ Partial Class R_PlanillaSueldos
         Me.Timer1.Enabled = True
         Me.Timer1.Interval = 1000
         '
+        'LabelX1
+        '
+        Me.LabelX1.BackColor = System.Drawing.Color.Transparent
+        '
+        '
+        '
+        Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX1.Location = New System.Drawing.Point(61, 7)
+        Me.LabelX1.Name = "LabelX1"
+        Me.LabelX1.Size = New System.Drawing.Size(75, 23)
+        Me.LabelX1.TabIndex = 25
+        Me.LabelX1.Text = "FILTRAR:"
+        '
+        'swFiltrar
+        '
+        '
+        '
+        '
+        Me.swFiltrar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swFiltrar.Location = New System.Drawing.Point(142, 8)
+        Me.swFiltrar.Name = "swFiltrar"
+        Me.swFiltrar.OffText = "UNO"
+        Me.swFiltrar.OnText = "TODOS"
+        Me.swFiltrar.Size = New System.Drawing.Size(100, 22)
+        Me.swFiltrar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swFiltrar.TabIndex = 24
+        Me.swFiltrar.Value = True
+        Me.swFiltrar.ValueObject = "Y"
+        '
+        'swTipo
+        '
+        '
+        '
+        '
+        Me.swTipo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swTipo.Location = New System.Drawing.Point(77, 11)
+        Me.swTipo.Name = "swTipo"
+        Me.swTipo.OffText = "RESUMEN BOLETAS"
+        Me.swTipo.OnBackColor = System.Drawing.Color.Gold
+        Me.swTipo.OnText = "BOLETAS"
+        Me.swTipo.Size = New System.Drawing.Size(190, 22)
+        Me.swTipo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swTipo.TabIndex = 26
+        Me.swTipo.Value = True
+        Me.swTipo.ValueObject = "Y"
+        '
+        'GroupPanel2
+        '
+        Me.GroupPanel2.BackColor = System.Drawing.Color.Transparent
+        Me.GroupPanel2.CanvasColor = System.Drawing.SystemColors.Control
+        Me.GroupPanel2.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.Office2007
+        Me.GroupPanel2.Controls.Add(Me.JMc_Persona)
+        Me.GroupPanel2.Controls.Add(Me.tbAnio)
+        Me.GroupPanel2.Controls.Add(Me.tbMes)
+        Me.GroupPanel2.Controls.Add(Me.LabelX1)
+        Me.GroupPanel2.Controls.Add(Me.LabelX2)
+        Me.GroupPanel2.Controls.Add(Me.swFiltrar)
+        Me.GroupPanel2.Controls.Add(Me.LabelX3)
+        Me.GroupPanel2.DisabledBackColor = System.Drawing.Color.Empty
+        Me.GroupPanel2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.GroupPanel2.Location = New System.Drawing.Point(0, 80)
+        Me.GroupPanel2.Margin = New System.Windows.Forms.Padding(15)
+        Me.GroupPanel2.Name = "GroupPanel2"
+        Me.GroupPanel2.Padding = New System.Windows.Forms.Padding(15)
+        Me.GroupPanel2.Size = New System.Drawing.Size(357, 170)
+        '
+        '
+        '
+        Me.GroupPanel2.Style.BackColor2SchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground2
+        Me.GroupPanel2.Style.BackColorGradientAngle = 90
+        Me.GroupPanel2.Style.BackColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBackground
+        Me.GroupPanel2.Style.BorderBottom = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel2.Style.BorderBottomWidth = 1
+        Me.GroupPanel2.Style.BorderColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelBorder
+        Me.GroupPanel2.Style.BorderLeft = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel2.Style.BorderLeftWidth = 1
+        Me.GroupPanel2.Style.BorderRight = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel2.Style.BorderRightWidth = 1
+        Me.GroupPanel2.Style.BorderTop = DevComponents.DotNetBar.eStyleBorderType.Solid
+        Me.GroupPanel2.Style.BorderTopWidth = 1
+        Me.GroupPanel2.Style.CornerDiameter = 4
+        Me.GroupPanel2.Style.CornerType = DevComponents.DotNetBar.eCornerType.Rounded
+        Me.GroupPanel2.Style.TextColorSchemePart = DevComponents.DotNetBar.eColorSchemePart.PanelText
+        Me.GroupPanel2.Style.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Near
+        '
+        '
+        '
+        Me.GroupPanel2.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        '
+        '
+        '
+        Me.GroupPanel2.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.GroupPanel2.TabIndex = 25
+        Me.GroupPanel2.Text = "PERSONAL"
+        '
+        'JMc_Persona
+        '
+        JMc_Persona_DesignTimeLayout.LayoutString = resources.GetString("JMc_Persona_DesignTimeLayout.LayoutString")
+        Me.JMc_Persona.DesignTimeLayout = JMc_Persona_DesignTimeLayout
+        Me.JMc_Persona.Location = New System.Drawing.Point(9, 45)
+        Me.JMc_Persona.Name = "JMc_Persona"
+        Me.JMc_Persona.SelectedIndex = -1
+        Me.JMc_Persona.SelectedItem = Nothing
+        Me.JMc_Persona.Size = New System.Drawing.Size(330, 22)
+        Me.JMc_Persona.TabIndex = 12
+        '
         'R_PlanillaSueldos
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -324,6 +436,9 @@ Partial Class R_PlanillaSueldos
         CType(Me.tbMes, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.tbAnio, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel3.ResumeLayout(False)
+        Me.GroupPanel2.ResumeLayout(False)
+        Me.GroupPanel2.PerformLayout()
+        CType(Me.JMc_Persona, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -334,4 +449,9 @@ Partial Class R_PlanillaSueldos
     Friend WithEvents LabelX2 As DevComponents.DotNetBar.LabelX
     Friend WithEvents GroupPanel3 As DevComponents.DotNetBar.Controls.GroupPanel
     Friend WithEvents Timer1 As Timer
+    Friend WithEvents GroupPanel2 As DevComponents.DotNetBar.Controls.GroupPanel
+    Friend WithEvents JMc_Persona As Janus.Windows.GridEX.EditControls.MultiColumnCombo
+    Friend WithEvents LabelX1 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents swFiltrar As DevComponents.DotNetBar.Controls.SwitchButton
+    Friend WithEvents swTipo As DevComponents.DotNetBar.Controls.SwitchButton
 End Class

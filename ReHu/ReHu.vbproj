@@ -701,6 +701,12 @@
       <DependentUpon>R_NotaVenta_Carta.rpt</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Reporte\R_PlanillaSueldoResumen.vb">
+      <DependentUpon>R_PlanillaSueldoResumen.rpt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <SubType>Component</SubType>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Reporte\R_PlanillaSueldo.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -1286,6 +1292,10 @@
     <EmbeddedResource Include="Reporte\R_NotaVenta_Carta.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
       <LastGenOutput>R_NotaVenta_Carta.vb</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Reporte\R_PlanillaSueldoResumen.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>R_PlanillaSueldoResumen.vb</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Reporte\R_PlanillaSueldo.rpt">
       <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
