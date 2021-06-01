@@ -6604,10 +6604,57 @@ Public Class AccesoLogica
 
         Dim _listParam As New List(Of Datos.DParametro)
 
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
         _listParam.Add(New Datos.DParametro("@fecha", fecha))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
         _Tabla = D_ProcedimientoConParam("PlanillaSueldo", _listParam)
         Return _Tabla
     End Function
+    Public Shared Function L_VerificarPlanillaSueldos() As DataTable
+        Dim _Tabla As DataTable
 
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 2))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("PlanillaSueldo", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_VerificarSiSeGraboPlanilla(Mes As Integer, Anio As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@Mes1", Mes))
+        _listParam.Add(New Datos.DParametro("@Anio1", Anio))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("PlanillaSueldo", _listParam)
+
+        Return _Tabla
+    End Function
+    Public Shared Function L_GrabarPlanilla(ByRef _numi As String, _anio As Integer, _mes As Integer, planilla As DataTable) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 4))
+        _listParam.Add(New Datos.DParametro("@pgnumi", _numi))
+        _listParam.Add(New Datos.DParametro("@Mes1", _mes))
+        _listParam.Add(New Datos.DParametro("@Anio1", _anio))
+        _listParam.Add(New Datos.DParametro("@Planilla1", "", planilla))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("PlanillaSueldo", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            _numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
 #End Region
 End Class

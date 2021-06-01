@@ -351,4 +351,11 @@ Public Class P_Principal
         frm._modulo = FP_RH
         frm.Show()
     End Sub
+
+    Private Sub btGrabarPlanilla_Click(sender As Object, e As EventArgs) Handles btGrabarPlanilla.Click
+        Dim frm As New R_GrabarPlanillaSueldos
+        frm._nameButton = btGrabarPlanilla.Name
+        frm._modulo = FP_RH
+        frm.Show()
+    End Sub
 End Class
