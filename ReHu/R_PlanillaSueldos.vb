@@ -50,137 +50,148 @@ Public Class R_PlanillaSueldos
     Private Sub _PCargarReporte(codPer As Integer)
         Dim _Ds As New DataSet
 
-        Dim objrep As New R_PlanillaSueldo
-
+        Dim objrep As New R_PlanillaSueldoGrabada
         Dim dt As New DataTable
 
-        dt = L_PlanillaSueldos(New Date(tbAnio.Value, tbMes.Value, 1).ToString("yyyy/MM/dd"))
+        'dt = L_PlanillaSueldos(New Date(tbAnio.Value, tbMes.Value, 1).ToString("yyyy/MM/dd"))
+        dt = L_PlanillaSueldosGrabada(tbMes.Value, tbAnio.Value)
 
-        If codPer > 0 Then
-            dt.Select("codPer=" + Str(codPer))
+        If dt.Rows.Count > 0 Then
+            If codPer > 0 Then
+                dt.Select("codPer=" + Str(codPer))
 
-            Dim rows As DataRow()
+                Dim rows As DataRow()
 
-            Dim dtNew As DataTable
+                Dim dtNew As DataTable
 
-            ' copy table structure
-            dtNew = dt.Clone()
+                ' copy table structure
+                dtNew = dt.Clone()
 
-            ' sort and filter data
-            rows = dt.Select("codPer=" + Str(codPer))
+                ' sort and filter data
+                rows = dt.Select("codPer=" + Str(codPer))
 
-            ' fill dtNew with selected rows
+                ' fill dtNew with selected rows
 
-            For Each dr As DataRow In rows
-                dtNew.ImportRow(dr)
-            Next
-            objrep.SetDataSource(dtNew)
+                For Each dr As DataRow In rows
+                    dtNew.ImportRow(dr)
+                Next
+                objrep.SetDataSource(dtNew)
+            Else
+                objrep.SetDataSource(dt)
+            End If
+
+
+            Dim mes As Integer = tbMes.Value
+            Dim mesl As String
+            Dim anio As Integer = tbAnio.Value
+
+            If mes = 1 Then
+                mesl = "Enero"
+            End If
+            If mes = 2 Then
+                mesl = "Febrero"
+            End If
+            If mes = 3 Then
+                mesl = "Marzo"
+            End If
+            If mes = 4 Then
+                mesl = "Abril"
+            End If
+            If mes = 5 Then
+                mesl = "Mayo"
+            End If
+            If mes = 6 Then
+                mesl = "Junio"
+            End If
+            If mes = 7 Then
+                mesl = "Julio"
+            End If
+            If mes = 8 Then
+                mesl = "Agosto"
+            End If
+            If mes = 9 Then
+                mesl = "Septiembre"
+            End If
+            If mes = 10 Then
+                mesl = "Octubre"
+            End If
+            If mes = 11 Then
+                mesl = "Noviembre"
+            End If
+            If mes = 12 Then
+                mesl = "Diciembre"
+            End If
+            objrep.SetParameterValue("periodo", mesl + "-" + anio.ToString)
+
+            MReportViewer.ReportSource = objrep
+            MReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
         Else
-            objrep.SetDataSource(dt)
+            ToastNotification.Show(Me, "NO HAY PLANILLA GRABADA PARA ESTE MES", My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.BottomLeft)
         End If
 
-
-        Dim mes As Integer = tbMes.Value
-        Dim mesl As String
-        Dim anio As Integer = tbAnio.Value
-
-        If mes = 1 Then
-            mesl = "Enero"
-        End If
-        If mes = 2 Then
-            mesl = "Febrero"
-        End If
-        If mes = 3 Then
-            mesl = "Marzo"
-        End If
-        If mes = 4 Then
-            mesl = "Abril"
-        End If
-        If mes = 5 Then
-            mesl = "Mayo"
-        End If
-        If mes = 6 Then
-            mesl = "Junio"
-        End If
-        If mes = 7 Then
-            mesl = "Julio"
-        End If
-        If mes = 8 Then
-            mesl = "Agosto"
-        End If
-        If mes = 9 Then
-            mesl = "Septiembre"
-        End If
-        If mes = 10 Then
-            mesl = "Octubre"
-        End If
-        If mes = 11 Then
-            mesl = "Noviembre"
-        End If
-        If mes = 12 Then
-            mesl = "Diciembre"
-        End If
-        objrep.SetParameterValue("periodo", mesl + "-" + anio.ToString)
-
-        MReportViewer.ReportSource = objrep
-        MReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
 
     End Sub
 
     Private Sub _PCargarReporteResumen()
-        Dim _Ds As New DataSet
 
         Dim objrep As New R_PlanillaSueldoResumen
-
         Dim dt As New DataTable
 
-        dt = L_PlanillaSueldos(New Date(tbAnio.Value, tbMes.Value, 1).ToString("yyyy/MM/dd"))
-        objrep.SetDataSource(dt)
+        'dt = L_PlanillaSueldos(New Date(tbAnio.Value, tbMes.Value, 1).ToString("yyyy/MM/dd"))
+        dt = L_PlanillaSueldosGrabada(tbMes.Value, tbAnio.Value)
 
-        Dim mes As Integer = tbMes.Value
-        Dim mesl As String
-        Dim anio As Integer = tbAnio.Value
+        If dt.Rows.Count > 0 Then
 
-        If mes = 1 Then
-            mesl = "Enero"
-        End If
-        If mes = 2 Then
-            mesl = "Febrero"
-        End If
-        If mes = 3 Then
-            mesl = "Marzo"
-        End If
-        If mes = 4 Then
-            mesl = "Abril"
-        End If
-        If mes = 5 Then
-            mesl = "Mayo"
-        End If
-        If mes = 6 Then
-            mesl = "Junio"
-        End If
-        If mes = 7 Then
-            mesl = "Julio"
-        End If
-        If mes = 8 Then
-            mesl = "Agosto"
-        End If
-        If mes = 9 Then
-            mesl = "Septiembre"
-        End If
-        If mes = 10 Then
-            mesl = "Octubre"
-        End If
-        If mes = 11 Then
-            mesl = "Noviembre"
-        End If
-        If mes = 12 Then
-            mesl = "Diciembre"
-        End If
-        objrep.SetParameterValue("periodo", mesl + "-" + anio.ToString)
+            objrep.SetDataSource(dt)
 
-        MReportViewer.ReportSource = objrep
-        MReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+
+            Dim mes As Integer = tbMes.Value
+            Dim mesl As String
+            Dim anio As Integer = tbAnio.Value
+
+            If mes = 1 Then
+                mesl = "Enero"
+            End If
+            If mes = 2 Then
+                mesl = "Febrero"
+            End If
+            If mes = 3 Then
+                mesl = "Marzo"
+            End If
+            If mes = 4 Then
+                mesl = "Abril"
+            End If
+            If mes = 5 Then
+                mesl = "Mayo"
+            End If
+            If mes = 6 Then
+                mesl = "Junio"
+            End If
+            If mes = 7 Then
+                mesl = "Julio"
+            End If
+            If mes = 8 Then
+                mesl = "Agosto"
+            End If
+            If mes = 9 Then
+                mesl = "Septiembre"
+            End If
+            If mes = 10 Then
+                mesl = "Octubre"
+            End If
+            If mes = 11 Then
+                mesl = "Noviembre"
+            End If
+            If mes = 12 Then
+                mesl = "Diciembre"
+            End If
+            objrep.SetParameterValue("periodo", mesl + "-" + anio.ToString)
+
+            MReportViewer.ReportSource = objrep
+            MReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
+        Else
+            ToastNotification.Show(Me, "NO HAY PLANILLA GRABADA PARA ESTE MES", My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.BottomLeft)
+        End If
 
     End Sub
 

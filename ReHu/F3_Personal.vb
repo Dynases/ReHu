@@ -24,7 +24,13 @@ Public Class F3_Personal
     Public _modulo As SideNavItem
     Public _nameButton As String
     Dim NumiVendedor As Integer = 0
-
+#End Region
+#Region "MApas"
+    Dim _Punto As Integer
+    Dim _ListPuntos As List(Of PointLatLng)
+    Dim _Overlay As GMapOverlay
+    Dim _latitud As Double = 0
+    Dim _longitud As Double = 0
 #End Region
 #Region "CLASE AUXILIAR"
     Public Class CImagen
@@ -49,6 +55,7 @@ Public Class F3_Personal
         Me.Text = "P E R S O N A L"
 
         _prAsignarPermisos()
+        _prInicarMapa()
         _prCargarComboLibreria(cbEstado, 1, 1)
         _prCargarComboLibreria(cbTipoDoc, 1, 2)
         _prCargarComboLibreria(cbEstCivil, 1, 3)
@@ -95,6 +102,33 @@ Public Class F3_Personal
         End If
 
     End Sub
+    Public Sub _prInicarMapa()
+        _Punto = 0
+        '_ListPuntos = New List(Of PointLatLng)
+        _Overlay = New GMapOverlay("points")
+        Gmc_Personal.Overlays.Add(_Overlay)
+        P_IniciarMap()
+    End Sub
+    Private Sub P_IniciarMap()
+        Gmc_Personal.DragButton = MouseButtons.Left
+        Gmc_Personal.CanDragMap = True
+        Gmc_Personal.MapProvider = GMapProviders.GoogleMap
+        If (_latitud <> 0 And _longitud <> 0) Then
+
+            Gmc_Personal.Position = New PointLatLng(_latitud, _longitud)
+        Else
+
+            _Overlay.Markers.Clear()
+            Gmc_Personal.Position = New PointLatLng(-17.3931784, -66.1738852)
+        End If
+
+        Gmc_Personal.MinZoom = 0
+        Gmc_Personal.MaxZoom = 24
+        Gmc_Personal.Zoom = 15.5
+        Gmc_Personal.AutoScroll = True
+
+        GMapProvider.Language = LanguageType.Spanish
+    End Sub
     Private Sub _prCargarComboLibreria(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo, cod1 As String, cod2 As String)
         Dim dt As New DataTable
         dt = L_prLibreriaClienteLGeneral(cod1, cod2)
@@ -110,7 +144,7 @@ Public Class F3_Personal
             .Refresh()
         End With
     End Sub
-    Private Sub _PCargarBuscadorOtros(numi As String)
+    Private Sub _PCargarDescuentosOtros(numi As String)
         Dim dt As New DataTable
         dt = L_prDescuentoGeneralOtros2(numi)
 
@@ -176,6 +210,68 @@ Public Class F3_Personal
             .GroupByBoxVisible = False
             'diseño de la grilla
             grDescuentos.VisualStyle = VisualStyle.Office2007
+            .RecordNavigator = True
+        End With
+    End Sub
+    Private Sub _PCargarDocumentos(numi As String)
+        Dim dt As New DataTable
+        dt = L_prPersonalDetalleDocumentos(numi)
+
+        grDocumentos.BoundMode = BoundMode.Bound
+        grDocumentos.DataSource = dt
+        grDocumentos.RetrieveStructure()
+
+        'dar formato a las columnas
+
+        With grDocumentos.RootTable.Columns("pinumi")
+            .Visible = False
+
+        End With
+        With grDocumentos.RootTable.Columns("pipanumi")
+            .Visible = False
+
+        End With
+        With grDocumentos.RootTable.Columns("piidlib")
+            .Caption = "Codigo"
+            .Width = 70
+            .Visible = False
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+        With grDocumentos.RootTable.Columns("ycdes3")
+            .Caption = "Descripción"
+            .Width = 200
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+        End With
+        With grDocumentos.RootTable.Columns("pifvenc")
+            .Caption = "Fecha"
+            .Width = 120
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+            '.FormatString = DateFormat.ShortDate
+            .EditType = EditType.CalendarCombo
+            '.ButtonDisplayMode = DateFormat.ShortDate
+        End With
+
+        With grDocumentos.RootTable.Columns("piestado")
+            .Caption = "Estado"
+            .Width = 70
+            .Visible = True
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+        End With
+
+        With grDocumentos.RootTable.Columns("estado")
+            .Visible = False
+        End With
+
+        'Habilitar Filtradores
+        With grDocumentos
+            '.DefaultFilterRowComparison = FilterConditionOperator.Contains
+            '.FilterMode = FilterMode.Automatic
+            '.FilterRowUpdateMode = FilterRowUpdateMode.WhenValueChanges
+            .GroupByBoxVisible = False
+            'diseño de la grilla
+            grDocumentos.VisualStyle = VisualStyle.Office2007
             .RecordNavigator = True
         End With
     End Sub
@@ -267,6 +363,21 @@ Public Class F3_Personal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = False
         End With
+        With grPersonal.RootTable.Columns("paafp")
+            .Width = 50
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+            .Visible = False
+        End With
+        With grPersonal.RootTable.Columns("palat")
+            .Width = 50
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+            .Visible = False
+        End With
+        With grPersonal.RootTable.Columns("palongi")
+            .Width = 50
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+            .Visible = False
+        End With
         With grPersonal.RootTable.Columns("paaux1")
             .Width = 50
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
@@ -331,6 +442,7 @@ Public Class F3_Personal
         cbGenero.ReadOnly = False
         tbEmail.ReadOnly = False
         tbObs.ReadOnly = False
+        swAFP.Enabled = True
 
         _PHabilitarContrato()
         _PHabilitarFamilia()
@@ -339,6 +451,7 @@ Public Class F3_Personal
         grDetalleSueldos.Enabled = True
         grDetalleSueldos.AllowUserToAddRows = True
         grDescuentos.Enabled = True
+        grDocumentos.Enabled = True
 
         btnNuevo.Enabled = False
         btnModificar.Enabled = False
@@ -391,6 +504,7 @@ Public Class F3_Personal
         cbGenero.ReadOnly = True
         tbEmail.ReadOnly = True
         tbObs.ReadOnly = True
+        swAFP.Enabled = False
 
         _PInHabilitarContrato()
         _PInHabilitarFamilia()
@@ -398,6 +512,7 @@ Public Class F3_Personal
 
         grDetalleSueldos.Enabled = False
         grDescuentos.Enabled = False
+        grDocumentos.Enabled = False
 
 
         btnNuevo.Enabled = True
@@ -498,7 +613,9 @@ Public Class F3_Personal
         _prCargarGridDetalleSueldos(-1)
         grDetalleSueldos.AllowUserToAddRows = True
 
-        _PCargarBuscadorOtros(-1)
+        _PCargarDescuentosOtros(-1)
+
+        _PCargarDocumentos(-1)
 
     End Sub
     Private Sub _prEliminarImagen()
@@ -822,9 +939,9 @@ Public Class F3_Personal
             Dim res As Boolean = L_prGrabarPersonal(tbNumi.Text, cbEstado.Value, cbTipoDoc.Value, tbNroDoc.Text, dtFNac.Value.ToString("yyyy/MM/dd"),
                                                     dtFIng.Value.ToString("yyyy/MM/dd"), tbNombre.Text, tbDireccion.Text, tbTelef1.Text,
                                                     tbTelef2.Text, cbEstCivil.Value, cbGenero.Value, tbEmail.Text, tbObs.Text, nomImg,
-                                                    CType(grContrato.DataSource, DataTable), CType(grFamilia.DataSource, DataTable),
-                                                    CType(grCargo.DataSource, DataTable), CType(grDetalleSueldos.DataSource, DataTable),
-                                                    dtDescuentos)
+                                                    IIf(swAFP.Value = True, 1, 0), _latitud, _longitud, CType(grContrato.DataSource, DataTable),
+                                                    CType(grFamilia.DataSource, DataTable), CType(grCargo.DataSource, DataTable),
+                                                    CType(grDetalleSueldos.DataSource, DataTable), dtDescuentos, CType(grDocumentos.DataSource, DataTable))
             If res Then
                 If IsNothing(vlImagen) = False Then
                     vlImagen.nombre = nomImg
@@ -882,9 +999,9 @@ Public Class F3_Personal
             Dim res As Boolean = L_prModificarPersonal(tbNumi.Text, cbEstado.Value, cbTipoDoc.Value, tbNroDoc.Text, dtFNac.Value.ToString("yyyy/MM/dd"),
                                                     dtFIng.Value.ToString("yyyy/MM/dd"), tbNombre.Text, tbDireccion.Text, tbTelef1.Text,
                                                     tbTelef2.Text, cbEstCivil.Value, cbGenero.Value, tbEmail.Text, tbObs.Text, nomImg,
-                                                    CType(grContrato.DataSource, DataTable), CType(grFamilia.DataSource, DataTable),
-                                                    CType(grCargo.DataSource, DataTable), CType(grDetalleSueldos.DataSource, DataTable),
-                                                    dtDescuentos)
+                                                    IIf(swAFP.Value = True, 1, 0), _latitud, _longitud, CType(grContrato.DataSource, DataTable),
+                                                    CType(grFamilia.DataSource, DataTable), CType(grCargo.DataSource, DataTable),
+                                                    CType(grDetalleSueldos.DataSource, DataTable), dtDescuentos, CType(grDocumentos.DataSource, DataTable))
 
             If res Then
                 If IsNothing(vlImagen) = False Then
@@ -1032,6 +1149,10 @@ Public Class F3_Personal
                 cbGenero.Value = .GetValue("pagenero")
                 tbEmail.Text = .GetValue("paemail").ToString
                 tbObs.Text = .GetValue("paemail").ToString
+                swAFP.Value = .GetValue("paafp")
+                _latitud = .GetValue("palat")
+                _longitud = .GetValue("palongi")
+
 
                 Dim nomImg = .GetValue("parutaimg").ToString
                 If nomImg = String.Empty Then
@@ -1052,7 +1173,8 @@ Public Class F3_Personal
                 _prCargarGridDetalleFamilia(tbNumi.Text)
                 _prCargarGridDetalleCargo(tbNumi.Text)
                 _prCargarGridDetalleSueldos(tbNumi.Text)
-                _PCargarBuscadorOtros(tbNumi.Text)
+                _PCargarDescuentosOtros(tbNumi.Text)
+                _PCargarDocumentos(tbNumi.Text)
 
                 lbFecha.Text = CType(.GetValue("pafact"), Date).ToString("dd/MM/yyyy")
                 lbHora.Text = .GetValue("pahact").ToString
@@ -1060,12 +1182,24 @@ Public Class F3_Personal
 
 
             End With
-
+            _dibujarUbicacion(grPersonal.GetValue("panombre").ToString, grPersonal.GetValue("panrodoc").ToString)
             LblPaginacion.Text = Str(grPersonal.Row + 1) + "/" + grPersonal.RowCount.ToString
 
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
         End Try
+    End Sub
+    Public Sub _dibujarUbicacion(_nombre As String, _ci As String)
+        If (_latitud <> 0 And _longitud <> 0) Then
+            Dim plg As PointLatLng = New PointLatLng(_latitud, _longitud)
+            _Overlay.Markers.Clear()
+            P_AgregarPunto(plg, _nombre, _ci)
+        Else
+
+
+            _Overlay.Markers.Clear()
+            Gmc_Personal.Position = New PointLatLng(-17.3931784, -66.1738852)
+        End If
     End Sub
     Public Sub _prMostrarRegistroContrato(_N As Integer)
         Try
@@ -1179,6 +1313,27 @@ Public Class F3_Personal
         Else
             Me.Close()
             _modulo.Select()
+        End If
+    End Sub
+
+    Private Sub P_AgregarPunto(pointLatLng As PointLatLng, _nombre As String, _ci As String)
+        If (Not IsNothing(_Overlay)) Then
+            'añadir puntos
+            'Dim markersOverlay As New GMapOverlay("markers")
+            Dim marker As New GMarkerGoogle(pointLatLng, My.Resources.markerIcono)
+            'añadir tooltip
+            Dim mode As MarkerTooltipMode = MarkerTooltipMode.OnMouseOver
+            marker.ToolTip = New GMapBaloonToolTip(marker)
+            marker.ToolTipMode = mode
+            Dim ToolTipBackColor As New SolidBrush(Color.Blue)
+            marker.ToolTip.Fill = ToolTipBackColor
+            marker.ToolTip.Foreground = Brushes.White
+            'If (Not _nombre.ToString = String.Empty) Then
+            '    marker.ToolTipText = "CLIENTE: " + _nombre & vbNewLine & " CI:" + _ci
+            'End If
+            _Overlay.Markers.Add(marker)
+            'mapa.Overlays.Add(markersOverlay)
+            Gmc_Personal.Position = pointLatLng
         End If
     End Sub
 #End Region
@@ -1523,6 +1678,47 @@ Public Class F3_Personal
             e.Cancel = False
         Else
             e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub btnAlejar_Click(sender As Object, e As EventArgs) Handles btnAlejar.Click
+        If (Gmc_Personal.Zoom >= Gmc_Personal.MinZoom) Then
+            Gmc_Personal.Zoom = Gmc_Personal.Zoom - 1
+        End If
+    End Sub
+
+    Private Sub btnAcercar_Click(sender As Object, e As EventArgs) Handles btnAcercar.Click
+        If (Gmc_Personal.Zoom <= Gmc_Personal.MaxZoom) Then
+            Gmc_Personal.Zoom = Gmc_Personal.Zoom + 1
+        End If
+    End Sub
+
+    Private Sub Gmc_Personal_DoubleClick(sender As Object, e As EventArgs) Handles Gmc_Personal.DoubleClick
+        If (btnGrabar.Enabled = True) Then
+            _Overlay.Markers.Clear()
+
+            Dim gm As GMapControl = CType(sender, GMapControl)
+            Dim hj As MouseEventArgs = CType(e, MouseEventArgs)
+            Dim plg As PointLatLng = gm.FromLocalToLatLng(hj.X, hj.Y)
+            _latitud = plg.Lat
+            _longitud = plg.Lng
+            P_AgregarPunto(plg, "", "")
+        End If
+    End Sub
+
+    Private Sub grDocumentos_EditingCell(sender As Object, e As EditingCellEventArgs) Handles grDocumentos.EditingCell
+        If (e.Column.Index = grDocumentos.RootTable.Columns("pifvenc").Index) Or (e.Column.Index = grDocumentos.RootTable.Columns("piestado").Index) Then
+            e.Cancel = False
+        Else
+            e.Cancel = True
+        End If
+    End Sub
+
+    Private Sub grDocumentos_CellEdited(sender As Object, e As ColumnActionEventArgs) Handles grDocumentos.CellEdited
+        Dim pos As Integer = grDocumentos.CurrentRow.RowIndex
+        Dim estado As Integer = CType(grDocumentos.DataSource, DataTable).Rows(pos).Item("estado")
+        If (estado = 1) Then
+            CType(grDocumentos.DataSource, DataTable).Rows(pos).Item("estado") = 2
         End If
     End Sub
 
