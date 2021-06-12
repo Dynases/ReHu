@@ -60,6 +60,7 @@ Public Class F3_Personal
         _prCargarComboLibreria(cbTipoDoc, 1, 2)
         _prCargarComboLibreria(cbEstCivil, 1, 3)
         _prCargarComboLibreria(cbGenero, 1, 4)
+        _prCargarComboLibreria(cbNacionalidad, 1, 5)
         _prCargarComboLibreria(cbTipoContrato, 2, 1)
         _prCargarComboLibreria(cbGeneroFlia, 1, 4)
         _prCargarComboLibreria(cbTipoDocFlia, 1, 2)
@@ -172,7 +173,7 @@ Public Class F3_Personal
 
         With grDescuentos.RootTable.Columns("tipo")
             .Caption = "TipoMonto"
-            .Width = 90
+            .Width = 60
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
@@ -192,8 +193,8 @@ Public Class F3_Personal
         End With
 
         With grDescuentos.RootTable.Columns("pfestado")
-            .Caption = "Estado"
-            .Width = 60
+            .Caption = "Aplica"
+            .Width = 70
             .Visible = True
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
         End With
@@ -254,8 +255,8 @@ Public Class F3_Personal
         End With
 
         With grDocumentos.RootTable.Columns("piestado")
-            .Caption = "Estado"
-            .Width = 70
+            .Caption = "Entregado"
+            .Width = 100
             .Visible = True
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
         End With
@@ -335,6 +336,11 @@ Public Class F3_Personal
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
             .Visible = True
             .Caption = "TELÉFONO2"
+        End With
+        With grPersonal.RootTable.Columns("panacionalidad")
+            .Width = 80
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Near
+            .Visible = False
         End With
         With grPersonal.RootTable.Columns("paestcivil")
             .Width = 250
@@ -438,6 +444,7 @@ Public Class F3_Personal
         tbDireccion.ReadOnly = False
         tbTelef1.ReadOnly = False
         tbTelef2.ReadOnly = False
+        cbNacionalidad.ReadOnly = False
         cbEstCivil.ReadOnly = False
         cbGenero.ReadOnly = False
         tbEmail.ReadOnly = False
@@ -500,6 +507,7 @@ Public Class F3_Personal
         tbDireccion.ReadOnly = True
         tbTelef1.ReadOnly = True
         tbTelef2.ReadOnly = True
+        cbNacionalidad.ReadOnly = True
         cbEstCivil.ReadOnly = True
         cbGenero.ReadOnly = True
         tbEmail.ReadOnly = True
@@ -938,7 +946,7 @@ Public Class F3_Personal
             Dim dtDescuentos As DataTable = CType(grDescuentos.DataSource, DataTable).DefaultView.ToTable(True, "pfnumi", "pfpanumi", "danumi", "pfestado", "estado")
             Dim res As Boolean = L_prGrabarPersonal(tbNumi.Text, cbEstado.Value, cbTipoDoc.Value, tbNroDoc.Text, dtFNac.Value.ToString("yyyy/MM/dd"),
                                                     dtFIng.Value.ToString("yyyy/MM/dd"), tbNombre.Text, tbDireccion.Text, tbTelef1.Text,
-                                                    tbTelef2.Text, cbEstCivil.Value, cbGenero.Value, tbEmail.Text, tbObs.Text, nomImg,
+                                                    tbTelef2.Text, cbNacionalidad.Value, cbEstCivil.Value, cbGenero.Value, tbEmail.Text, tbObs.Text, nomImg,
                                                     IIf(swAFP.Value = True, 1, 0), _latitud, _longitud, CType(grContrato.DataSource, DataTable),
                                                     CType(grFamilia.DataSource, DataTable), CType(grCargo.DataSource, DataTable),
                                                     CType(grDetalleSueldos.DataSource, DataTable), dtDescuentos, CType(grDocumentos.DataSource, DataTable))
@@ -998,7 +1006,7 @@ Public Class F3_Personal
             Dim dtDescuentos As DataTable = CType(grDescuentos.DataSource, DataTable).DefaultView.ToTable(True, "pfnumi", "pfpanumi", "danumi", "pfestado", "estado")
             Dim res As Boolean = L_prModificarPersonal(tbNumi.Text, cbEstado.Value, cbTipoDoc.Value, tbNroDoc.Text, dtFNac.Value.ToString("yyyy/MM/dd"),
                                                     dtFIng.Value.ToString("yyyy/MM/dd"), tbNombre.Text, tbDireccion.Text, tbTelef1.Text,
-                                                    tbTelef2.Text, cbEstCivil.Value, cbGenero.Value, tbEmail.Text, tbObs.Text, nomImg,
+                                                    tbTelef2.Text, cbNacionalidad.Value, cbEstCivil.Value, cbGenero.Value, tbEmail.Text, tbObs.Text, nomImg,
                                                     IIf(swAFP.Value = True, 1, 0), _latitud, _longitud, CType(grContrato.DataSource, DataTable),
                                                     CType(grFamilia.DataSource, DataTable), CType(grCargo.DataSource, DataTable),
                                                     CType(grDetalleSueldos.DataSource, DataTable), dtDescuentos, CType(grDocumentos.DataSource, DataTable))
@@ -1145,6 +1153,7 @@ Public Class F3_Personal
                 tbDireccion.Text = .GetValue("padirec").ToString
                 tbTelef1.Text = .GetValue("patelf1").ToString
                 tbTelef2.Text = .GetValue("patelf2").ToString
+                cbNacionalidad.Value = .GetValue("panacionalidad")
                 cbEstCivil.Value = .GetValue("paestcivil")
                 cbGenero.Value = .GetValue("pagenero")
                 tbEmail.Text = .GetValue("paemail").ToString
@@ -1720,6 +1729,10 @@ Public Class F3_Personal
         If (estado = 1) Then
             CType(grDocumentos.DataSource, DataTable).Rows(pos).Item("estado") = 2
         End If
+    End Sub
+
+    Private Sub btNacionalidad_Click(sender As Object, e As EventArgs) Handles btNacionalidad.Click
+        _prAgregarCombo(cbNacionalidad, 1, 5)
     End Sub
 
 

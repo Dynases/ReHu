@@ -430,6 +430,12 @@
     <Compile Include="F3_Descuentos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="F3_PedidoVacacion.Designer.vb">
+      <DependentUpon>F3_PedidoVacacion.vb</DependentUpon>
+    </Compile>
+    <Compile Include="F3_PedidoVacacion.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="F3_Personal.Designer.vb">
       <DependentUpon>F3_Personal.vb</DependentUpon>
     </Compile>
@@ -1150,6 +1156,9 @@
     <EmbeddedResource Include="F3_Descuentos.resx">
       <DependentUpon>F3_Descuentos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="F3_PedidoVacacion.resx">
+      <DependentUpon>F3_PedidoVacacion.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="F3_Personal.resx">
       <DependentUpon>F3_Personal.vb</DependentUpon>
     </EmbeddedResource>
@@ -1804,6 +1813,7 @@
     <None Include="Resources\trash.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\RRHH_VACACIONES.png" />
     <None Include="Resources\save1.png" />
     <None Include="Resources\PLANILLA_SUELDOS.png" />
     <None Include="Resources\sueldos.png" />

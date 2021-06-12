@@ -358,4 +358,12 @@ Public Class P_Principal
         frm._modulo = FP_RH
         frm.Show()
     End Sub
+
+    Private Sub btPedidoVacacion_Click(sender As Object, e As EventArgs) Handles btPedidoVacacion.Click
+        Dim frm As New F3_PedidoVacacion
+        frm._nameButton = btPedidoVacacion.Name
+        frm._modulo = FP_RH
+        frm.Show()
+
+    End Sub
 End Class

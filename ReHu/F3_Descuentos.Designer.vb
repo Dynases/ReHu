@@ -25,8 +25,11 @@ Partial Class F3_Descuentos
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim JMc_Persona_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
+        Dim cbConcepto_DesignTimeLayout As Janus.Windows.GridEX.GridEXLayout = New Janus.Windows.GridEX.GridEXLayout()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(F3_Descuentos))
         Me.Panel2 = New System.Windows.Forms.Panel()
+        Me.swTipo = New DevComponents.DotNetBar.Controls.SwitchButton()
+        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
         Me.Tb_Valor = New DevComponents.Editors.DoubleInput()
         Me.dtFInicio = New System.Windows.Forms.DateTimePicker()
         Me.LabelX9 = New DevComponents.DotNetBar.LabelX()
@@ -45,8 +48,8 @@ Partial Class F3_Descuentos
         Me.JGr_Buscador = New Janus.Windows.GridEX.GridEX()
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.RLAccion = New DevComponents.DotNetBar.Controls.ReflectionLabel()
-        Me.swTipo = New DevComponents.DotNetBar.Controls.SwitchButton()
-        Me.LabelX5 = New DevComponents.DotNetBar.LabelX()
+        Me.cbConcepto = New Janus.Windows.GridEX.EditControls.MultiColumnCombo()
+        Me.LabelX6 = New DevComponents.DotNetBar.LabelX()
         Me.MpanelSuperior.SuspendLayout()
         Me.PanelSuperior.SuspendLayout()
         Me.PanelToolBar1.SuspendLayout()
@@ -63,6 +66,7 @@ Partial Class F3_Descuentos
         CType(Me.JMc_Persona, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupPanel1.SuspendLayout()
         CType(Me.JGr_Buscador, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.cbConcepto, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'MpanelSuperior
@@ -179,6 +183,8 @@ Partial Class F3_Descuentos
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.cbConcepto)
+        Me.Panel2.Controls.Add(Me.LabelX6)
         Me.Panel2.Controls.Add(Me.swTipo)
         Me.Panel2.Controls.Add(Me.LabelX5)
         Me.Panel2.Controls.Add(Me.Tb_Valor)
@@ -200,6 +206,38 @@ Partial Class F3_Descuentos
         Me.Panel2.Size = New System.Drawing.Size(1350, 180)
         Me.Panel2.TabIndex = 90
         '
+        'swTipo
+        '
+        '
+        '
+        '
+        Me.swTipo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.swTipo.Location = New System.Drawing.Point(158, 45)
+        Me.swTipo.Name = "swTipo"
+        Me.swTipo.OffBackColor = System.Drawing.Color.Coral
+        Me.swTipo.OffText = "DESCUENTO"
+        Me.swTipo.OnBackColor = System.Drawing.Color.LimeGreen
+        Me.swTipo.OnText = "BONO"
+        Me.swTipo.Size = New System.Drawing.Size(155, 22)
+        Me.swTipo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
+        Me.swTipo.TabIndex = 41
+        Me.swTipo.Value = True
+        Me.swTipo.ValueObject = "Y"
+        '
+        'LabelX5
+        '
+        '
+        '
+        '
+        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX5.Location = New System.Drawing.Point(40, 45)
+        Me.LabelX5.Name = "LabelX5"
+        Me.LabelX5.Size = New System.Drawing.Size(104, 23)
+        Me.LabelX5.TabIndex = 40
+        Me.LabelX5.Text = "TIPO:"
+        '
         'Tb_Valor
         '
         '
@@ -210,7 +248,7 @@ Partial Class F3_Descuentos
         Me.Tb_Valor.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2
         Me.Tb_Valor.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Tb_Valor.Increment = 1.0R
-        Me.Tb_Valor.Location = New System.Drawing.Point(316, 121)
+        Me.Tb_Valor.Location = New System.Drawing.Point(316, 144)
         Me.Tb_Valor.MinValue = 0R
         Me.Tb_Valor.Name = "Tb_Valor"
         Me.Tb_Valor.Size = New System.Drawing.Size(140, 21)
@@ -303,12 +341,15 @@ Partial Class F3_Descuentos
         '
         JMc_Persona_DesignTimeLayout.LayoutString = resources.GetString("JMc_Persona_DesignTimeLayout.LayoutString")
         Me.JMc_Persona.DesignTimeLayout = JMc_Persona_DesignTimeLayout
-        Me.JMc_Persona.Location = New System.Drawing.Point(158, 84)
+        Me.JMc_Persona.Location = New System.Drawing.Point(158, 109)
         Me.JMc_Persona.Name = "JMc_Persona"
+        Me.JMc_Persona.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.JMc_Persona.Office2007CustomColor = System.Drawing.Color.DodgerBlue
         Me.JMc_Persona.SelectedIndex = -1
         Me.JMc_Persona.SelectedItem = Nothing
         Me.JMc_Persona.Size = New System.Drawing.Size(298, 22)
         Me.JMc_Persona.TabIndex = 19
+        Me.JMc_Persona.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
         '
         'Tb_Observacion
         '
@@ -345,7 +386,7 @@ Partial Class F3_Descuentos
         Me.LabelX3.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX3.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX3.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX3.Location = New System.Drawing.Point(40, 83)
+        Me.LabelX3.Location = New System.Drawing.Point(40, 108)
         Me.LabelX3.Name = "LabelX3"
         Me.LabelX3.Size = New System.Drawing.Size(104, 23)
         Me.LabelX3.TabIndex = 16
@@ -357,10 +398,10 @@ Partial Class F3_Descuentos
         '
         '
         Me.Tb_TipoMov.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Tb_TipoMov.Location = New System.Drawing.Point(158, 120)
+        Me.Tb_TipoMov.Location = New System.Drawing.Point(158, 143)
         Me.Tb_TipoMov.Name = "Tb_TipoMov"
         Me.Tb_TipoMov.OffText = "PORCENTAJE"
-        Me.Tb_TipoMov.OnText = "MONTO"
+        Me.Tb_TipoMov.OnText = "MONTO BS."
         Me.Tb_TipoMov.Size = New System.Drawing.Size(155, 22)
         Me.Tb_TipoMov.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.Tb_TipoMov.TabIndex = 14
@@ -373,7 +414,7 @@ Partial Class F3_Descuentos
         Me.LabelX2.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX2.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX2.Location = New System.Drawing.Point(40, 119)
+        Me.LabelX2.Location = New System.Drawing.Point(40, 142)
         Me.LabelX2.Name = "LabelX2"
         Me.LabelX2.Size = New System.Drawing.Size(104, 23)
         Me.LabelX2.TabIndex = 13
@@ -386,7 +427,7 @@ Partial Class F3_Descuentos
         '
         Me.Tb_Id.Border.Class = "TextBoxBorder"
         Me.Tb_Id.Border.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.Tb_Id.Location = New System.Drawing.Point(158, 17)
+        Me.Tb_Id.Location = New System.Drawing.Point(158, 14)
         Me.Tb_Id.Name = "Tb_Id"
         Me.Tb_Id.PreventEnterBeep = True
         Me.Tb_Id.Size = New System.Drawing.Size(112, 22)
@@ -400,7 +441,7 @@ Partial Class F3_Descuentos
         Me.LabelX1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.LabelX1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelX1.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX1.Location = New System.Drawing.Point(40, 17)
+        Me.LabelX1.Location = New System.Drawing.Point(40, 14)
         Me.LabelX1.Name = "LabelX1"
         Me.LabelX1.Size = New System.Drawing.Size(104, 23)
         Me.LabelX1.TabIndex = 11
@@ -475,35 +516,35 @@ Partial Class F3_Descuentos
         Me.RLAccion.TabIndex = 10
         Me.RLAccion.Text = "<b><font size=""+10""><font color=""#FF0000""></font></font></b>"
         '
-        'swTipo
+        'cbConcepto
+        '
+        cbConcepto_DesignTimeLayout.LayoutString = resources.GetString("cbConcepto_DesignTimeLayout.LayoutString")
+        Me.cbConcepto.DesignTimeLayout = cbConcepto_DesignTimeLayout
+        Me.cbConcepto.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cbConcepto.Location = New System.Drawing.Point(157, 77)
+        Me.cbConcepto.MaxLength = 40
+        Me.cbConcepto.Name = "cbConcepto"
+        Me.cbConcepto.Office2007ColorScheme = Janus.Windows.GridEX.Office2007ColorScheme.Custom
+        Me.cbConcepto.Office2007CustomColor = System.Drawing.Color.DodgerBlue
+        Me.cbConcepto.SelectedIndex = -1
+        Me.cbConcepto.SelectedItem = Nothing
+        Me.cbConcepto.Size = New System.Drawing.Size(299, 22)
+        Me.cbConcepto.TabIndex = 43
+        Me.cbConcepto.VisualStyle = Janus.Windows.GridEX.VisualStyle.Office2007
+        '
+        'LabelX6
         '
         '
         '
         '
-        Me.swTipo.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.swTipo.Location = New System.Drawing.Point(158, 51)
-        Me.swTipo.Name = "swTipo"
-        Me.swTipo.OffBackColor = System.Drawing.Color.Coral
-        Me.swTipo.OffText = "DESCUENTO"
-        Me.swTipo.OnBackColor = System.Drawing.Color.LimeGreen
-        Me.swTipo.OnText = "BONO"
-        Me.swTipo.Size = New System.Drawing.Size(155, 22)
-        Me.swTipo.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
-        Me.swTipo.TabIndex = 41
-        '
-        'LabelX5
-        '
-        '
-        '
-        '
-        Me.LabelX5.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.LabelX5.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelX5.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
-        Me.LabelX5.Location = New System.Drawing.Point(40, 51)
-        Me.LabelX5.Name = "LabelX5"
-        Me.LabelX5.Size = New System.Drawing.Size(104, 23)
-        Me.LabelX5.TabIndex = 40
-        Me.LabelX5.Text = "TIPO:"
+        Me.LabelX6.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.LabelX6.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelX6.ForeColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(85, Byte), Integer), CType(CType(139, Byte), Integer))
+        Me.LabelX6.Location = New System.Drawing.Point(40, 75)
+        Me.LabelX6.Name = "LabelX6"
+        Me.LabelX6.Size = New System.Drawing.Size(90, 23)
+        Me.LabelX6.TabIndex = 42
+        Me.LabelX6.Text = "CONCEPTO:"
         '
         'F3_Descuentos
         '
@@ -535,6 +576,7 @@ Partial Class F3_Descuentos
         CType(Me.JMc_Persona, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupPanel1.ResumeLayout(False)
         CType(Me.JGr_Buscador, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.cbConcepto, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -560,4 +602,6 @@ Partial Class F3_Descuentos
     Friend WithEvents Tb_Valor As DevComponents.Editors.DoubleInput
     Friend WithEvents swTipo As DevComponents.DotNetBar.Controls.SwitchButton
     Friend WithEvents LabelX5 As DevComponents.DotNetBar.LabelX
+    Friend WithEvents cbConcepto As Janus.Windows.GridEX.EditControls.MultiColumnCombo
+    Friend WithEvents LabelX6 As DevComponents.DotNetBar.LabelX
 End Class

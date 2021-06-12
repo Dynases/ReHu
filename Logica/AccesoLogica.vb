@@ -6000,10 +6000,10 @@ Public Class AccesoLogica
     End Function
     Public Shared Function L_prGrabarPersonal(ByRef _numi As String, _estado As String, _tipoDoc As String, _nroDoc As String,
                                               _fnac As String, _fing As String, _nombres As String, _direc As String,
-                                              _telf1 As String, _telf2 As String, _estcivil As String, _genero As String,
-                                              _email As String, _obs As String, ByRef _img As String, _afp As String, _lat As String,
-                                              _longi As String, Contrato As DataTable, Familia As DataTable, Cargo As DataTable,
-                                              Sueldos As DataTable, Descuentos As DataTable, Documentos As DataTable) As Boolean
+                                              _telf1 As String, _telf2 As String, _nacionalidad As String, _estcivil As String,
+                                              _genero As String, _email As String, _obs As String, ByRef _img As String,
+                                              _afp As String, _lat As String, _longi As String, Contrato As DataTable, Familia As DataTable,
+                                              Cargo As DataTable, Sueldos As DataTable, Descuentos As DataTable, Documentos As DataTable) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
         Dim _listParam As New List(Of Datos.DParametro)
@@ -6019,6 +6019,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@padirec", _direc))
         _listParam.Add(New Datos.DParametro("@patelf1", _telf1))
         _listParam.Add(New Datos.DParametro("@patelf2", _telf2))
+        _listParam.Add(New Datos.DParametro("@panacionalidad", _nacionalidad))
         _listParam.Add(New Datos.DParametro("@paestcivil", _estcivil))
         _listParam.Add(New Datos.DParametro("@pagenero", _genero))
         _listParam.Add(New Datos.DParametro("@paemail", _email))
@@ -6056,7 +6057,7 @@ Public Class AccesoLogica
     End Function
     Public Shared Function L_prModificarPersonal(ByRef _numi As String, _estado As String, _tipoDoc As String, _nroDoc As String,
                                               _fnac As String, _fing As String, _nombres As String, _direc As String,
-                                              _telf1 As String, _telf2 As String, _estcivil As String, _genero As String,
+                                              _telf1 As String, _telf2 As String, _nacionalidad As String, _estcivil As String, _genero As String,
                                               _email As String, _obs As String, ByRef _img As String, _afp As String,
                                               _lat As String, _longi As String, Contrato As DataTable,
                                               Familia As DataTable, Cargo As DataTable, Sueldos As DataTable,
@@ -6076,6 +6077,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@padirec", _direc))
         _listParam.Add(New Datos.DParametro("@patelf1", _telf1))
         _listParam.Add(New Datos.DParametro("@patelf2", _telf2))
+        _listParam.Add(New Datos.DParametro("@panacionalidad", _nacionalidad))
         _listParam.Add(New Datos.DParametro("@paestcivil", _estcivil))
         _listParam.Add(New Datos.DParametro("@pagenero", _genero))
         _listParam.Add(New Datos.DParametro("@paemail", _email))
@@ -6545,7 +6547,7 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
-    Public Shared Function L_prGrabarDescuentoPer(ByRef _numi As String, _tipo As String, _codPersona As String, _tipoM As String, _monto As String,
+    Public Shared Function L_prGrabarDescuentoPer(ByRef _numi As String, _tipo As String, _concepto As String, _codPersona As String, _tipoM As String, _monto As String,
                                               _obs As String, _finicio As String, _venc As String, _fvenc As String) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
@@ -6554,6 +6556,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@tipo", 1))
         _listParam.Add(New Datos.DParametro("@dbnumi", _numi))
         _listParam.Add(New Datos.DParametro("@dbtipo", _tipo))
+        _listParam.Add(New Datos.DParametro("@dbconcepto", _concepto))
         _listParam.Add(New Datos.DParametro("@dbcper", _codPersona))
         _listParam.Add(New Datos.DParametro("@dbtipomonto", _tipoM))
         _listParam.Add(New Datos.DParametro("@dbvalor", _monto))
@@ -6576,7 +6579,7 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
-    Public Shared Function L_prModificarDescuentoPer(ByRef _numi As String, _tipo As String, _codPersona As String, _tipoM As String, _monto As String,
+    Public Shared Function L_prModificarDescuentoPer(ByRef _numi As String, _tipo As String, _concepto As String, _codPersona As String, _tipoM As String, _monto As String,
                                               _obs As String, _finicio As String, _venc As String, _fvenc As String) As Boolean
         Dim _Tabla As DataTable
         Dim _resultado As Boolean
@@ -6585,6 +6588,7 @@ Public Class AccesoLogica
         _listParam.Add(New Datos.DParametro("@tipo", 2))
         _listParam.Add(New Datos.DParametro("@dbnumi", _numi))
         _listParam.Add(New Datos.DParametro("@dbtipo", _tipo))
+        _listParam.Add(New Datos.DParametro("@dbconcepto", _concepto))
         _listParam.Add(New Datos.DParametro("@dbcper", _codPersona))
         _listParam.Add(New Datos.DParametro("@dbtipomonto", _tipoM))
         _listParam.Add(New Datos.DParametro("@dbvalor", _monto))

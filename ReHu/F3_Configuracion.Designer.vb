@@ -865,7 +865,7 @@ Partial Class F3_Configuracion
         Me.swTMonto.Location = New System.Drawing.Point(178, 81)
         Me.swTMonto.Name = "swTMonto"
         Me.swTMonto.OffText = "PORCENTAJE"
-        Me.swTMonto.OnText = "MONTO BS"
+        Me.swTMonto.OnText = "MONTO BS."
         Me.swTMonto.Size = New System.Drawing.Size(155, 22)
         Me.swTMonto.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.swTMonto.TabIndex = 14

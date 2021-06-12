@@ -36,6 +36,18 @@ Public Class F3_Descuentos
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
             .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
+        With JGr_Buscador.RootTable.Columns("dbtipo")
+            .Caption = "Tipo Desc."
+            .Width = 90
+            .Visible = False
+            .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
+            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
+        End With
+        With JGr_Buscador.RootTable.Columns("dbconcepto")
+            .Caption = "Concepto"
+            .Width = 90
+            .Visible = False
+        End With
         With JGr_Buscador.RootTable.Columns("dbcper")
             .Caption = "Cod. Persona"
             .Width = 90
@@ -49,14 +61,11 @@ Public Class F3_Descuentos
             .Width = 250
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
         End With
-        With JGr_Buscador.RootTable.Columns("dbtipo")
-            .Caption = "Tipo Desc."
-            .Width = 90
-            .Visible = False
+        With JGr_Buscador.RootTable.Columns("dbtipomonto")
+            .Caption = "Tipo Monto"
+            .Width = 150
             .HeaderAlignment = Janus.Windows.GridEX.TextAlignment.Center
-            .CellStyle.TextAlignment = Janus.Windows.GridEX.TextAlignment.Far
         End With
-
         With JGr_Buscador.RootTable.Columns("dbvalor")
             .Caption = "Descuento"
             .Width = 130
@@ -146,6 +155,7 @@ Public Class F3_Descuentos
 
         JMc_Persona.ReadOnly = False
         swTipo.Enabled = True
+        cbConcepto.ReadOnly = False
         Tb_TipoMov.Enabled = True
         Tb_Valor.IsInputReadOnly = False
         Tb_Observacion.ReadOnly = False
@@ -166,6 +176,7 @@ Public Class F3_Descuentos
 
         Tb_Id.ReadOnly = True
         swTipo.Enabled = False
+        cbConcepto.ReadOnly = True
         JMc_Persona.ReadOnly = True
         Tb_TipoMov.Enabled = False
         Tb_Valor.IsInputReadOnly = True
@@ -212,7 +223,7 @@ Public Class F3_Descuentos
     End Sub
 
     Private Sub _PIniciarTodo()
-        Me.Text = "D E S C U E N T O S / B O N O S   P E R S O N A L"
+        Me.Text = " D E S C U E N T O S / B O N O S    P E R S O N A L"
 
         _prAsignarPermisos()
 
@@ -243,7 +254,21 @@ Public Class F3_Descuentos
         End If
 
     End Sub
-
+    Private Sub _prCargarComboLibreria(mCombo As Janus.Windows.GridEX.EditControls.MultiColumnCombo, cod1 As String, cod2 As String)
+        Dim dt As New DataTable
+        dt = L_prLibreriaClienteLGeneral(cod1, cod2)
+        With mCombo
+            .DropDownList.Columns.Clear()
+            .DropDownList.Columns.Add("yccod3").Width = 70
+            .DropDownList.Columns("yccod3").Caption = "COD"
+            .DropDownList.Columns.Add("ycdes3").Width = 230
+            .DropDownList.Columns("ycdes3").Caption = "DESCRIPCION"
+            .ValueMember = "yccod3"
+            .DisplayMember = "ycdes3"
+            .DataSource = dt
+            .Refresh()
+        End With
+    End Sub
     Private Sub _PFiltrar()
         _Dsencabezado = New DataTable
         _Dsencabezado = L_prDescuentoGeneralPersonal()
@@ -267,6 +292,7 @@ Public Class F3_Descuentos
 
             Tb_Id.Text = .GetValue("dbnumi").ToString
             swTipo.Value = .GetValue("dbtipo")
+            cbConcepto.Value = .GetValue("dbconcepto")
             JMc_Persona.Value = .GetValue("dbcper")
             Tb_TipoMov.Value = .GetValue("dbtipomonto")
             Tb_Valor.Value = .GetValue("dbvalor")
@@ -345,7 +371,8 @@ Public Class F3_Descuentos
                 tipo = "0"
             End If
 
-            Dim res As Boolean = L_prGrabarDescuentoPer(Tb_Id.Text, IIf(swTipo.Value = True, "1", "0"), JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
+            Dim res As Boolean = L_prGrabarDescuentoPer(Tb_Id.Text, IIf(swTipo.Value = True, "1", "0"), cbConcepto.Value,
+                                                        JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
                                                         dtFechaVenc.Value.ToString("yyyy/MM/dd"), IIf(tbVencimiento.Value = True, "1", "0"),
                                                         dtFechaVenc.Value.ToString("yyyy/MM/dd"))
             If res Then
@@ -365,9 +392,10 @@ Public Class F3_Descuentos
             Else
                 tipo = "0"
             End If
-            Dim res As Boolean = L_prModificarDescuentoPer(Tb_Id.Text, IIf(swTipo.Value = True, "1", "0"), JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
-                                                        dtFechaVenc.Value.ToString("yyyy/MM/dd"), IIf(tbVencimiento.Value = True, "1", "0"),
-                                                        dtFechaVenc.Value.ToString("yyyy/MM/dd"))
+            Dim res As Boolean = L_prModificarDescuentoPer(Tb_Id.Text, IIf(swTipo.Value = True, "1", "0"), cbConcepto.Value,
+                                                           JMc_Persona.Value, tipo, Tb_Valor.Value, Tb_Observacion.Text,
+                                                           dtFechaVenc.Value.ToString("yyyy/MM/dd"), IIf(tbVencimiento.Value = True, "1", "0"),
+                                                           dtFechaVenc.Value.ToString("yyyy/MM/dd"))
             If res Then
                 ToastNotification.Show(Me, "Código de descuento ".ToUpper + Tb_Id.Text + " Modificado con éxito.".ToUpper, My.Resources.GRABACION_EXITOSA, 5000, eToastGlowColor.Green, eToastPosition.BottomLeft)
                 _Nuevo = False 'aumentado danny
@@ -513,6 +541,14 @@ Public Class F3_Descuentos
         Else
             Me.Opacity = 100
             Timer1.Enabled = False
+        End If
+    End Sub
+
+    Private Sub swTipo_ValueChanged(sender As Object, e As EventArgs) Handles swTipo.ValueChanged
+        If swTipo.Value = True Then
+            _prCargarComboLibreria(cbConcepto, 10, 1)
+        Else
+            _prCargarComboLibreria(cbConcepto, 10, 2)
         End If
     End Sub
 End Class
