@@ -6695,5 +6695,18 @@ Public Class AccesoLogica
 
         Return _Tabla
     End Function
+    Public Shared Function L_PlanillaSueldosGrabadaFormato2(Mes As Integer, Anio As Integer) As DataTable
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 6))
+        _listParam.Add(New Datos.DParametro("@Mes1", Mes))
+        _listParam.Add(New Datos.DParametro("@Anio1", Anio))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("PlanillaSueldo", _listParam)
+
+        Return _Tabla
+    End Function
 #End Region
 End Class
