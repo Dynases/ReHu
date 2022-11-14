@@ -89,6 +89,9 @@ Partial Class F3_PlanillaSueldos2
         '
         Me.PanelToolBar1.Visible = False
         '
+        'btnSalir
+        '
+        '
         'PanelInferior
         '
         Me.PanelInferior.Location = New System.Drawing.Point(0, 663)

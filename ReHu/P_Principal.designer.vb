@@ -29,11 +29,14 @@ Partial Class P_Principal
         Me.SideNavPanel5 = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.Panel1 = New System.Windows.Forms.Panel()
         Me.MetroTilePanel6 = New DevComponents.DotNetBar.Metro.MetroTilePanel()
-        Me.btPersonal = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btGrabarPlanilla = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btPlanillaSueldos = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btPlanillaSueldos2 = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btPedidoVacacion = New DevComponents.DotNetBar.Metro.MetroTileItem()
+        Me.SideNavPanel3 = New DevComponents.DotNetBar.Controls.SideNavPanel()
+        Me.MetroTilePanel8 = New DevComponents.DotNetBar.Metro.MetroTilePanel()
+        Me.btPersonal = New DevComponents.DotNetBar.Metro.MetroTileItem()
+        Me.btDescuentos = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.SideNavPanel6 = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.Panel2 = New System.Windows.Forms.Panel()
         Me.MetroTilePanel7 = New DevComponents.DotNetBar.Metro.MetroTilePanel()
@@ -49,7 +52,6 @@ Partial Class P_Principal
         Me.btConfRoles = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btConfUsuarios = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.btConfiguracion = New DevComponents.DotNetBar.Metro.MetroTileItem()
-        Me.btDescuentos = New DevComponents.DotNetBar.Metro.MetroTileItem()
         Me.PictureBox4 = New System.Windows.Forms.PictureBox()
         Me.SideNavPanel7 = New DevComponents.DotNetBar.Controls.SideNavPanel()
         Me.MenuCreditos = New DevComponents.DotNetBar.Metro.MetroTilePanel()
@@ -117,6 +119,7 @@ Partial Class P_Principal
         Me.FP_RH = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.FP_Pedidos = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.SideNavItem2 = New DevComponents.DotNetBar.Controls.SideNavItem()
+        Me.FP_REG = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.FP_COMPRAS = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.FP_VENTAS = New DevComponents.DotNetBar.Controls.SideNavItem()
         Me.Separator2 = New DevComponents.DotNetBar.Separator()
@@ -164,6 +167,7 @@ Partial Class P_Principal
         Me.SideNav1.SuspendLayout()
         Me.SideNavPanel5.SuspendLayout()
         Me.Panel1.SuspendLayout()
+        Me.SideNavPanel3.SuspendLayout()
         Me.SideNavPanel6.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.SideNav_Conf.SuspendLayout()
@@ -207,16 +211,17 @@ Partial Class P_Principal
         '
         Me.SideNav1.BackColor = System.Drawing.Color.FromArgb(CType(CType(49, Byte), Integer), CType(CType(59, Byte), Integer), CType(CType(66, Byte), Integer))
         Me.SideNav1.Controls.Add(Me.SideNavPanel5)
-        Me.SideNav1.Controls.Add(Me.SideNav_Conf)
         Me.SideNav1.Controls.Add(Me.SideNavPanel6)
+        Me.SideNav1.Controls.Add(Me.SideNavPanel3)
         Me.SideNav1.Controls.Add(Me.SideNavPanel7)
+        Me.SideNav1.Controls.Add(Me.SideNav_Conf)
         Me.SideNav1.Controls.Add(Me.SideNav_Ventas)
         Me.SideNav1.Controls.Add(Me.SideNavPanel4)
         Me.SideNav1.Controls.Add(Me.SideNav_Logistica)
         Me.SideNav1.Controls.Add(Me.SideNavPanel1)
         Me.SideNav1.Controls.Add(Me.SideNavPanel2)
         Me.SideNav1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNav1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SideNavItem1, Me.Separator1, Me.FP_Configuracion, Me.FP_ZONAS, Me.FP_RH, Me.FP_Pedidos, Me.SideNavItem2, Me.FP_COMPRAS, Me.FP_VENTAS, Me.Separator2, Me.SideNavItem3})
+        Me.SideNav1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.SideNavItem1, Me.Separator1, Me.FP_Configuracion, Me.FP_ZONAS, Me.FP_RH, Me.FP_Pedidos, Me.SideNavItem2, Me.FP_REG, Me.FP_COMPRAS, Me.FP_VENTAS, Me.Separator2, Me.SideNavItem3})
         Me.SideNav1.Location = New System.Drawing.Point(0, 0)
         Me.SideNav1.Name = "SideNav1"
         Me.SideNav1.Padding = New System.Windows.Forms.Padding(1)
@@ -228,9 +233,9 @@ Partial Class P_Principal
         '
         Me.SideNavPanel5.Controls.Add(Me.Panel1)
         Me.SideNavPanel5.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanel5.Location = New System.Drawing.Point(170, 36)
+        Me.SideNavPanel5.Location = New System.Drawing.Point(142, 36)
         Me.SideNavPanel5.Name = "SideNavPanel5"
-        Me.SideNavPanel5.Size = New System.Drawing.Size(806, 524)
+        Me.SideNavPanel5.Size = New System.Drawing.Size(834, 524)
         Me.SideNavPanel5.TabIndex = 87
         '
         'Panel1
@@ -239,7 +244,7 @@ Partial Class P_Principal
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(806, 524)
+        Me.Panel1.Size = New System.Drawing.Size(834, 524)
         Me.Panel1.TabIndex = 0
         '
         'MetroTilePanel6
@@ -256,35 +261,14 @@ Partial Class P_Principal
         Me.MetroTilePanel6.ContainerControlProcessDialogKey = True
         Me.MetroTilePanel6.Dock = System.Windows.Forms.DockStyle.Fill
         Me.MetroTilePanel6.DragDropSupport = True
-        Me.MetroTilePanel6.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btPersonal, Me.btGrabarPlanilla, Me.btPlanillaSueldos, Me.btPlanillaSueldos2, Me.btPedidoVacacion})
+        Me.MetroTilePanel6.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btGrabarPlanilla, Me.btPlanillaSueldos, Me.btPlanillaSueldos2, Me.btPedidoVacacion})
         Me.MetroTilePanel6.ItemSpacing = 10
         Me.MetroTilePanel6.Location = New System.Drawing.Point(0, 0)
         Me.MetroTilePanel6.MultiLine = True
         Me.MetroTilePanel6.Name = "MetroTilePanel6"
-        Me.MetroTilePanel6.Size = New System.Drawing.Size(806, 524)
+        Me.MetroTilePanel6.Size = New System.Drawing.Size(834, 524)
         Me.MetroTilePanel6.TabIndex = 2
         Me.MetroTilePanel6.Text = "mtp2Logistica"
-        '
-        'btPersonal
-        '
-        Me.btPersonal.Image = Global.ReHu.My.Resources.Resources.PERSONAL1
-        Me.btPersonal.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        Me.btPersonal.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Center
-        Me.btPersonal.Name = "btPersonal"
-        Me.btPersonal.SymbolColor = System.Drawing.Color.Empty
-        Me.btPersonal.Text = "PERSONAL"
-        Me.btPersonal.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Teal
-        Me.btPersonal.TileSize = New System.Drawing.Size(250, 135)
-        '
-        '
-        '
-        Me.btPersonal.TileStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(132, Byte), Integer))
-        Me.btPersonal.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(144, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(226, Byte), Integer))
-        Me.btPersonal.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.btPersonal.TileStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btPersonal.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
-        Me.btPersonal.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
-        Me.btPersonal.TitleTextColor = System.Drawing.Color.Red
         '
         'btGrabarPlanilla
         '
@@ -370,13 +354,84 @@ Partial Class P_Principal
         Me.btPedidoVacacion.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
         Me.btPedidoVacacion.TitleTextColor = System.Drawing.Color.Red
         '
+        'SideNavPanel3
+        '
+        Me.SideNavPanel3.Controls.Add(Me.MetroTilePanel8)
+        Me.SideNavPanel3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.SideNavPanel3.Location = New System.Drawing.Point(142, 36)
+        Me.SideNavPanel3.Name = "SideNavPanel3"
+        Me.SideNavPanel3.Size = New System.Drawing.Size(834, 524)
+        Me.SideNavPanel3.TabIndex = 181
+        Me.SideNavPanel3.Visible = False
+        '
+        'MetroTilePanel8
+        '
+        Me.MetroTilePanel8.BackColor = System.Drawing.Color.Transparent
+        Me.MetroTilePanel8.BackgroundImage = Global.ReHu.My.Resources.Resources.fondoInfo
+        Me.MetroTilePanel8.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
+        '
+        '
+        '
+        Me.MetroTilePanel8.BackgroundStyle.BackColor = System.Drawing.Color.Transparent
+        Me.MetroTilePanel8.BackgroundStyle.Class = "MetroTilePanel"
+        Me.MetroTilePanel8.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.MetroTilePanel8.ContainerControlProcessDialogKey = True
+        Me.MetroTilePanel8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.MetroTilePanel8.DragDropSupport = True
+        Me.MetroTilePanel8.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btPersonal, Me.btDescuentos})
+        Me.MetroTilePanel8.ItemSpacing = 10
+        Me.MetroTilePanel8.Location = New System.Drawing.Point(0, 0)
+        Me.MetroTilePanel8.MultiLine = True
+        Me.MetroTilePanel8.Name = "MetroTilePanel8"
+        Me.MetroTilePanel8.Size = New System.Drawing.Size(834, 524)
+        Me.MetroTilePanel8.TabIndex = 3
+        Me.MetroTilePanel8.Text = "mtp2Logistica"
+        '
+        'btPersonal
+        '
+        Me.btPersonal.Image = Global.ReHu.My.Resources.Resources.PERSONAL1
+        Me.btPersonal.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btPersonal.ItemAlignment = DevComponents.DotNetBar.eItemAlignment.Center
+        Me.btPersonal.Name = "btPersonal"
+        Me.btPersonal.SymbolColor = System.Drawing.Color.Empty
+        Me.btPersonal.Text = "PERSONAL"
+        Me.btPersonal.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Teal
+        Me.btPersonal.TileSize = New System.Drawing.Size(250, 135)
+        '
+        '
+        '
+        Me.btPersonal.TileStyle.BackColor = System.Drawing.Color.FromArgb(CType(CType(132, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(132, Byte), Integer))
+        Me.btPersonal.TileStyle.BackColor2 = System.Drawing.Color.FromArgb(CType(CType(144, Byte), Integer), CType(CType(138, Byte), Integer), CType(CType(43, Byte), Integer), CType(CType(226, Byte), Integer))
+        Me.btPersonal.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.btPersonal.TileStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btPersonal.TileStyle.TextLineAlignment = DevComponents.DotNetBar.eStyleTextAlignment.Far
+        Me.btPersonal.TitleTextAlignment = System.Drawing.ContentAlignment.BottomCenter
+        Me.btPersonal.TitleTextColor = System.Drawing.Color.Red
+        '
+        'btDescuentos
+        '
+        Me.btDescuentos.Image = Global.ReHu.My.Resources.Resources.DESCUENTOS_FIJOS
+        Me.btDescuentos.ImageIndent = New System.Drawing.Point(5, 5)
+        Me.btDescuentos.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
+        Me.btDescuentos.Name = "btDescuentos"
+        Me.btDescuentos.SymbolColor = System.Drawing.Color.Empty
+        Me.btDescuentos.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Azure
+        Me.btDescuentos.TileSize = New System.Drawing.Size(250, 135)
+        '
+        '
+        '
+        Me.btDescuentos.TileStyle.BackColor = System.Drawing.Color.Red
+        Me.btDescuentos.TileStyle.BackColor2 = System.Drawing.SystemColors.ControlDark
+        Me.btDescuentos.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
+        Me.btDescuentos.TitleText = "DESCUENTOS"
+        '
         'SideNavPanel6
         '
         Me.SideNavPanel6.Controls.Add(Me.Panel2)
         Me.SideNavPanel6.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanel6.Location = New System.Drawing.Point(170, 36)
+        Me.SideNavPanel6.Location = New System.Drawing.Point(142, 36)
         Me.SideNavPanel6.Name = "SideNavPanel6"
-        Me.SideNavPanel6.Size = New System.Drawing.Size(806, 524)
+        Me.SideNavPanel6.Size = New System.Drawing.Size(834, 524)
         Me.SideNavPanel6.TabIndex = 109
         Me.SideNavPanel6.Visible = False
         '
@@ -386,7 +441,7 @@ Partial Class P_Principal
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 0)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(806, 524)
+        Me.Panel2.Size = New System.Drawing.Size(834, 524)
         Me.Panel2.TabIndex = 1
         '
         'MetroTilePanel7
@@ -408,7 +463,7 @@ Partial Class P_Principal
         Me.MetroTilePanel7.Location = New System.Drawing.Point(0, 0)
         Me.MetroTilePanel7.MultiLine = True
         Me.MetroTilePanel7.Name = "MetroTilePanel7"
-        Me.MetroTilePanel7.Size = New System.Drawing.Size(806, 524)
+        Me.MetroTilePanel7.Size = New System.Drawing.Size(834, 524)
         Me.MetroTilePanel7.TabIndex = 2
         Me.MetroTilePanel7.Text = "mtp2Logistica"
         '
@@ -560,9 +615,9 @@ Partial Class P_Principal
         Me.SideNav_Conf.Controls.Add(Me.MetroTilePanel1)
         Me.SideNav_Conf.Controls.Add(Me.PictureBox4)
         Me.SideNav_Conf.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNav_Conf.Location = New System.Drawing.Point(170, 36)
+        Me.SideNav_Conf.Location = New System.Drawing.Point(142, 36)
         Me.SideNav_Conf.Name = "SideNav_Conf"
-        Me.SideNav_Conf.Size = New System.Drawing.Size(806, 524)
+        Me.SideNav_Conf.Size = New System.Drawing.Size(834, 524)
         Me.SideNav_Conf.TabIndex = 2
         Me.SideNav_Conf.Visible = False
         '
@@ -582,12 +637,12 @@ Partial Class P_Principal
         Me.MetroTilePanel1.DragDropSupport = True
         Me.MetroTilePanel1.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MetroTilePanel1.ForeColor = System.Drawing.Color.White
-        Me.MetroTilePanel1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btConfRoles, Me.btConfUsuarios, Me.btConfiguracion, Me.btDescuentos})
+        Me.MetroTilePanel1.Items.AddRange(New DevComponents.DotNetBar.BaseItem() {Me.btConfRoles, Me.btConfUsuarios, Me.btConfiguracion})
         Me.MetroTilePanel1.ItemSpacing = 10
         Me.MetroTilePanel1.Location = New System.Drawing.Point(0, 0)
         Me.MetroTilePanel1.MultiLine = True
         Me.MetroTilePanel1.Name = "MetroTilePanel1"
-        Me.MetroTilePanel1.Size = New System.Drawing.Size(806, 410)
+        Me.MetroTilePanel1.Size = New System.Drawing.Size(834, 410)
         Me.MetroTilePanel1.Style = DevComponents.DotNetBar.eDotNetBarStyle.Office2010
         Me.MetroTilePanel1.TabIndex = 0
         Me.MetroTilePanel1.Text = "mtp1Configuracion"
@@ -649,30 +704,13 @@ Partial Class P_Principal
         Me.btConfiguracion.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.btConfiguracion.TitleText = "PARÁMETROS"
         '
-        'btDescuentos
-        '
-        Me.btDescuentos.Image = Global.ReHu.My.Resources.Resources.DESCUENTOS_FIJOS
-        Me.btDescuentos.ImageIndent = New System.Drawing.Point(5, 5)
-        Me.btDescuentos.ImageTextAlignment = System.Drawing.ContentAlignment.MiddleCenter
-        Me.btDescuentos.Name = "btDescuentos"
-        Me.btDescuentos.SymbolColor = System.Drawing.Color.Empty
-        Me.btDescuentos.TileColor = DevComponents.DotNetBar.Metro.eMetroTileColor.Azure
-        Me.btDescuentos.TileSize = New System.Drawing.Size(250, 135)
-        '
-        '
-        '
-        Me.btDescuentos.TileStyle.BackColor = System.Drawing.Color.Red
-        Me.btDescuentos.TileStyle.BackColor2 = System.Drawing.SystemColors.ControlDark
-        Me.btDescuentos.TileStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square
-        Me.btDescuentos.TitleText = "DESCUENTOS"
-        '
         'PictureBox4
         '
         Me.PictureBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.PictureBox4.Dock = System.Windows.Forms.DockStyle.Bottom
         Me.PictureBox4.Location = New System.Drawing.Point(0, 410)
         Me.PictureBox4.Name = "PictureBox4"
-        Me.PictureBox4.Size = New System.Drawing.Size(806, 114)
+        Me.PictureBox4.Size = New System.Drawing.Size(834, 114)
         Me.PictureBox4.TabIndex = 2
         Me.PictureBox4.TabStop = False
         Me.PictureBox4.Visible = False
@@ -681,9 +719,9 @@ Partial Class P_Principal
         '
         Me.SideNavPanel7.Controls.Add(Me.MenuCreditos)
         Me.SideNavPanel7.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SideNavPanel7.Location = New System.Drawing.Point(170, 36)
+        Me.SideNavPanel7.Location = New System.Drawing.Point(142, 36)
         Me.SideNavPanel7.Name = "SideNavPanel7"
-        Me.SideNavPanel7.Size = New System.Drawing.Size(806, 524)
+        Me.SideNavPanel7.Size = New System.Drawing.Size(834, 524)
         Me.SideNavPanel7.TabIndex = 162
         Me.SideNavPanel7.Visible = False
         '
@@ -705,7 +743,7 @@ Partial Class P_Principal
         Me.MenuCreditos.Location = New System.Drawing.Point(0, 0)
         Me.MenuCreditos.MultiLine = True
         Me.MenuCreditos.Name = "MenuCreditos"
-        Me.MenuCreditos.Size = New System.Drawing.Size(806, 524)
+        Me.MenuCreditos.Size = New System.Drawing.Size(834, 524)
         Me.MenuCreditos.TabIndex = 2
         '
         'SideNav_Ventas
@@ -1723,7 +1761,7 @@ Partial Class P_Principal
         Me.FP_RH.Name = "FP_RH"
         Me.FP_RH.Panel = Me.SideNavPanel5
         Me.FP_RH.Symbol = ""
-        Me.FP_RH.Text = "RECURSOS HUMANOS"
+        Me.FP_RH.Text = "PLANILLAS"
         '
         'FP_Pedidos
         '
@@ -1740,6 +1778,13 @@ Partial Class P_Principal
         Me.SideNavItem2.Symbol = ""
         Me.SideNavItem2.Text = "SOCIOS"
         Me.SideNavItem2.Visible = False
+        '
+        'FP_REG
+        '
+        Me.FP_REG.Name = "FP_REG"
+        Me.FP_REG.Panel = Me.SideNavPanel3
+        Me.FP_REG.Symbol = ""
+        Me.FP_REG.Text = "REGISTRO"
         '
         'FP_COMPRAS
         '
@@ -2459,6 +2504,7 @@ Partial Class P_Principal
         Me.SideNav1.PerformLayout()
         Me.SideNavPanel5.ResumeLayout(False)
         Me.Panel1.ResumeLayout(False)
+        Me.SideNavPanel3.ResumeLayout(False)
         Me.SideNavPanel6.ResumeLayout(False)
         Me.Panel2.ResumeLayout(False)
         Me.SideNav_Conf.ResumeLayout(False)
@@ -2541,7 +2587,6 @@ Partial Class P_Principal
     Friend WithEvents SideNavPanel5 As DevComponents.DotNetBar.Controls.SideNavPanel
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents MetroTilePanel6 As DevComponents.DotNetBar.Metro.MetroTilePanel
-    Friend WithEvents btPersonal As DevComponents.DotNetBar.Metro.MetroTileItem
     Private WithEvents FP_RH As DevComponents.DotNetBar.Controls.SideNavItem
     Friend WithEvents SideNavPanel6 As DevComponents.DotNetBar.Controls.SideNavPanel
     Private WithEvents FP_COMPRAS As DevComponents.DotNetBar.Controls.SideNavItem
@@ -2605,10 +2650,14 @@ Partial Class P_Principal
     Friend WithEvents btConfProducto As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents btConfCliente As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents btConfiguracion As DevComponents.DotNetBar.Metro.MetroTileItem
-    Friend WithEvents btDescuentos As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents btPlanillaSueldos As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents MetroTileItem2 As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents btGrabarPlanilla As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents btPedidoVacacion As DevComponents.DotNetBar.Metro.MetroTileItem
     Friend WithEvents btPlanillaSueldos2 As DevComponents.DotNetBar.Metro.MetroTileItem
+    Friend WithEvents SideNavPanel3 As DevComponents.DotNetBar.Controls.SideNavPanel
+    Friend WithEvents MetroTilePanel8 As DevComponents.DotNetBar.Metro.MetroTilePanel
+    Friend WithEvents btPersonal As DevComponents.DotNetBar.Metro.MetroTileItem
+    Friend WithEvents btDescuentos As DevComponents.DotNetBar.Metro.MetroTileItem
+    Friend WithEvents FP_REG As DevComponents.DotNetBar.Controls.SideNavItem
 End Class

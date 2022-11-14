@@ -83,6 +83,7 @@ Partial Class R_GrabarPlanillaSueldos
         '
         'PanelSuperior
         '
+        Me.PanelSuperior.Size = New System.Drawing.Size(363, 80)
         Me.PanelSuperior.Style.Alignment = System.Drawing.StringAlignment.Center
         Me.PanelSuperior.Style.BackColor1.Color = System.Drawing.Color.Yellow
         Me.PanelSuperior.Style.BackColor2.Color = System.Drawing.Color.Khaki
@@ -143,7 +144,8 @@ Partial Class R_GrabarPlanillaSueldos
         'MGPFiltros
         '
         Me.MGPFiltros.Controls.Add(Me.gpDatos)
-        Me.MGPFiltros.Size = New System.Drawing.Size(363, 553)
+        Me.MGPFiltros.Location = New System.Drawing.Point(0, 80)
+        Me.MGPFiltros.Size = New System.Drawing.Size(363, 545)
         '
         '
         '
@@ -301,7 +303,6 @@ Partial Class R_GrabarPlanillaSueldos
         Me.gpDatos.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square
         Me.gpDatos.TabIndex = 24
         Me.gpDatos.Text = "DATOS"
-        Me.gpDatos.Visible = False
         '
         'Timer1
         '
@@ -313,8 +314,9 @@ Partial Class R_GrabarPlanillaSueldos
         Me.btnGrabar.AccessibleRole = System.Windows.Forms.AccessibleRole.PushButton
         Me.btnGrabar.ColorTable = DevComponents.DotNetBar.eButtonColor.Orange
         Me.btnGrabar.Dock = System.Windows.Forms.DockStyle.Left
+        Me.btnGrabar.Enabled = False
         Me.btnGrabar.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnGrabar.Image = Global.ReHu.My.Resources.Resources.save
+        Me.btnGrabar.Image = Global.ReHu.My.Resources.Resources.ToastWarning
         Me.btnGrabar.ImageFixedSize = New System.Drawing.Size(48, 48)
         Me.btnGrabar.ImagePosition = DevComponents.DotNetBar.eImagePosition.Top
         Me.btnGrabar.Location = New System.Drawing.Point(72, 0)
@@ -322,7 +324,7 @@ Partial Class R_GrabarPlanillaSueldos
         Me.btnGrabar.Size = New System.Drawing.Size(72, 72)
         Me.btnGrabar.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled
         Me.btnGrabar.TabIndex = 11
-        Me.btnGrabar.Text = "GRABAR"
+        Me.btnGrabar.Text = "REVERTIR"
         Me.btnGrabar.TextColor = System.Drawing.Color.White
         '
         'R_GrabarPlanillaSueldos

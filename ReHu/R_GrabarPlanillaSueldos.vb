@@ -115,6 +115,7 @@ Public Class R_GrabarPlanillaSueldos
 
             End If
             'End If
+
         Catch ex As Exception
             MostrarMensajeError(ex.Message)
         End Try
@@ -123,15 +124,16 @@ Public Class R_GrabarPlanillaSueldos
     End Sub
 #End Region
 #Region "EVENTOS"
-
+    Dim Anio As Integer
+    Dim Mes As Integer
+    Dim numi As Integer
+    Dim dt As DataTable
     Private Sub R_PlanillaSueldos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         _PIniciarTodo()
-    End Sub
-
-    Private Sub btnGenerar_Click(sender As Object, e As EventArgs) Handles btnGenerar.Click
-        Dim dt As DataTable = L_VerificarPlanillaSueldos()
-        Dim Anio As Integer = Now.Year
-        Dim Mes As Integer = Now.Month
+        dt = L_VerificarPlanillaSueldos()
+        Anio = Now.Year
+        Mes = Now.Month
+        numi = Now.Month
         If dt.Rows.Count = 0 Then
             Anio = Now.Year
             Mes = Now.Month - 1
@@ -141,9 +143,10 @@ Public Class R_GrabarPlanillaSueldos
             End If
             _PCargarReporte(Anio, Mes)
         Else
-
+            numi = dt.Rows(0).Item("phnumi")
             Anio = dt.Rows(0).Item("phanio")
-            Mes = dt.Rows(0).Item("phmes") + 1
+            'Mes = dt.Rows(0).Item("phmes") '+ 1
+            Mes = Now.Month - 1
             If Mes = 13 Then
                 Anio = Anio + 1
                 Mes = 1
@@ -151,10 +154,82 @@ Public Class R_GrabarPlanillaSueldos
             _PCargarReporte(Anio, Mes)
         End If
 
-        gpDatos.Visible = True
+        'gpDatos.Visible = True
         tbAnio.Value = anio1
         tbMes.Value = mes1
+        btnGrabar.Enabled = True
+        Try
+            If mes1 = Now.Month Then
+                ToastNotification.Show(Me, "No se puede grabar planilla antes que concluya el mes".ToUpper, My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
+            Else
+                Dim dt1 As DataTable = L_VerificarSiSeGraboPlanilla(mes1, anio1)
+                If dt1.Rows.Count > 0 Then
+                    ToastNotification.Show(Me, "Ya se grabó planilla de sueldos de este mes".ToUpper, My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                Else
+                    _Guardar()
+                    dt = L_VerificarPlanillaSueldos()
+                    numi = dt.Rows(0).Item("phnumi")
+                    Anio = dt.Rows(0).Item("phanio")
+                    Mes = dt.Rows(0).Item("phmes")
+                End If
+            End If
 
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
+    End Sub
+
+    Private Sub btnGenerar_Click(sender As Object, e As EventArgs) Handles btnGenerar.Click
+        Dim dt As DataTable = L_VerificarPlanillaSueldos()
+        Anio = Now.Year
+        Mes = Now.Month
+        numi = Now.Month
+        If dt.Rows.Count = 0 Then
+            Anio = Now.Year
+            Mes = Now.Month - 1
+            If Mes = 0 Then
+                Anio = Anio - 1
+                Mes = 12
+            End If
+            _PCargarReporte(Anio, Mes)
+        Else
+            numi = dt.Rows(0).Item("phnumi")
+            Anio = dt.Rows(0).Item("phanio")
+            'Mes = dt.Rows(0).Item("phmes")
+            Mes = Now.Month - 1
+            If Mes = 13 Then
+                Anio = Anio + 1
+                Mes = 1
+            End If
+            _PCargarReporte(Anio, Mes)
+        End If
+
+        'gpDatos.Visible = True
+        tbAnio.Value = anio1
+        tbMes.Value = mes1
+        btnGrabar.Enabled = True
+
+
+        Try
+            If mes1 = Now.Month Then
+                ToastNotification.Show(Me, "No se puede grabar planilla antes que concluya el mes".ToUpper, My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
+
+            Else
+                Dim dt1 As DataTable = L_VerificarSiSeGraboPlanilla(mes1, anio1)
+                If dt1.Rows.Count > 0 Then
+                    ToastNotification.Show(Me, "Ya se grabó planilla de sueldos de este mes".ToUpper, My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
+                Else
+                    _Guardar()
+                    dt = L_VerificarPlanillaSueldos()
+                    numi = dt.Rows(0).Item("phnumi")
+                    Anio = dt.Rows(0).Item("phanio")
+                    Mes = dt.Rows(0).Item("phmes")
+                End If
+            End If
+
+        Catch ex As Exception
+            MostrarMensajeError(ex.Message)
+        End Try
     End Sub
 
     Private Sub Timer1_Tick(sender As Object, e As EventArgs) Handles Timer1.Tick
@@ -173,21 +248,43 @@ Public Class R_GrabarPlanillaSueldos
     End Sub
 
     Private Sub btnGrabar_Click(sender As Object, e As EventArgs) Handles btnGrabar.Click
-        Try
-            If mes1 = Now.Month Then
-                ToastNotification.Show(Me, "No se puede grabar planilla antes que concluya el mes".ToUpper, My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
-            Else
-                Dim dt As DataTable = L_VerificarSiSeGraboPlanilla(mes1, anio1)
-                If dt.Rows.Count > 0 Then
-                    ToastNotification.Show(Me, "Ya se grabó planilla de sueldos de este mes".ToUpper, My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
+        Dim dt As DataTable = L_VerificarPlanillaSueldos()
+        Dim Anio As Integer
+        Dim Mes As Integer = 1
+        Anio = Now.Year
+        Mes = Now.Month - 1
+
+        If Anio = dt.Rows(0).Item("phanio") And Mes = dt.Rows(0).Item("phmes") Then
+            Dim ef = New Efecto
+            ef.tipo = 2
+            ef.Context = "¿esta seguro que desea revertir el registro?".ToUpper
+            ef.Header = "mensaje principal".ToUpper + vbCrLf + "año: ".ToUpper + Anio.ToString + vbCrLf + "mes:".ToUpper + MonthName(Mes).ToUpper
+            ef.ShowDialog()
+            Dim bandera As Boolean = False
+            bandera = ef.band
+            If (bandera = True) Then
+                Dim mensajeError As String = ""
+                Dim res As Boolean = L_EliminarPlanilla(numi)
+                If res Then
+
+                    ToastNotification.Show(Me, "Planilla revertida con éxito".ToUpper, My.Resources.GRABACION_EXITOSA, 4000, eToastGlowColor.Green, eToastPosition.TopCenter)
+                    '_PCargarReporte(Anio, Mes - 1)
+                    tbAnio.Text = Anio
+                    tbMes.Text = Mes
+                    MReportViewer.ToolPanelView = CrystalDecisions.Windows.Forms.ToolPanelViewType.None
                 Else
-                    _Guardar()
+
+                    ToastNotification.Show(Me, "Ya se revertio la ultima planilla".ToUpper, My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.BottomCenter)
                 End If
             End If
+        Else
+            ToastNotification.Show(Me, "No existe planilla para revertir".ToUpper, My.Resources.WARNING, 4000, eToastGlowColor.Red, eToastPosition.TopCenter)
 
-        Catch ex As Exception
-            MostrarMensajeError(ex.Message)
-        End Try
+
+        End If
+
+
+
     End Sub
 
 

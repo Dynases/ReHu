@@ -6682,6 +6682,27 @@ Public Class AccesoLogica
 
         Return _resultado
     End Function
+
+    Public Shared Function L_EliminarPlanilla(ByRef _numi As String) As Boolean
+        Dim _Tabla As DataTable
+        Dim _resultado As Boolean
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 7))
+        _listParam.Add(New Datos.DParametro("@pgnumi", _numi))
+        _listParam.Add(New Datos.DParametro("@uact", L_Usuario))
+        _Tabla = D_ProcedimientoConParam("PlanillaSueldo", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            _numi = _Tabla.Rows(0).Item(0)
+            _resultado = False
+        Else
+            _resultado = True
+
+        End If
+
+        Return _resultado
+    End Function
     Public Shared Function L_PlanillaSueldosGrabada(Mes As Integer, Anio As Integer) As DataTable
         Dim _Tabla As DataTable
 

@@ -416,4 +416,12 @@ Public Class F3_PlanillaSueldos2
         'End If
         P_ExportarExcel2(RutaGlobal + "\Reporte\Planilla Sueldos")
     End Sub
+
+    Private Sub btnSalir_Click(sender As Object, e As EventArgs) Handles btnSalir.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnSalir1_Click(sender As Object, e As EventArgs) Handles btnSalir1.Click
+        Me.Close()
+    End Sub
 End Class

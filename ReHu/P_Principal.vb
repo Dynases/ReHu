@@ -17,7 +17,7 @@ Public Class P_Principal
         _prCambiarStyle()
         ' This call is required by the designer.
         InitializeComponent()
-        FP_Configuracion.Select ()
+        FP_Configuracion.Select()
 
         ' Add any initialization after the InitializeComponent() call.
 
@@ -123,6 +123,7 @@ Public Class P_Principal
         listaTabs.Add(MetroTilePanel1)
         'listaTabs.Add(MetroTilePanel2)
         listaTabs.Add(MetroTilePanel6)
+        listaTabs.Add(MetroTilePanel8)
         'listaTabs.Add(MetroTilePanel7)
         'listaTabs.Add(MetroTilePanelVentas)
 
@@ -324,12 +325,7 @@ Public Class P_Principal
         'Dim ico As Icon = Icon.FromHandle(blah.GetHicon())
         'tab3.Icon = ico
     End Sub
-    Private Sub btPersonal_Click(sender As Object, e As EventArgs) Handles btPersonal.Click
-        Dim frm As New F3_Personal
-        frm._nameButton = btPersonal.Name
-        frm._modulo = FP_RH
-        frm.Show()
-    End Sub
+
 
     Private Sub btConfiguracion_Click(sender As Object, e As EventArgs) Handles btConfiguracion.Click
         Dim frm As New F3_Configuracion
@@ -338,7 +334,7 @@ Public Class P_Principal
         frm.Show()
     End Sub
 
-    Private Sub btDescuentos_Click(sender As Object, e As EventArgs) Handles btDescuentos.Click
+    Private Sub btDescuentos_Click(sender As Object, e As EventArgs)
         Dim frm As New F3_Descuentos
         frm._nameButton = btDescuentos.Name
         frm._modulo = FP_Configuracion
@@ -372,5 +368,19 @@ Public Class P_Principal
         frm._nameButton = btPlanillaSueldos2.Name
         frm._modulo = FP_RH
         frm.ShowDialog()
+    End Sub
+
+    Private Sub MetroTileItem1_Click(sender As Object, e As EventArgs) Handles btPersonal.Click
+        Dim frm As New F3_Personal
+        frm._nameButton = btPersonal.Name
+        frm._modulo = FP_RH
+        frm.Show()
+    End Sub
+
+    Private Sub btDescuentos_Click_1(sender As Object, e As EventArgs) Handles btDescuentos.Click
+        Dim frm As New F3_Descuentos
+        frm._nameButton = btDescuentos.Name
+        frm._modulo = FP_Configuracion
+        frm.Show()
     End Sub
 End Class
