@@ -363,6 +363,12 @@
     <Compile Include="F1_Bancos.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="F1_Feriado.designer.vb">
+      <DependentUpon>F1_Feriado.vb</DependentUpon>
+    </Compile>
+    <Compile Include="F1_Feriado.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="F1_IngresosEgresos.Designer.vb">
       <DependentUpon>F1_IngresosEgresos.vb</DependentUpon>
     </Compile>
@@ -1131,6 +1137,9 @@
     <EmbeddedResource Include="F1_Bancos.resx">
       <DependentUpon>F1_Bancos.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="F1_Feriado.resx">
+      <DependentUpon>F1_Feriado.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="F1_IngresosEgresos.resx">
       <DependentUpon>F1_IngresosEgresos.vb</DependentUpon>
     </EmbeddedResource>
@@ -1836,6 +1845,7 @@
     <None Include="Resources\Guardar2.png" />
     <None Include="Resources\configuracion.png" />
     <None Include="Resources\DESCUENTOS_FIJOS.png" />
+    <Content Include="Resources\FERIADO.png" />
     <Content Include="Resources\PERSONAL.png" />
     <None Include="Resources\VENT_PAGOS.png" />
     <None Include="Resources\pie-chart1.png" />

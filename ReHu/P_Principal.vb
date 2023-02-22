@@ -383,4 +383,10 @@ Public Class P_Principal
         frm._modulo = FP_Configuracion
         frm.Show()
     End Sub
+
+    Private Sub btRHFeriados_Click(sender As Object, e As EventArgs) Handles btRHFeriados.Click
+        Dim frm As New F1_Feriado
+        frm._nameButton = btRHFeriados.Name
+        frm.Show()
+    End Sub
 End Class

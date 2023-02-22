@@ -6730,4 +6730,326 @@ Public Class AccesoLogica
         Return _Tabla
     End Function
 #End Region
+
+#Region "FERIADOS"
+
+    Public Shared Function L_prFeriadoGeneral(Optional _Cadena As String = "", Optional _order As String = "") As DataTable 'modelo 1 con condificion
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 3))
+        _listParam.Add(New Datos.DParametro("@pfuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_dg_TP005", _listParam)
+
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_prFeriadoGeneralPorFecha(_fecha As String) As DataTable 'modelo 1 con condificion
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 4))
+        _listParam.Add(New Datos.DParametro("@pfflib", _fecha))
+        _listParam.Add(New Datos.DParametro("@pfuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_dg_TP005", _listParam)
+
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_prFeriadoGeneralPorRangoFecha(_fechaDel As String, _fechaAl As String) As DataTable 'modelo 1 con condificion
+        Dim _Tabla As DataTable
+
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 5))
+        _listParam.Add(New Datos.DParametro("@fecha1", _fechaDel))
+        _listParam.Add(New Datos.DParametro("@fecha2", _fechaAl))
+        _listParam.Add(New Datos.DParametro("@pfuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_dg_TP005", _listParam)
+
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_prFeriadoGrabar(ByRef _numi As String, _fecha As String, _desc As String) As Boolean
+        Dim _resultado As Boolean
+
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 1))
+        _listParam.Add(New Datos.DParametro("@pfflib", _fecha))
+        _listParam.Add(New Datos.DParametro("@pfdes", _desc))
+        _listParam.Add(New Datos.DParametro("@pfuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_dg_TP005", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            _numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+    Public Shared Function L_prFeriadoModificar(ByRef _numi As String, _fecha As String, _desc As String) As Boolean
+        Dim _resultado As Boolean
+
+        Dim _Tabla As DataTable
+        Dim _listParam As New List(Of Datos.DParametro)
+
+        _listParam.Add(New Datos.DParametro("@tipo", 2))
+        _listParam.Add(New Datos.DParametro("@pfnumi", _numi))
+        _listParam.Add(New Datos.DParametro("@pfflib", _fecha))
+        _listParam.Add(New Datos.DParametro("@pfdes", _desc))
+        _listParam.Add(New Datos.DParametro("@pfuact", L_Usuario))
+
+        _Tabla = D_ProcedimientoConParam("sp_dg_TP005", _listParam)
+
+        If _Tabla.Rows.Count > 0 Then
+            _numi = _Tabla.Rows(0).Item(0)
+            _resultado = True
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+    Public Shared Function L_prFeriadoBorrar(_numi As String, ByRef _mensaje As String) As Boolean
+
+        Dim _resultado As Boolean
+
+        If L_fnbValidarEliminacion(_numi, "TP005", "pfnumi", _mensaje) = True Then
+            Dim _Tabla As DataTable
+
+            Dim _listParam As New List(Of Datos.DParametro)
+
+            _listParam.Add(New Datos.DParametro("@tipo", -1))
+            _listParam.Add(New Datos.DParametro("@pfnumi", _numi))
+            _listParam.Add(New Datos.DParametro("@pfuact", L_Usuario))
+
+            _Tabla = D_ProcedimientoConParam("sp_dg_TP005", _listParam)
+
+            If _Tabla.Rows.Count > 0 Then
+                _numi = _Tabla.Rows(0).Item(0)
+                _resultado = True
+            Else
+                _resultado = False
+            End If
+        Else
+            _resultado = False
+        End If
+
+        Return _resultado
+    End Function
+
+#End Region
+
+
+#Region "Pedido Vacacion"
+
+    Public Shared Function L_PedidoVacacionCabecera_General(_Modo As Integer, Optional _Cadena As String = "") As DataSet
+        Dim _Tabla As DataTable
+        Dim _Ds As New DataSet
+        Dim _Where As String
+        If _Modo = 0 Then
+            _Where = "pgnumi=pgnumi AND pgcper=panumi"
+        Else
+            _Where = "pgcper=panumi " + _Cadena
+        End If
+        _Tabla = D_Datos_Tabla("pgnumi,pgcper,Personal1.panombre as cbdesc,pgfdoc,pgest,pgobs,pgfsal,pgfing,pgdias", "TP006,Personal1", _Where + " order by pgnumi")
+        _Ds.Tables.Add(_Tabla)
+        Return _Ds
+    End Function
+
+    Public Shared Sub L_PedidoVacacionCabecera_Grabar(ByRef _numi As String, _codPersona As String, _fechaDoc As String, _estado As String, _obs As String, _fSal As String, _fIng As String, _dias As String)
+        Dim _Actualizacion As String
+        Dim _Err As Boolean
+        Dim _Tabla As DataTable
+        _Tabla = D_Maximo("TP006", "pgnumi", "pgnumi=pgnumi")
+        If Not IsDBNull(_Tabla.Rows(0).Item(0)) Then
+            _numi = _Tabla.Rows(0).Item(0) + 1
+        Else
+            _numi = "1"
+        End If
+
+        _Actualizacion = "'" + Date.Now.Date.ToString("yyyy/MM/dd") + "', '" + Now.Hour.ToString + ":" + Now.Minute.ToString + "' ,'" + L_Usuario + "'"
+
+        Dim Sql As String
+        Sql = _numi + "," + _codPersona + ",'" + _fechaDoc + "'," + _estado + ",'" + _obs + "','" + _fSal + "','" + _fIng + "'," + _dias + "," + _Actualizacion
+        _Err = D_Insertar_Datos("TP006", Sql)
+    End Sub
+
+    Public Shared Sub L_PedidoVacacionCabecera_Modificar(_numi As String, _codPersona As String, _fechaDoc As String, _estado As String, _obs As String, _fIng As String, _fSal As String, _dias As String)
+        Dim _Err As Boolean
+        Dim Sql, _where As String
+
+        Sql = "pgcper = " + _codPersona + ", " +
+        "pgfdoc = '" + _fechaDoc + "', " +
+        "pgest = " + _estado + " , " +
+        "pgobs = '" + _obs + "', " +
+        "pgfsal = '" + _fSal + "', " +
+        "pgfing = '" + _fIng + "', " +
+        "pgdias = " + _dias + " , " +
+        "pgfact = '" + Date.Now.Date.ToString("yyyy/MM/dd") + "', " +
+        "pghact = '" + Now.Hour.ToString + ":" + Now.Minute.ToString + "', " +
+        "pguact = '" + L_Usuario + "'"
+
+        _where = "pgnumi = " + _numi
+        _Err = D_Modificar_Datos("TP006", Sql, _where)
+    End Sub
+
+    Public Shared Sub L_PedidoVacacionCabecera_Borrar(_Id As String)
+        Dim _Where As String
+        Dim _Err As Boolean
+        _Where = "pgnumi = " + _Id
+        _Err = D_Eliminar_Datos("TP006", _Where)
+    End Sub
+
+    'DETALLE DE PEDIDO VACACIONES
+    Public Shared Function L_PedidoVacacionDetalle_General(_Modo As Integer, Optional _idCabecera As String = "") As DataTable
+        Dim _Tabla As DataTable
+        Dim _Where As String
+        If _Modo = 0 Then
+            _Where = " phnumi = phnumi"
+        Else
+            _Where = "phnumi=" + _idCabecera
+        End If
+        _Tabla = D_Datos_Tabla("phnumi,phfsal,phfing,phdias", "TP0061", _Where)
+        Return _Tabla
+    End Function
+
+    Public Shared Sub L_PedidoVacacionDetalle_Grabar(_idCabecera As String, _fechaSalida As String, _fechaIngreso As String, _dias As String)
+        Dim _Err As Boolean
+        Dim Sql As String
+        Sql = _idCabecera + ",'" + _fechaSalida + "','" + _fechaIngreso + "'," + _dias
+        _Err = D_Insertar_Datos("TP0061", Sql)
+    End Sub
+
+    Public Shared Sub L_PedidoVacacionDetalle_Modificar(_idCabecera As String, _fechaSalida As String, _fechaIngreso As String, _dias As String)
+        Dim _Err As Boolean
+        Dim Sql, _where As String
+
+        Sql = "phfsal ='" + _fechaSalida + "', " +
+        "phfing ='" + _fechaIngreso + "', " +
+        "phdias =" + _dias
+
+        _where = "phnumi = " + _idCabecera
+        _Err = D_Modificar_Datos("TP0061", Sql, _where)
+    End Sub
+
+    Public Shared Sub L_PedidoVacacionDetalle_Borrar(_Id As String)
+        Dim _Where As String
+        Dim _Err As Boolean
+
+        _Where = "phnumi = " + _Id
+        _Err = D_Eliminar_Datos("TP0061", _Where)
+    End Sub
+
+    'METODOS EXTRAS
+    Public Shared Function L_PedidoVacacionDetalleFechas(_codEmpl As String) As DataTable
+        Dim _Tabla As DataTable
+        Dim _Where, _select As String
+        _Where = "panumi=" + _codEmpl
+        _select = "pafing as cbfing, DATEADD(YEAR, 1, pafing) AS fechaFin,0 as diasLibres, 0 as diasUsados,0 as saldo "
+        _Tabla = D_Datos_Tabla(_select, "TP001", _Where)
+        Return _Tabla
+    End Function
+
+    Public Shared Function L_PedidoVacacion_ObtenerDiasVacacion(_meses As String) As Integer
+        Dim _Tabla As DataTable
+        Dim _Where, _select As String
+        _Where = _meses + ">=pemeses order by pemeses desc"
+        _select = "top 1 pedias "
+        _Tabla = D_Datos_Tabla(_select, "TP004", _Where)
+        If _Tabla.Rows.Count = 0 Then
+            Return 0
+        Else
+            Return _Tabla.Rows(0).Item(0)
+        End If
+
+    End Function
+
+    Public Shared Function L_PedidoVacacion_ObtenerDiasUsados(_codEmpleado As String) As Integer
+        Dim _Tabla As DataTable
+        Dim _Where, _select As String
+        _Where = "pgcper=" + _codEmpleado
+        _select = "sum(pgdias) as totalDias "
+        _Tabla = D_Datos_Tabla(_select, "TP006", _Where)
+        If IsDBNull(_Tabla.Rows(0).Item(0)) Then
+            Return 0
+        Else
+            Return _Tabla.Rows(0).Item(0)
+        End If
+
+    End Function
+
+#End Region
+
+#Region "Vacacion"
+
+    Public Shared Function L_Vacacion_General(_Modo As Integer, Optional _Cadena As String = "") As DataSet
+        Dim _Tabla As DataTable
+        Dim _Ds As New DataSet
+        Dim _Where As String
+        If _Modo = 0 Then
+            _Where = "penumi=penumi"
+        Else
+            _Where = "penumi=penumi " + _Cadena
+        End If
+        _Tabla = D_Datos_Tabla("penumi,pemeses,pedias,pefvig,petipo", "TP004", _Where + " order by penumi")
+        _Ds.Tables.Add(_Tabla)
+        Return _Ds
+    End Function
+
+    Public Shared Sub L_Vacacion_Grabar(ByRef _numi As String, _meses As String, _dias As String, _fechaVigencia As String, _tipo As String)
+        Dim _Actualizacion As String
+        Dim _Err As Boolean
+        Dim _Tabla As DataTable
+        _Tabla = D_Maximo("TP004", "penumi", "penumi=penumi")
+        If Not IsDBNull(_Tabla.Rows(0).Item(0)) Then
+            _numi = _Tabla.Rows(0).Item(0) + 1
+        Else
+            _numi = "1"
+        End If
+
+        _Actualizacion = "'" + Date.Now.Date.ToString("yyyy/MM/dd") + "', '" + Now.Hour.ToString + ":" + Now.Minute.ToString + "' ,'" + L_Usuario + "'"
+
+        Dim Sql As String
+        Sql = _numi + "," + _meses + "," + _dias + ",'" + _fechaVigencia + "'," + _tipo + "," + _Actualizacion
+        _Err = D_Insertar_Datos("TP004", Sql)
+    End Sub
+
+    Public Shared Sub L_Vacacion_Modificar(_numi As String, _meses As String, _dias As String, _fechaVigencia As String, _tipo As String)
+        Dim _Err As Boolean
+        Dim Sql, _where As String
+
+        Sql = "pemeses = " + _meses + ", " +
+        "pedias = " + _dias + " , " +
+        "pefvig = '" + _fechaVigencia + "', " +
+        "petipo = " + _tipo + " , " +
+        "pefact = '" + Date.Now.Date.ToString("yyyy/MM/dd") + "', " +
+        "pehact = '" + Now.Hour.ToString + ":" + Now.Minute.ToString + "', " +
+        "peuact = '" + "DANNY" + "'"
+
+        _where = "penumi = " + _numi
+        _Err = D_Modificar_Datos("TP004", Sql, _where)
+    End Sub
+
+    Public Shared Sub L_Vacacion_Borrar(_Id As String)
+        Dim _Where As String
+        Dim _Err As Boolean
+        _Where = "penumi = " + _Id
+        _Err = D_Eliminar_Datos("TP004", _Where)
+    End Sub
+
+#End Region
+
 End Class

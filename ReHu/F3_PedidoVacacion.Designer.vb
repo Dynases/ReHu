@@ -97,6 +97,23 @@ Partial Class F3_PedidoVacacion
         Me.PanelSuperior.StyleMouseOver.BackColor1.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         Me.PanelSuperior.StyleMouseOver.BackColor2.Color = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(45, Byte), Integer), CType(CType(150, Byte), Integer))
         '
+        'btnSalir
+        '
+        Me.btnSalir.Image = Global.ReHu.My.Resources.Resources.atras
+        '
+        'btnGrabar
+        '
+        Me.btnGrabar.Image = Global.ReHu.My.Resources.Resources.save1
+        '
+        'btnEliminar
+        '
+        '
+        'btnModificar
+        '
+        '
+        'btnNuevo
+        '
+        '
         'PanelInferior
         '
         Me.PanelInferior.Location = New System.Drawing.Point(0, 663)
@@ -619,6 +636,7 @@ Partial Class F3_PedidoVacacion
         Me.Location = New System.Drawing.Point(0, 0)
         Me.Name = "F3_PedidoVacacion"
         Me.Text = "F3_PedidoVacacion"
+        Me.WindowState = System.Windows.Forms.FormWindowState.Maximized
         Me.MpanelSuperior.ResumeLayout(False)
         Me.PanelSuperior.ResumeLayout(False)
         Me.PanelToolBar1.ResumeLayout(False)
